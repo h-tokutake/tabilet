@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>ItineraryEdit</servlet-name>
+		<servlet-class>com.appspot.tabilet.Controller.ItineraryEditServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ItineraryList</servlet-name>
+		<servlet-class>com.appspot.tabilet.Controller.ItineraryListServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PlaceEdit</servlet-name>
+		<servlet-class>com.appspot.tabilet.Controller.PlaceEditServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Calendar</servlet-name>
+		<servlet-class>com.appspot.tabilet.Controller.CalendarServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItineraryEdit</servlet-name>
+		<url-pattern>/itinerary_edit</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ItineraryList</servlet-name>
+		<url-pattern>/itinerary_list</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PlaceEdit</servlet-name>
+		<url-pattern>/place_edit</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Calendar</servlet-name>
+		<url-pattern>/calendar</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>User</filter-name>
+		<filter-class>com.appspot.tabilet.Controller.UserFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>User</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<welcome-file-list>
+		<welcome-file>itinerary_edit</welcome-file>
+	</welcome-file-list>
+</web-app>
