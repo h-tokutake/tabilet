@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/start/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/le-frog/jquery-ui.css" type="text/css" media="all" />
 <link href="/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
@@ -24,7 +24,7 @@
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/WaypointEditDialog.js"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMain.js"></script>
-<title>タブレットで旅をする - Tabilet</title>
+<title>[Experimental] タブレットで旅をする - Tabilet</title>
 </head>
 <body>
 
