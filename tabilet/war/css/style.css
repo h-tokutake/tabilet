@@ -25,6 +25,18 @@ label {
 	font-weight: bold;
 	font-size: 14px;
 }
+label#title_logo {
+	font-weight: normal;
+	font-size: 24px;
+	border-style: ridge;
+	border-width: 6px;
+	border-radius: 25px;
+	border-color: blue;
+	background-color: blue;
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 span {
 	display: inline;
 }
@@ -74,7 +86,7 @@ div.map_canvas {
 	width: 100%;
 }
 div.movable:hover {
-	background-color: purple;
+	background-color: yellow;
 }
 div.movable_drag {
 	background-color: rgba(128,128,128,0.6);
@@ -94,7 +106,7 @@ td.waypoint_column_datetime {
 	width: 110px;
 }
 .ui-button-text {
-	font-size: 10px;
+	font-size: 12px;
 }
 .ui-menu {
 	z-index: 3000;

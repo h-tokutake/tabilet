@@ -28,95 +28,107 @@
 </head>
 <body>
 
+<!-- タイトル -->
+<label id="title_logo">Tabilet</label>
+
 <!-- メニュー欄表示 -->
 <div id="itinerary_edit_menu_main">
 	<button id="itinerary_edit_menu_main_create_itinerary"          class="menu_main">新規作成</button>
 	<button id="itinerary_edit_menu_main_move_ItineraryListView"    class="menu_main">旅程一覧</button>
-	<button id="itinerary_edit_menu_main_move_ItineraryEditView"    class="menu_main">旅程編集</button>
-	<button id="itinerary_edit_menu_main_show_map"                  class="menu_main">地図表示</button>
 	<button id="itinerary_edit_menu_main_refresh_ItineraryEditView" class="menu_main">変更破棄</button>
 	<button id="itinerary_edit_menu_main_save_itinerary"            class="menu_main">旅程保存</button>
 	<button id="itinerary_edit_menu_main_delete_itinerary"          class="menu_main">旅程削除</button>
+<!--
 	<button id="itinerary_edit_menu_main_export_calendar"           class="menu_main">カレンダー</button>
-	<button id="itinerary_edit_menu_main_login"                     class="menu_main">ログイン</button>
+-->
 </div>
 
 <div id="itinerary_edit_login_info">
 	<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
-	<span class='ui-icon ui-icon-person'></span> ユーザ :
-	<c:if test="${not empty user}"><c:out value="${nickname}" /></c:if>
-	<c:if test="${empty user}">ゲスト</c:if>
+	<button id="itinerary_edit_menu_main_login"                     class="menu_main">
+		<c:if test="${not empty user}"><c:out value="${nickname}" /></c:if>
+		<c:if test="${empty user}">ゲスト</c:if>
+	</button>
 </div>
 
-<!-- 地図表示 -->
-<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
+<!-- タブメニュー -->
+<div id="itinerary_edit_menu_tabs">
+	<ul>
+		<li><a href="#itinerary_edit_screen_main" id="itinerary_edit_menu_main_move_ItineraryEditView">旅程編集</a></li>
+		<li><a href="#itinerary_edit_screen_map_canvas"  id="itinerary_edit_menu_main_show_map">地図表示</a></li>
+	</ul>
 
-<!-- 旅程入力欄を表示 -->
-<div id="itinerary_edit_screen_main">
-	<form id="itinerary_edit_form" action="itinerary_edit" method="post">
-		<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
-		<input type="hidden"
-			id="itinerary_edit_itinerary_id"
-			name="itinerary_id"
-			value="<c:out value="${itinerary_id}" />"
-		></input>
-		<label for="itinerary_edit_itinerary_summary" accesskey="s">概要 : </label>
-		<input type="text"
-			id="itinerary_edit_itinerary_summary"
-			class="summary"
-			name="itinerary_summary"
-			value="<c:out value="${itinerary_summary}" />"
-		></input>
-		<br />
-		<label for="itinerary_edit_itinerary_description" accesskey="d">説明 : </label>
-		<textarea
-			id="itinerary_edit_itinerary_description"
-			class="description"
-			name="itinerary_description"
-		><c:out value="${itinerary_description}" /></textarea>
-		<br />
-		<label for="itinerary_edit_itinerary_deptime" accesskey="t">出発日時 : </label>
-		<input type="datetime-local"
-			id="itinerary_edit_itinerary_deptime"
-			class="datetime"
-			name="itinerary_deptime"
-			value="<c:out value="${itinerary_deptime}" />"
-		></input>
+	<!-- 地図表示 -->
+	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
 
-		<br />
-		<label>目的地</label>
-		<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
-			<div class="waypoint movable"><table><tr><td>
-				<button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button><input type="hidden"
-					class="place_position"
-					name="place_position"
-					value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>"
-				></input><input type="hidden"
-					class="place_siteurl"
-					name="place_siteurl"
-					value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>"
-				><input type="hidden"
-					class="place_description"
-					name="place_description"
-					value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>"
-				><input type="text"
-					class="place_name"
-					name="place_name"
-					value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>"
-				></input><input type="time"
-					class="dwell_time"
-					name="dwell_time"
-					value="<c:if test="${not empty dwell_time_list}"><c:out value="${dwell_time_list[status.index]}" /></c:if>"
-				></input></td><td class="waypoint_column_datetime"><div class="waypoint_arrival_datetime"></div></td><td> ～ </td>
-				<td class="waypoint_column_datetime"><div class="waypoint_departure_datetime"></div></td></tr></table>
+	<!-- 旅程入力欄を表示 -->
+	<div id="itinerary_edit_screen_main">
+		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
+			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
+			<input type="hidden"
+				id="itinerary_edit_itinerary_id"
+				name="itinerary_id"
+				value="<c:out value="${itinerary_id}" />"
+			></input>
+			<label for="itinerary_edit_itinerary_summary" accesskey="s">概要 : </label>
+			<input type="text"
+				id="itinerary_edit_itinerary_summary"
+				class="summary"
+				name="itinerary_summary"
+				value="<c:out value="${itinerary_summary}" />"
+			></input>
+			<br />
+			<label for="itinerary_edit_itinerary_description" accesskey="d">説明 : </label>
+			<textarea
+				id="itinerary_edit_itinerary_description"
+				class="description"
+				name="itinerary_description"
+			><c:out value="${itinerary_description}" /></textarea>
+			<br />
+			<label for="itinerary_edit_itinerary_deptime" accesskey="t">出発日時 : </label>
+			<input type="datetime-local"
+				id="itinerary_edit_itinerary_deptime"
+				class="datetime"
+				name="itinerary_deptime"
+				value="<c:out value="${itinerary_deptime}" />"
+			></input>
+
+			<br />
+			<label>目的地</label>
+			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
+				<div class="waypoint movable"><table><tr><td>
+					<button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button><input type="hidden"
+						class="place_position"
+						name="place_position"
+						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>"
+					></input><input type="hidden"
+						class="place_siteurl"
+						name="place_siteurl"
+						value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>"
+					><input type="hidden"
+						class="place_description"
+						name="place_description"
+						value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>"
+					><input type="text"
+						class="place_name"
+						name="place_name"
+						value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>"
+					></input><input type="time"
+						class="dwell_time"
+						name="dwell_time"
+						value="<c:if test="${not empty dwell_time_list}"><c:out value="${dwell_time_list[status.index]}" /></c:if>"
+					></input></td><td class="waypoint_column_datetime"><div class="waypoint_arrival_datetime"></div></td><td> ～ </td>
+					<td class="waypoint_column_datetime"><div class="waypoint_departure_datetime"></div></td></tr></table>
+				</div>
+			</c:forEach>
+			<div class="waypoint">
+				<buttonset>
+					<button class="button_delete_place" disabled>削除</button><button class="button_insert_place">追加</button>
+				</buttonset>
 			</div>
-		</c:forEach>
-		<div class="waypoint">
-			<buttonset>
-				<button class="button_delete_place" disabled>削除</button><button class="button_insert_place">追加</button>
-			</buttonset>
-		</div>
-	</form>
+		</form>
+	</div>
+
 </div>
 
 <!-- 経由地編集画面 -->

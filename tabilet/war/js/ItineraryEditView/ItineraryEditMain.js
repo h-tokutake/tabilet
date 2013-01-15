@@ -21,7 +21,7 @@ var ItineraryEditView = (function(){
 		mainMenu = new ItineraryEditMenu(this);
 		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight - 20);
 		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
-		$("#itinerary_edit_screen_map_canvas").hide().change(function(){
+		$("#itinerary_edit_screen_map_canvas").change(function(){
 			mapCanvas.refresh();
 		});
 		setEvents();

@@ -19,7 +19,7 @@ var ItineraryEditMenu = (function() {
 			return false;
 		});
 		$("#itinerary_edit_menu_main_login").button({
-			icons : { primary : "ui-icon-key" },
+			icons : { primary : "ui-icon-person" },
 			text : true
 		}).click(function(){
 			$("#itinerary_edit_menu_login").show().position({
@@ -64,30 +64,6 @@ var ItineraryEditMenu = (function() {
 			}
 			return false;
 		});
-		$("#itinerary_edit_menu_main_move_ItineraryEditView").button({
-			icons : { primary : "ui-icon-pencil" },
-			text : true
-		}).click(function(){
-			mainView.updateTimeline(false);
-			$("#itinerary_edit_menu_main_move_ItineraryEditView").button("disable");
-			$("#itinerary_edit_menu_main_show_map").button("enable");
-			$("#itinerary_edit_screen_map_canvas").fadeOut("fast");
-			$("#itinerary_edit_screen_main").show();
-			return false;
-		});
-		$("#itinerary_edit_menu_main_show_map").button({
-			icons : { primary : "ui-icon-image" },
-			text : true
-		}).click(function(){
-			mainView.updateDirections(false, function() {
-				$("#itinerary_edit_menu_main_move_ItineraryEditView").button("enable");
-				$("#itinerary_edit_menu_main_show_map").button("disable");
-				$("#itinerary_edit_screen_main").hide();
-				$("#itinerary_edit_screen_map_canvas").fadeIn("fast");
-				mainView.getMapCanvas().refresh();
-				return false;
-			});
-		});
 		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button({
 			icons : { primary : "ui-icon-refresh" },
 			text : true
@@ -114,13 +90,20 @@ var ItineraryEditMenu = (function() {
 		});
 		$("#itinerary_edit_menu_main").buttonset();
 
+		$("#itinerary_edit_menu_main_show_map").click(function(){
+			mainView.updateDirections(false, function() {
+				mainView.getMapCanvas().refresh();
+				return false;
+			});
+		});
+		$("#itinerary_edit_menu_tabs").tabs();
+
 		$("#itinerary_edit_menu_login").menu().hide();
 		$(document.body).append($(document.createElement("ul")).attr("id", "place_list_menu"));
 		$("#place_list_menu").menu().hide();
 
 		$("#itinerary_edit_menu_main_save_itinerary").button("disable");
 		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button("disable");
-		$("#itinerary_edit_menu_main_move_ItineraryEditView").button("disable");
 		if($("#itinerary_edit_itinerary_id").val() == "") $("#itinerary_edit_menu_main_delete_itinerary").button("disable");
 
 		$(document.body).append($(document.createElement("ul")).attr("id", "itinerary_list_menu"));
@@ -143,10 +126,12 @@ var ItineraryEditMenu = (function() {
 			__disableSaveMenu();
 		},
 		enableMapMenu : function () {
-			$("#itinerary_edit_menu_main_show_map").button("enable");
+//			$("#itinerary_edit_menu_main_show_map").button("enable");
+			$("#itinerary_edit_menu_tabs").tabs({ disabled: false });
 		},
 		disableMapMenu : function () {
-			$("#itinerary_edit_menu_main_show_map").button("disable");
+//			$("#itinerary_edit_menu_main_show_map").button("disable");
+			$("#itinerary_edit_menu_tabs").tabs({ disabled: [ 1 ] });
 		}
 	};
 
