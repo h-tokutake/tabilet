@@ -186,6 +186,7 @@ var ItineraryEditMenu = (function() {
 			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
 			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
 			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
+			itinerary_depdate     : $("#itinerary_edit_itinerary_depdate").val(),
 			itinerary_deptime     : $("#itinerary_edit_itinerary_deptime").val(),
 			place_name            : placeNameList,
 			place_position        : placePositionList,

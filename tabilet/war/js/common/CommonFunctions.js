@@ -14,6 +14,29 @@ function toDateTimeString(src) {
 	return strDateTime;
 }
 
+function toDateString(src) {
+	var year  = src.getFullYear();
+	var month = src.getMonth() + 1;
+	if (month < 10) month = "0" + month;
+	var date = src.getDate();
+	if (date < 10) date = "0" + date;
+
+	var strDate = year + '-' + month + '-' + date;
+
+	return strDate;
+}
+
+function toTimeString(src) {
+	var hour = src.getHours();
+	if (hour < 10) hour = "0" + hour;
+	var min = src.getMinutes();
+	if (min < 10) min = "0" + min;
+
+	var strTime = hour + ':' + min;
+
+	return strTime;
+}
+
 function toDateTimeString2(src) {
 	var year  = src.getFullYear();
 	var month = src.getMonth() + 1;

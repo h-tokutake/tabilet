@@ -41,11 +41,23 @@ class ItineraryData extends ItinerarySkeletonData {
 	final boolean isDuplicateOf(ItineraryData other) {
 		return (this.isOwnedBy(other.getOwnerId()) && this.getSummary().equals(other.getSummary()) && !this.getId().equals(other.getId()));
 	}
+	final String getDepDate() {
+		return this.depTime.split("T")[0];
+	}
+	final String getDepTime() {
+		return this.depTime.split("T")[1];
+	}
+	final String getDepDateTime() {
+		return this.depTime;
+	}
+	final void setDepDate(String depDate) {
+		this.depTime = depDate + "T" + this.depTime.split("T")[1];
+	}
+	final void setDepTime(String depTime) {
+		this.depTime = this.depTime.split("T")[0] + "T" + depTime;
+	}
 
 	/* getter */
-	final String getDepTime() {
-		return depTime;
-	}
 	final ArrayList<String> getDwellTimeList() {
 		return dwellTimeList;
 	}
@@ -54,9 +66,6 @@ class ItineraryData extends ItinerarySkeletonData {
 	}
 
 	/* setter */
-	final void setDepTime(String depTime) {
-		this.depTime = depTime;
-	}
 	final void setDwellTimeList(ArrayList<String> dwellTimeList) {
 		this.dwellTimeList = dwellTimeList;
 	}

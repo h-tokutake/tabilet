@@ -96,6 +96,9 @@ public class ItineraryDataHandler extends DataHandler {
 			if("itinerary_description".equals(entry.getKey())){
 				this.getData().setDescription(entry.getValue()[0]);
 			} else
+			if("itinerary_depdate".equals(entry.getKey())){
+				((ItineraryData) this.getData()).setDepDate(entry.getValue()[0]);
+			} else
 			if("itinerary_deptime".equals(entry.getKey())){
 				((ItineraryData) this.getData()).setDepTime(entry.getValue()[0]);
 			} else
@@ -126,6 +129,7 @@ public class ItineraryDataHandler extends DataHandler {
 		String id          = "";
 		String summary     = "";
 		String description = "";
+		String depDate     = "";
 		String depTime     = "";
 		ArrayList<String> placeNameList     = new ArrayList<String>();
 		ArrayList<String> placePositionList = new ArrayList<String>();
@@ -138,6 +142,7 @@ public class ItineraryDataHandler extends DataHandler {
 			id          = data.getId();
 			summary     = data.getSummary();
 			description = data.getDescription();
+			depDate     = data.getDepDate();
 			depTime     = data.getDepTime();
 			placeNameList     = data.getPlaceNameList();
 			placePositionList = data.getPlacePositionList();
@@ -148,6 +153,7 @@ public class ItineraryDataHandler extends DataHandler {
 		session.setAttribute("itinerary_id"         , id         );
 		session.setAttribute("itinerary_summary"    , summary    );
 		session.setAttribute("itinerary_description", description);
+		session.setAttribute("itinerary_depdate"    , depDate    );
 		session.setAttribute("itinerary_deptime"    , depTime    );
 		session.setAttribute("place_name_list"      , placeNameList.toArray()    );
 		session.setAttribute("place_position_list"  , placePositionList.toArray());
@@ -170,7 +176,7 @@ public class ItineraryDataHandler extends DataHandler {
 			ItineraryData data = (ItineraryData) iter.next();
 			itineraryIdList.add(data.getId());
 			itinerarySummaryList.add(data.getSummary());
-			itineraryDeptimeList.add(data.getDepTime());
+			itineraryDeptimeList.add(data.getDepDateTime());
 			itineraryOriginList.add(data.getOriginName());
 			itineraryDestinationList.add(data.getDestinationName());
 		}
