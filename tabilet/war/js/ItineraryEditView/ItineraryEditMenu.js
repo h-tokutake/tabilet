@@ -16,7 +16,6 @@ var ItineraryEditMenu = (function() {
 			text : true
 		}).click(function(){
 			submitForm("calendar", "get");
-			return false;
 		});
 		$("#itinerary_edit_menu_main_login").button({
 			icons : { primary : "ui-icon-person" },
@@ -40,7 +39,6 @@ var ItineraryEditMenu = (function() {
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
 				submitForm("itinerary_edit", "get");
 			});
-			return false;
 		});
 		$("#itinerary_edit_menu_main_move_ItineraryListView").button({
 			icons : { primary : "ui-icon-folder-open" },
@@ -48,7 +46,6 @@ var ItineraryEditMenu = (function() {
 		}).click(function(){
 			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, ajaxToGetItineraryList);
-			return false;
 		});
 		$("#itinerary_edit_menu_main_save_itinerary").button({
 			icons : { primary : "ui-icon-disk" },
@@ -62,7 +59,6 @@ var ItineraryEditMenu = (function() {
 					ajaxToSaveItineraryData();
 				});
 			}
-			return false;
 		});
 		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button({
 			icons : { primary : "ui-icon-refresh" },
@@ -76,7 +72,6 @@ var ItineraryEditMenu = (function() {
 					submitPostToItineraryEdit($("#itinerary_edit_itinerary_id").val(), "itinerary_edit");
 				}
 			});
-			return false;
 		});
 		$("#itinerary_edit_menu_main_delete_itinerary").button({
 			icons : { primary : "ui-icon-trash" },
@@ -86,14 +81,12 @@ var ItineraryEditMenu = (function() {
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToDeleteItineraryData();
 			});
-			return false;
 		});
 		$("#itinerary_edit_menu_main").buttonset();
 
 		$("#itinerary_edit_menu_main_show_map").click(function(){
 			mainView.updateDirections(false, function() {
 				mainView.getMapCanvas().refresh();
-				return false;
 			});
 		});
 		$("#itinerary_edit_menu_tabs").tabs();
@@ -110,6 +103,10 @@ var ItineraryEditMenu = (function() {
 		$("#itinerary_list_menu").menu().hide();
 		$("#itinerary_list_menu").html("");
 		$("#itinerary_list_menu").append('<li>旅程一覧読み込み中・・・</li>');
+
+		$("#title_logo").click(function(){
+			window.open("http://www.tabilet.net/", "_top");
+		});
 
 		__checkLoggedIn();
 	}
@@ -275,7 +272,6 @@ var ItineraryEditMenu = (function() {
 					var selected_itinerary_id = $(e.target).find("a").attr("name");
 					if(e.target.tagName == "A") selected_itinerary_id = $(e.target).attr("name");
 					submitPostToItineraryEdit(selected_itinerary_id, "itinerary_edit");
-					return false;
 				});
 		}
 	}

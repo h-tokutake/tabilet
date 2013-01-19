@@ -11,6 +11,8 @@ var WaypointEditDialog = (function(){
 
 	var WaypointEditDialog = function(view){
 		mainView = view;
+		$("#waypoint_edit_screen_map_canvas").css("height", window.innerHeight * 0.9 - 130);
+		$("#waypoint_edit_screen_map_canvas").css("width", window.innerWidth * 0.9 - 30);
 		smallMapCanvas = new MapCanvas("waypoint_edit_screen_map_canvas", mainView);
 		$("#itinerary_edit_screen_waypoint_edit").hide();
 
@@ -45,6 +47,9 @@ var WaypointEditDialog = (function(){
 	// public methods
 
 	WaypointEditDialog.prototype.open = function (target) {
+		$("#itinerary_edit_itinerary_deptime").hide();
+		$(".dwell_time").hide();
+
 		var place_name_obj = target;
 		var place_position_obj = target.siblings(".place_position");
 		var place_siteurl_obj = target.siblings(".place_siteurl");
@@ -73,7 +78,6 @@ var WaypointEditDialog = (function(){
 						text : false
 					}).click(function(){
 						ajaxToGetPlaceList();
-						return false;
 					});
 				} else {
 					$("#waypoint_edit_button_place_list").hide();
@@ -107,6 +111,8 @@ var WaypointEditDialog = (function(){
 				if(place_name_obj.val() == "") {
 					mainView.deleteRow(place_name_obj.closest(".waypoint"));
 				}
+				$("#itinerary_edit_itinerary_deptime").show();
+				$(".dwell_time").show();
 			},
 			resize  : function() { smallMapCanvas.refresh(); },
 			buttons : [
@@ -122,7 +128,6 @@ var WaypointEditDialog = (function(){
 							smallMapCanvas.refresh();
 							position_dirty_flag = true;
 						});
-						return false;
 					}
 				},
 				{
@@ -176,20 +181,17 @@ var WaypointEditDialog = (function(){
 												});
 											}
 											$(this).dialog("close");
-											return false;
 										}
 									},
 									{
 										text: "キャンセル",
 										click: function() {
 											$(this).dialog("close");
-											return false;
 										}
 									}
 								]
 							});
 						}
-						return false;
 					}
 				},
 				{
@@ -209,7 +211,6 @@ var WaypointEditDialog = (function(){
 								ajaxToDeletePlaceData($("#waypoint_edit_place_name").val());
 							});
 						}
-						return false;
 					}
 				},
 				{
@@ -222,14 +223,12 @@ var WaypointEditDialog = (function(){
 						$(this).dialog("close");
 						place_name_obj.change();
 						place_name_obj.next().focus();
-						return false;
 					}
 				},
 				{
 					text: "キャンセル",
 					click: function() {
 						$(this).dialog("close");
-						return false;
 					}
 				}
 			]

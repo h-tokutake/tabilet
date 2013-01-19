@@ -19,7 +19,8 @@ var ItineraryEditView = (function(){
 	function ItineraryEditView() {
 		dialog = new CommonDialogs();
 		mainMenu = new ItineraryEditMenu(this);
-		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight - 20);
+		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
+		$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth - 40);
 		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
 		$("#itinerary_edit_screen_map_canvas").change(function(){
 			mapCanvas.refresh();
@@ -123,13 +124,11 @@ var ItineraryEditView = (function(){
 		$(".button_delete_place").live("click", function(e){
 			__deleteRow($(e.target).closest("div"));
 			__updateDirections(true);
-			return false;
 		});
 		$(".button_insert_place").live("click", function(e){
 			insertRow($(e.target).closest("div"));
 			$(e.target).closest("div").prev().find(".place_name").focus();
 			__updateDirections(true);
-			return false;
 		});
 		$(".place_name").live("change", function(){
 			if($(this).val() == "") {

@@ -147,7 +147,6 @@ var MapCanvas = (function(){
 		}
 
 		this.__refresh = function (){
-			$("#" + canvasId).css("height", $("#" + canvasId).parent().get(0).offsetHeight - 30);
 			google.maps.event.trigger(map, 'resize');
 		}
 

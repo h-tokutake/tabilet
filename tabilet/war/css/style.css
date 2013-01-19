@@ -36,6 +36,7 @@ label#title_logo {
 	color: white;
 	padding-left: 10px;
 	padding-right: 10px;
+	cursor: pointer;
 }
 span {
 	display: inline;
