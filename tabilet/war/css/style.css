@@ -26,8 +26,8 @@ label {
 	font-size: 14px;
 }
 label#title_logo {
-	font-weight: normal;
-	font-size: 24px;
+	font-weight: bold;
+	font-size: 20px;
 	border-style: ridge;
 	border-width: 6px;
 	border-radius: 25px;
@@ -52,11 +52,14 @@ textarea.description {
 	max-width: 400px;
 }
 input.dwell_time {
-	width: 60px;
+	color: white;
 }
 input.place_name {
 	width: 240px;
 	autocomplete: off;
+}
+input#itinerary_edit_itinerary_deptime {
+	color: white;
 }
 input#waypoint_edit_place_name {
 	width: 400px;
@@ -86,7 +89,7 @@ div.map_canvas {
 	width: 100%;
 }
 div.movable:hover {
-	background-color: yellow;
+	background-color: navy;
 }
 div.movable_drag {
 	background-color: rgba(128,128,128,0.6);
@@ -107,6 +110,7 @@ td.waypoint_column_datetime {
 }
 .ui-button-text {
 	font-size: 12px;
+	font-weight: bold;
 }
 .ui-menu {
 	z-index: 3000;

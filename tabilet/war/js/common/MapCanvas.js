@@ -175,8 +175,8 @@ var MapCanvas = (function(){
 			dwellTimes = argDwellTimes;
 		}
 
-		this.__setDepDateTime = function (argDepDate, argDepTime) {
-			depDateTime = argDepDate + "T" + argDepTime;
+		this.__setDepDateTime = function (argDepDateTime) {
+			depDateTime = argDepDateTime;
 		}
 
 		this.__getArrDateTimeString = function () {
@@ -299,7 +299,7 @@ var MapCanvas = (function(){
 		addPlaceDescription : function(argPlaceDescription) { this.__addPlaceDescription(argPlaceDescription); },
 		setWaypoints : function(argWaypoints) { this.__setWaypoints(argWaypoints); },
 		setDwellTimes : function(argDwellTimes) { this.__setDwellTimes(argDwellTimes); },
-		setDepDateTime : function(argDepDate, argDepTime) { this.__setDepDateTime(argDepDate, argDepTime); },
+		setDepDateTime : function(argDepDateTime) { this.__setDepDateTime(argDepDateTime); },
 		getArrDateTimeString : function() { return this.__getArrDateTimeString(); },
 		getDepDateTimeString : function() { return this.__getDepDateTimeString(); },
 		showDirections : function(callback) { this.__showDirections(callback); },

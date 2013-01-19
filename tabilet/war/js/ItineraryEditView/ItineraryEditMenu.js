@@ -268,7 +268,7 @@ var ItineraryEditMenu = (function() {
 		if(data == null) return false;
 		for(var i=0; i<data.idList.length; i++) {
 			var list_item_tag = '<li class="selectable"><a href="#" name="' + data.idList[i] + '">'
-				+ data.depDateTimeList[i] + ' ' + data.summaryList[i] + '</a></li>';
+				+ data.depDateTimeList[i].replace(/T/, ' ') + ' @ ' + data.summaryList[i] + '</a></li>';
 			$("#itinerary_list_menu")
 				.append(list_item_tag)
 				.find("li").eq(i).click(function(e) {

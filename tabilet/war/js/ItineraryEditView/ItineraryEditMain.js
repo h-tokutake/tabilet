@@ -74,7 +74,7 @@ var ItineraryEditView = (function(){
 			$("#itinerary_edit_itinerary_depdate").val(toDateString(new Date()));
 		}
 		$("#itinerary_edit_itinerary_depdate").datepicker(
-			{ dateFormat: "yy-mm-dd" }
+			{ dateFormat: "yy/mm/dd" }
 		);
 		if ($("#itinerary_edit_itinerary_deptime").val() == "") {
 			$("#itinerary_edit_itinerary_deptime").val(toTimeString(new Date()));
@@ -94,20 +94,21 @@ var ItineraryEditView = (function(){
 				return value;
 			},
 			_format: function( value ) {
-				return Globalize.format( new Date(value), "t" );
+				return Globalize.format( new Date(value), "HH:mm" );
 			}
 		});
-		$( "#itinerary_edit_itinerary_deptime" ).timespinner();
-//		$( "#culture" ).change(function() {
-//			var current = $( "#spinner" ).timespinner( "value" );
-//			Globalize.culture( $(this).val() );
-//			$( "#spinner" ).timespinner( "value", current );
-//		});
-
-		$("#itinerary_edit_itinerary_depdate").change(function(){
-			__updateTimeline(true);
+		Globalize.culture("ja");
+		$( "#itinerary_edit_itinerary_deptime" ).timespinner({
+			change : function(){
+				__updateTimeline(true);
+			}
 		});
-		$("#itinerary_edit_itinerary_deptime").change(function(){
+		$( ".dwell_time" ).timespinner({
+			change : function(){
+				__updateTimeline(true);
+			}
+		});
+		$("#itinerary_edit_itinerary_depdate").change(function(){
 			__updateTimeline(true);
 		});
 		$("#itinerary_edit_itinerary_summary").change(function(){
@@ -138,9 +139,6 @@ var ItineraryEditView = (function(){
 		}).live("focus", function(e){
 			waypointDialog.open($(e.target));
 			return false;
-		});
-		$(".dwell_time").live("change", function(){
-			__updateTimeline(true);
 		});
 	}
 
@@ -183,6 +181,11 @@ var ItineraryEditView = (function(){
 			icons : { primary : "ui-icon-circle-plus" },
 			text : false
 		});
+		target.find(".dwell_time").timespinner({
+			change : function(){
+				__updateTimeline(true);
+			}
+		});
 	}
 
 	//------------------------
@@ -196,10 +199,9 @@ var ItineraryEditView = (function(){
 		var dwell_times = [];
 		var waypoint_obj = $(".waypoint")
 
-		mapCanvas.setDepDateTime(
-			document.getElementById("itinerary_edit_itinerary_depdate").valueAsNumber,
-			document.getElementById("itinerary_edit_itinerary_deptime").valueAsNumber
-		);
+		var dateString = $("#itinerary_edit_itinerary_depdate").val() + "T" + $("#itinerary_edit_itinerary_deptime").val();
+		var dateTimeInMs = Date.parse(dateString);
+		mapCanvas.setDepDateTime(dateTimeInMs);
 
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name     = waypoint_obj.eq(i).find(".place_name").val();
@@ -246,10 +248,9 @@ var ItineraryEditView = (function(){
 		var dwell_times = [];
 		var waypoint_obj = $(".waypoint");
 
-		mapCanvas.setDepDateTime(
-			document.getElementById("itinerary_edit_itinerary_depdate").valueAsNumber,
-			document.getElementById("itinerary_edit_itinerary_deptime").valueAsNumber
-		);
+		var dateString = $("#itinerary_edit_itinerary_depdate").val() + "T" + $("#itinerary_edit_itinerary_deptime").val();
+		var dateTimeInMs = Date.parse(dateString);
+		mapCanvas.setDepDateTime(dateTimeInMs);
 
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name = waypoint_obj.eq(i).find(".place_name").val();
@@ -303,7 +304,7 @@ var ItineraryEditView = (function(){
 			.append('<input type="hidden" class="place_siteurl" name="place_siteurl" value=""></input>')
 			.append('<input type="hidden" class="place_description" name="place_description" value=""></input>')
 			.append('<input type="text" class="place_name" name="place_name" value=""></input>')
-			.append('<input type="time" class="dwell_time" name="dwell_time" value="00:00"></input>');
+			.append('<input class="dwell_time" name="dwell_time" value="00:00"></input>');
 		target.find("td").eq(1)
 			.append('<div class="waypoint_arrival_datetime"></div>');
 		target.find("td").eq(2)
