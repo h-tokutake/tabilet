@@ -52,15 +52,9 @@ textarea.description {
 	width: 400px;
 	max-width: 400px;
 }
-input.dwell_time {
-	color: white;
-}
 input.place_name {
 	width: 240px;
 	autocomplete: off;
-}
-input#itinerary_edit_itinerary_deptime {
-	color: white;
 }
 input#waypoint_edit_place_name {
 	width: 400px;

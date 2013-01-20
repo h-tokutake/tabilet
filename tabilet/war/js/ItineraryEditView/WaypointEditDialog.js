@@ -47,9 +47,6 @@ var WaypointEditDialog = (function(){
 	// public methods
 
 	WaypointEditDialog.prototype.open = function (target) {
-		$("#itinerary_edit_itinerary_deptime").hide();
-		$(".dwell_time").hide();
-
 		var place_name_obj = target;
 		var place_position_obj = target.siblings(".place_position");
 		var place_siteurl_obj = target.siblings(".place_siteurl");
@@ -111,8 +108,6 @@ var WaypointEditDialog = (function(){
 				if(place_name_obj.val() == "") {
 					mainView.deleteRow(place_name_obj.closest(".waypoint"));
 				}
-				$("#itinerary_edit_itinerary_deptime").show();
-				$(".dwell_time").show();
 			},
 			resize  : function() { smallMapCanvas.refresh(); },
 			buttons : [

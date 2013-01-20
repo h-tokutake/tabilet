@@ -21,7 +21,7 @@ function toDateString(src) {
 	var date = src.getDate();
 	if (date < 10) date = "0" + date;
 
-	var strDate = year + '-' + month + '-' + date;
+	var strDate = year + '/' + month + '/' + date;
 
 	return strDate;
 }

@@ -80,35 +80,13 @@ var ItineraryEditView = (function(){
 		if ($("#itinerary_edit_itinerary_deptime").val() == "") {
 			$("#itinerary_edit_itinerary_deptime").val(toTimeString(new Date()));
 		}
-		$.widget( "ui.timespinner", $.ui.spinner, {
-			options: {
-				step: 60 * 1000, // seconds
-				page: 60 // hours
-			},
-			_parse: function( value ) {
-				if ( typeof value === "string" ) {
-					if ( Number( value ) == value ) {
-						return Number( value );
-					}
-					return +Globalize.parseDate( value );
-				}
-				return value;
-			},
-			_format: function( value ) {
-				return Globalize.format( new Date(value), "HH:mm" );
-			}
-		});
-		Globalize.culture("ja");
-		$( "#itinerary_edit_itinerary_deptime" ).timespinner({
-			change : function(){
-				__updateTimeline(true);
-			}
-		});
-		$( ".dwell_time" ).timespinner({
-			change : function(){
-				__updateTimeline(true);
-			}
-		});
+//		Globalize.culture("ja");
+		$( "#itinerary_edit_itinerary_deptime" ).change(function () {
+			__updateTimeline(true);
+		}).timepicker();
+		$( ".dwell_time" ).change(function () {
+			__updateTimeline(true);
+		}).timepicker();
 		$("#itinerary_edit_itinerary_depdate").change(function(){
 			__updateTimeline(true);
 		});
@@ -137,7 +115,6 @@ var ItineraryEditView = (function(){
 			__updateDirections(true);
 		}).live("focus", function(e){
 			waypointDialog.open($(e.target));
-			return false;
 		});
 	}
 
@@ -180,11 +157,9 @@ var ItineraryEditView = (function(){
 			icons : { primary : "ui-icon-circle-plus" },
 			text : false
 		});
-		target.find(".dwell_time").timespinner({
-			change : function(){
-				__updateTimeline(true);
-			}
-		});
+		target.find(".dwell_time").change(function () {
+			__updateTimeline(true);
+		}).timepicker();
 	}
 
 	//------------------------
@@ -303,7 +278,7 @@ var ItineraryEditView = (function(){
 			.append('<input type="hidden" class="place_siteurl" name="place_siteurl" value=""></input>')
 			.append('<input type="hidden" class="place_description" name="place_description" value=""></input>')
 			.append('<input type="text" class="place_name" name="place_name" value=""></input>')
-			.append('<input class="dwell_time" name="dwell_time" value="00:00"></input>');
+			.append('<input type="text" class="dwell_time" name="dwell_time" value="00:00"></input>');
 		target.find("td").eq(1)
 			.append('<div class="waypoint_arrival_datetime"></div>');
 		target.find("td").eq(2)

@@ -26,6 +26,7 @@ var ItineraryEditMenu = (function() {
 				at: "left bottom",
 				of: "#itinerary_edit_menu_main_login"
 			});
+			$( document ).click();
 			$( document ).one( "click", function() {
 				$("#itinerary_edit_menu_login").hide();
 			});
