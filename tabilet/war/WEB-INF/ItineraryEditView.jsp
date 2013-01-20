@@ -17,10 +17,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/JavaScript" src="/js/common/jquery.ui.touch-punch.min.js"></script>
+<script type="text/JavaScript" src="/js/lib/jquery.ui.touch-punch.min.js"></script>
 <script type="text/JavaScript" src="/js/lib/globalize.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja-JP.js"></script>
+<script type="text/JavaScript" src="/js/lib/timepicker.js"></script>
 <script type="text/JavaScript" src="/js/common/CommonFunctions.js"></script>
 <script type="text/JavaScript" src="/js/common/CommonDialogs.js"></script>
 <script type="text/JavaScript" src="/js/common/MapCanvas.js"></script>
