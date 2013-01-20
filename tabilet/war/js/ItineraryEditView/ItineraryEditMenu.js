@@ -47,6 +47,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-folder-open" },
 			text : true
 		}).click(function(){
+			$( document ).click();
 			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, ajaxToGetItineraryList);
 			return false;
