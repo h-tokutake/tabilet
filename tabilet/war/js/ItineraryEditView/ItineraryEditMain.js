@@ -102,11 +102,13 @@ var ItineraryEditView = (function(){
 		$(".button_delete_place").live("click", function(e){
 			__deleteRow($(e.target).closest("div"));
 			__updateDirections(true);
+			return false;
 		});
 		$(".button_insert_place").live("click", function(e){
 			insertRow($(e.target).closest("div"));
 			$(e.target).closest("div").prev().find(".place_name").focus();
 			__updateDirections(true);
+			return false;
 		});
 		$(".place_name").live("change", function(){
 			if($(this).val() == "") {
@@ -124,6 +126,7 @@ var ItineraryEditView = (function(){
 			target
 				.click(function(e){
 					$(e.target).focus();
+					return false;
 				})
 				.draggable({
 					revert: "invalid",
