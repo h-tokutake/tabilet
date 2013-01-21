@@ -122,6 +122,7 @@ var MapCanvas = (function(){
 			var arrDateTime = new Date(arrTimeInMs);
 			arrDateTimeString[row_index + 1] = toDateTimeString2(arrDateTime);
 			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 着";
+			depDateTimeString[row_index + 1] = "";
 
 			return arrTimeInMs;
 		}
