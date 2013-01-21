@@ -112,7 +112,11 @@ var WaypointEditDialog = (function(){
 					mainView.deleteRow(place_name_obj.closest(".waypoint"));
 				}
 			},
-			resize  : function() { smallMapCanvas.refresh(); },
+			resizeStop  : function() {
+				$("#waypoint_edit_screen_map_canvas").css("height", $(this).dialog("option", "height") - 130);
+				$("#waypoint_edit_screen_map_canvas").css("width", $(this).dialog("option", "width") - 30);
+				smallMapCanvas.refresh();
+			},
 			buttons : [
 				{
 					text: "現在地表示",

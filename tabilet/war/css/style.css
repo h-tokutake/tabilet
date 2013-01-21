@@ -83,6 +83,9 @@ div#itinerary_edit_login_info {
 div.map_canvas {
 	width: 100%;
 }
+div.info_window {
+	color: black;
+}
 div.movable:hover {
 	background-color: navy;
 }

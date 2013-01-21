@@ -22,7 +22,9 @@ var ItineraryEditView = (function(){
 		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
 		$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth - 40);
 		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
-		$("#itinerary_edit_screen_map_canvas").change(function(){
+		$( window ).resize(function(){
+			$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
+			$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth - 40);
 			mapCanvas.refresh();
 		});
 		setEvents();
