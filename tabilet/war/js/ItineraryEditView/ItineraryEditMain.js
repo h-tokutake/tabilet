@@ -73,27 +73,21 @@ var ItineraryEditView = (function(){
 
 	function setEvents() {
 		var that = this;
-		if ($("#itinerary_edit_itinerary_depdate").val() == "") {
-			$("#itinerary_edit_itinerary_depdate").val(toDateString(new Date()));
-		}
-		$("#itinerary_edit_itinerary_depdate").datepicker(
-			{ dateFormat: "yy/mm/dd" }
-		);
-		if ($("#itinerary_edit_itinerary_deptime").val() == "") {
-			$("#itinerary_edit_itinerary_deptime").val(toTimeString(new Date()));
-		}
-		$( "#itinerary_edit_itinerary_deptime" ).timepicker({
+		$( "#itinerary_edit_itinerary_deptime" ).datetimepicker({
+			defaultValue: toDateTimeString(new Date()),
+			dateFormat: 'yy/mm/dd',
+			separator : ' ',
+			timeFormat: 'HH:mm',
 			onClose : function () {
 				__updateTimeline(true);
 			}
 		});
 		$( ".dwell_time" ).timepicker({
+			defaultValue: '00:00',
+			timeFormat: 'HH:mm',
 			onClose : function () {
 				__updateTimeline(true);
 			}
-		});
-		$("#itinerary_edit_itinerary_depdate").change(function(){
-			__updateTimeline(true);
 		});
 		$("#itinerary_edit_itinerary_summary").change(function(){
 			dirty_flag = true;
@@ -166,6 +160,7 @@ var ItineraryEditView = (function(){
 			text : false
 		});
 		target.find(".dwell_time").timepicker({
+			timeFormat : 'HH:mm',
 			onClose : function () {
 				__updateTimeline(true);
 			}
@@ -183,7 +178,7 @@ var ItineraryEditView = (function(){
 		var dwell_times = [];
 		var waypoint_obj = $(".waypoint")
 
-		var dateString = $("#itinerary_edit_itinerary_depdate").val() + " " + $("#itinerary_edit_itinerary_deptime").val() + " GMT";
+		var dateString = $("#itinerary_edit_itinerary_deptime").val() + " GMT";
 		var dateTimeInMs = Date.parse(dateString);
 		mapCanvas.setDepDateTime(dateTimeInMs);
 
@@ -232,7 +227,7 @@ var ItineraryEditView = (function(){
 		var dwell_times = [];
 		var waypoint_obj = $(".waypoint");
 
-		var dateString = $("#itinerary_edit_itinerary_depdate").val() + " " + $("#itinerary_edit_itinerary_deptime").val() + " GMT";
+		var dateString = $("#itinerary_edit_itinerary_deptime").val() + " GMT";
 		var dateTimeInMs = Date.parse(dateString);
 		mapCanvas.setDepDateTime(dateTimeInMs);
 
@@ -288,7 +283,7 @@ var ItineraryEditView = (function(){
 			.append('<input type="hidden" class="place_siteurl" name="place_siteurl" value=""></input>')
 			.append('<input type="hidden" class="place_description" name="place_description" value=""></input>')
 			.append('<input type="text" class="place_name" name="place_name" value=""></input>')
-			.append('<input type="text" class="dwell_time" name="dwell_time" value="00:00"></input>');
+			.append('<input type="text" class="dwell_time" name="dwell_time" value=""></input>');
 		target.find("td").eq(1)
 			.append('<div class="waypoint_arrival_datetime"></div>');
 		target.find("td").eq(2)

@@ -77,17 +77,15 @@ var MapCanvas = (function(){
 				arrDateTimeString[0] = "";
 				for(var i=0; i<result.routes.length; i++){
 					for(var j=0; j<result.routes[i].legs.length; j++){
-						result.routes[i].legs[j].start_address = "<div class='info_window'><h3>" + placeNames[k] + "</h3>" +
+						result.routes[i].legs[j].start_address = "<h3>" + placeNames[k] + "</h3>" +
 							'<p><a href="' + placeUrls[k] + '" target="_blank">' + placeUrls[k] + '</a></p>' +
 							'<p>' + placeDescriptions[k] + '</p>';
 						if (i == result.routes.length - 1 && j == result.routes[i].legs.length - 1) {
-							result.routes[i].legs[j].end_address = "<div class='info_window'><h3>" + placeNames[k + 1] + "</h3>" +
+							result.routes[i].legs[j].end_address = "<h3>" + placeNames[k + 1] + "</h3>" +
 							'<p><a href="' + placeUrls[k + 1] + '" target="_blank">' + placeUrls[k + 1] + '</a></p>' +
 							'<p>' + placeDescriptions[k + 1] + '</p>';
 						}
 						arrTimeInMs = this.__setDepTimeInfo(result.routes[i].legs[j], depTimeInMs, arrTimeInMs, dwellTimes, k++);
-						result.routes[i].legs[j].start_address += '</div>';
-						result.routes[i].legs[j].end_address += '</div>';
 					}
 				}
 				if(directionsDisplay != null) {
@@ -141,7 +139,7 @@ var MapCanvas = (function(){
 			marker.setMap(map);
 
 			//情報ウインドウを作成
-			infoWnd.setContent('<div class="info_window"><h3>' + msg + '</h3></div>');
+			infoWnd.setContent('<h3>' + msg + '</h3>');
 
 			//マーカーがクリックされたら、情報ウィンドウを表示
 			google.maps.event.addListener(marker, "click", function(){
@@ -168,7 +166,7 @@ var MapCanvas = (function(){
 		}
 
 		this.__addPlaceDescription = function (argPlaceDescription) {
-			infoWnd.setContent(infoWnd.getContent().replace(/\<\/div\>/, '') + argPlaceDescription + '</div>');
+			infoWnd.setContent(infoWnd.getContent() + argPlaceDescription);
 		}
 
 		this.__setWaypoints = function (argWaypoints) {

@@ -90,13 +90,7 @@
 				name="itinerary_description"
 			><c:out value="${itinerary_description}" /></textarea>
 			<br />
-			<label for="itinerary_edit_itinerary_depdate" accesskey="t">出発日時 : </label>
-			<input type="text"
-				id="itinerary_edit_itinerary_depdate"
-				class="datetime"
-				name="itinerary_depdate"
-				value="<c:out value="${itinerary_depdate}" />"
-			></input>
+			<label for="itinerary_edit_itinerary_deptime" accesskey="t">出発日時 : </label>
 			<input type="text"
 				id="itinerary_edit_itinerary_deptime"
 				class="datetime"
