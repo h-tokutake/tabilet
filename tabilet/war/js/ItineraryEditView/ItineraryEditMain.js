@@ -130,7 +130,6 @@ var ItineraryEditView = (function(){
 			target
 				.click(function(e){
 					$(e.target).focus();
-					return false;
 				})
 				.draggable({
 					revert: "invalid",
