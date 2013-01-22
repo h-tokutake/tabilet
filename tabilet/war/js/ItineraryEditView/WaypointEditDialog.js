@@ -103,7 +103,7 @@ var WaypointEditDialog = (function(){
 				position_dirty_flag = false;
 
 				if(!mainView.isLoggedIn()) {
-					$('.ui-dialog-buttonpane').find('button:contains("地点登録")').button("disable");
+					$('.ui-dialog-buttonpane').find('button:contains("地点保存")').button("disable");
 					$('.ui-dialog-buttonpane').find('button:contains("地点削除")').button("disable");
 				}
 			},
@@ -134,7 +134,7 @@ var WaypointEditDialog = (function(){
 					}
 				},
 				{
-					text: "地点登録",
+					text: "地点保存",
 					click: function() {
 						if(!mainView.isLoggedIn()) {
 							mainView.getCommonDialog().error("ログインしてください。");
@@ -153,7 +153,7 @@ var WaypointEditDialog = (function(){
 							$("#place_edit_place_siteurl").val($("#waypoint_edit_place_siteurl").val());
 							$("#place_edit_place_description").val($("#waypoint_edit_place_description").val());
 							$("#itinerary_edit_screen_place_edit").show().dialog({
-								title   : "地点登録",
+								title   : "地点保存",
 								autoOpen: true,
 								modal   : true,
 								width   : 600,
@@ -165,7 +165,7 @@ var WaypointEditDialog = (function(){
 												mainView.getCommonDialog().error("地名を入力してください。");
 												$("#place_edit_place_name").focus();
 											} else {
-												var msg = '地点 "' + $("#place_edit_place_name").val() + '" を登録します。よろしいですか？';
+												var msg = '地点 "' + $("#place_edit_place_name").val() + '" を保存します。よろしいですか？';
 												mainView.getCommonDialog().confirm(true, msg, function(){
 													ajaxToSavePlaceData(
 														$("#place_edit_place_name").val(),
@@ -211,7 +211,7 @@ var WaypointEditDialog = (function(){
 							mainView.getCommonDialog().error("地名を入力してください。");
 							$("#waypoint_edit_place_name").focus();
 						} else if(position_dirty_flag) {
-							mainView.getCommonDialog().error("この地点は登録されていません。");
+							mainView.getCommonDialog().error("この地点は保存されていません。");
 						} else {
 							var msg = '地点 "' + $("#waypoint_edit_place_name").val() + '" を削除します。よろしいですか？';
 							mainView.getCommonDialog().confirm(true, msg, function(){
@@ -252,7 +252,7 @@ var WaypointEditDialog = (function(){
 
 	function ajaxToGetPlaceList () {
 		$("#place_list_menu").html("");
-		$("#place_list_menu").append('<li>登録地点一覧読み込み中・・・</li>');
+		$("#place_list_menu").append('<li>保存地点一覧読み込み中・・・</li>');
 		var menu = $("#place_list_menu").show().position({
 			my: "left top",
 			at: "left bottom",

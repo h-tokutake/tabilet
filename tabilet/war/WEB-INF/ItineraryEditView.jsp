@@ -29,7 +29,7 @@
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/WaypointEditDialog.js"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMain.js"></script>
-<title>[Experimental] タブレットで旅をする - Tabilet</title>
+<title>タブレットで旅をする - Tabilet</title>
 </head>
 <body>
 
@@ -39,10 +39,10 @@
 <!-- メニュー欄表示 -->
 <div id="itinerary_edit_menu_main">
 	<button id="itinerary_edit_menu_main_create_itinerary"          class="menu_main">新規作成</button>
-	<button id="itinerary_edit_menu_main_move_ItineraryListView"    class="menu_main">旅程一覧</button>
+	<button id="itinerary_edit_menu_main_move_ItineraryListView"    class="menu_main">行程一覧</button>
 	<button id="itinerary_edit_menu_main_refresh_ItineraryEditView" class="menu_main">変更破棄</button>
-	<button id="itinerary_edit_menu_main_save_itinerary"            class="menu_main">旅程保存</button>
-	<button id="itinerary_edit_menu_main_delete_itinerary"          class="menu_main">旅程削除</button>
+	<button id="itinerary_edit_menu_main_save_itinerary"            class="menu_main">行程保存</button>
+	<button id="itinerary_edit_menu_main_delete_itinerary"          class="menu_main">行程削除</button>
 <!--
 	<button id="itinerary_edit_menu_main_export_calendar"           class="menu_main">カレンダー</button>
 -->
@@ -59,14 +59,14 @@
 <!-- タブメニュー -->
 <div id="itinerary_edit_menu_tabs">
 	<ul>
-		<li><a href="#itinerary_edit_screen_main" id="itinerary_edit_menu_main_move_ItineraryEditView">旅程編集</a></li>
+		<li><a href="#itinerary_edit_screen_main" id="itinerary_edit_menu_main_move_ItineraryEditView">行程編集</a></li>
 		<li><a href="#itinerary_edit_screen_map_canvas"  id="itinerary_edit_menu_main_show_map">地図表示</a></li>
 	</ul>
 
 	<!-- 地図表示 -->
 	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
 
-	<!-- 旅程入力欄を表示 -->
+	<!-- 行程入力欄を表示 -->
 	<div id="itinerary_edit_screen_main">
 		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
 			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
@@ -75,7 +75,7 @@
 				name="itinerary_id"
 				value="<c:out value="${itinerary_id}" />"
 			></input>
-			<label for="itinerary_edit_itinerary_summary" accesskey="s">概要 : </label>
+			<label for="itinerary_edit_itinerary_summary" accesskey="s">コースタイトル : </label>
 			<input type="text"
 				id="itinerary_edit_itinerary_summary"
 				class="summary"
@@ -83,7 +83,7 @@
 				value="<c:out value="${itinerary_summary}" />"
 			></input>
 			<br />
-			<label for="itinerary_edit_itinerary_description" accesskey="d">説明 : </label>
+			<label for="itinerary_edit_itinerary_description" accesskey="d">行程概要 : </label>
 			<textarea
 				id="itinerary_edit_itinerary_description"
 				class="description"
@@ -99,10 +99,10 @@
 			></input>
 
 			<br />
-			<label>目的地</label>
+			<label>目的地リスト</label>
 			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
 				<div class="waypoint movable"><table><tr><td>
-					<button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button><input type="hidden"
+					<buttonset><button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button></buttonset><input type="hidden"
 						class="place_position"
 						name="place_position"
 						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>"
@@ -126,11 +126,9 @@
 					<td class="waypoint_column_datetime"><div class="waypoint_departure_datetime"></div></td></tr></table>
 				</div>
 			</c:forEach>
-			<div class="waypoint">
-				<buttonset>
-					<button class="button_delete_place" disabled>削除</button><button class="button_insert_place">追加</button>
-				</buttonset>
-			</div>
+			<div class="waypoint"><table><tr><td>
+				<buttonset><button class="button_delete_place" disabled>削除</button><button class="button_insert_place">追加</button></buttonset>
+			</td></tr></table></div>
 		</form>
 	</div>
 
@@ -138,7 +136,7 @@
 
 <!-- 経由地編集画面 -->
 <div id="itinerary_edit_screen_waypoint_edit">
-	<input type="text" id="waypoint_edit_place_name" name="waypoint_place_name" value=""></input><button id="waypoint_edit_button_place_list">登録地点一覧</button>
+	<input type="text" id="waypoint_edit_place_name" name="waypoint_place_name" value=""></input><button id="waypoint_edit_button_place_list">保存地点一覧</button>
 	<input type="hidden" id="waypoint_edit_place_position" name="waypoint_place_position" value=""></input>
 	<input type="hidden" id="waypoint_edit_place_siteurl" name="waypoint_place_siteurl" value=""></input>
 	<input type="hidden" id="waypoint_edit_place_description" name="waypoint_place_description" value=""></input>

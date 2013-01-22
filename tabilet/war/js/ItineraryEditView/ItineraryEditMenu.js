@@ -37,7 +37,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-document" },
 			text : true
 		}).click(function(){
-			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
 				submitForm("itinerary_edit", "get");
 			});
@@ -48,7 +48,7 @@ var ItineraryEditMenu = (function() {
 			text : true
 		}).click(function(){
 			$( document ).click();
-			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, ajaxToGetItineraryList);
 			return false;
 		});
@@ -57,14 +57,14 @@ var ItineraryEditMenu = (function() {
 			text : true
 		}).click(function(){
 			if ($("#itinerary_edit_itinerary_summary").val() === "") {
-				mainView.getCommonDialog().error('旅程の概要が未入力です。');
+				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_summary").text() + 'が未入力です。');
 				return false;
 			}
 			if ($("#itinerary_edit_itinerary_deptime").val() === "") {
-				mainView.getCommonDialog().error('出発日時が未入力です。');
+				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_deptime").text() + 'が未入力です。');
 				return false;
 			}
-			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToSaveItineraryData();
 			});
@@ -74,7 +74,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-refresh" },
 			text : true
 		}).click(function(){
-			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" へのすべての変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
 				if($("#itinerary_edit_itinerary_id").val() == "") {
 					submitForm("itinerary_edit", "get");
@@ -88,7 +88,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-trash" },
 			text : true
 		}).click(function(event) {
-			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" が削除されます。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" が削除されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToDeleteItineraryData();
 			});
@@ -115,7 +115,7 @@ var ItineraryEditMenu = (function() {
 		$(document.body).append($(document.createElement("ul")).attr("id", "itinerary_list_menu"));
 		$("#itinerary_list_menu").menu().hide();
 		$("#itinerary_list_menu").html("");
-		$("#itinerary_list_menu").append('<li>旅程一覧読み込み中・・・</li>');
+		$("#itinerary_list_menu").append('<li>行程一覧読み込み中・・・</li>');
 
 		$("#title_logo").click(function(){
 			window.open("http://www.tabilet.net/", "_top");
@@ -221,16 +221,16 @@ var ItineraryEditMenu = (function() {
 			url: "itinerary_edit",
 			success: function(result){
 				if(result.returnCode == "0") {
-					mainView.getCommonDialog().ok('旅程保存完了', '旅程 "' + itinerary_data_json.itinerary_summary + '" を保存しました。');
+					mainView.getCommonDialog().ok('行程保存完了', '行程 "' + itinerary_data_json.itinerary_summary + '" を保存しました。');
 					mainView.setItineraryId(result.strInfo);
 					mainView.setDirtyFlag(false);
 					__disableSaveMenu();
 				} else {
-					mainView.getCommonDialog().error('旅程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。');
+					mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('旅程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。');
+				mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。');
 			}
 		});
 	}
@@ -246,15 +246,15 @@ var ItineraryEditMenu = (function() {
 			url: "itinerary_edit",
 			success: function(result){
 				if(result.returnCode == "0") {
-					mainView.getCommonDialog().ok('旅程削除完了', '旅程 "' + itinerary_data_json.itinerary_summary + '" を削除しました。', function(){
+					mainView.getCommonDialog().ok('行程削除完了', '行程 "' + itinerary_data_json.itinerary_summary + '" を削除しました。', function(){
 						submitForm("itinerary_edit", "get");
 					});
 				} else {
-					mainView.getCommonDialog().error('旅程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
+					mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('旅程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
+				mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
 			}
 		});
 	}

@@ -18,6 +18,9 @@ input,textarea {
 	vertical-align: center;
 	z-index: 100;
 }
+input.dwell_time {
+	width: 40px;
+}
 button {
 	display: inline;
 }
@@ -49,8 +52,8 @@ input.user_id{
 	display: inline;
 }
 textarea.description {
-	width: 400px;
-	max-width: 400px;
+	width: 430px;
+	max-width: 430px;
 }
 input.place_name {
 	width: 240px;
