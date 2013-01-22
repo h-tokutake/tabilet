@@ -79,6 +79,9 @@ var ItineraryEditView = (function(){
 			separator : ' ',
 			timeFormat: 'HH:mm',
 			onClose : function () {
+				if($("#itinerary_edit_itinerary_summary").val() != '' && $( "#itinerary_edit_itinerary_deptime" ).val() != '') {
+					mainMenu.enableSaveMenu();
+				}
 				__updateTimeline(true);
 			}
 		});
@@ -91,7 +94,9 @@ var ItineraryEditView = (function(){
 		});
 		$("#itinerary_edit_itinerary_summary").change(function(){
 			dirty_flag = true;
-			mainMenu.enableSaveMenu();
+			if($("#itinerary_edit_itinerary_summary").val() != '' && $( "#itinerary_edit_itinerary_deptime" ).val() != '') {
+				mainMenu.enableSaveMenu();
+			}
 		});
 		$("#itinerary_edit_itinerary_description").change(function(){
 			dirty_flag = true;

@@ -58,12 +58,16 @@ var ItineraryEditMenu = (function() {
 		}).click(function(){
 			if ($("#itinerary_edit_itinerary_summary").val() === "") {
 				mainView.getCommonDialog().error('旅程の概要が未入力です。');
-			} else {
-				var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
-				mainView.getCommonDialog().confirm(true, msg, function(){
-					ajaxToSaveItineraryData();
-				});
+				return false;
 			}
+			if ($("#itinerary_edit_itinerary_deptime").val() === "") {
+				mainView.getCommonDialog().error('出発日時が未入力です。');
+				return false;
+			}
+			var msg = '旅程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
+			mainView.getCommonDialog().confirm(true, msg, function(){
+				ajaxToSaveItineraryData();
+			});
 			return false;
 		});
 		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button({
