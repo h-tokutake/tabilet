@@ -287,7 +287,7 @@ var ItineraryEditView = (function(){
 			.append('<input type="hidden" class="place_siteurl" name="place_siteurl" value=""></input>')
 			.append('<input type="hidden" class="place_description" name="place_description" value=""></input>')
 			.append('<input type="text" class="place_name" name="place_name" value=""></input>')
-			.append('<input type="text" class="dwell_time" name="dwell_time" value=""></input>');
+			.append('<input type="text" class="dwell_time" name="dwell_time" value="00:00"></input>');
 		target.find("td").eq(1)
 			.append('<div class="waypoint_arrival_datetime"></div>');
 		target.find("td").eq(2)
