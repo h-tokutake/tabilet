@@ -49,6 +49,7 @@ var MapCanvas = (function(){
 		var placeDescriptions = [];
 		var waypoints = [];
 		var dwellTimes = [];
+		var placeDepTimes = [];
 		var directionResult = null;
 
 		var arrDateTimeString = [];
@@ -85,7 +86,7 @@ var MapCanvas = (function(){
 							'<p><a href="' + placeUrls[k + 1] + '" target="_blank">' + placeUrls[k + 1] + '</a></p>' +
 							'<p>' + placeDescriptions[k + 1] + '</p>';
 						}
-						arrTimeInMs = this.__setDepTimeInfo(result.routes[i].legs[j], depTimeInMs, arrTimeInMs, dwellTimes, k++);
+						arrTimeInMs = this.__setDepTimeInfo(result.routes[i].legs[j], depTimeInMs, arrTimeInMs, dwellTimes, placeDepTimes, k++);
 					}
 				}
 				if(directionsDisplay != null) {
@@ -103,28 +104,32 @@ var MapCanvas = (function(){
 			return depTimeInMs + currentTime.getTimezoneOffset() * 60000;
 		}
 
-		this.__setDepTimeInfo = function (leg, depTimeInMs, arrTimeInMs, dwell_times, row_index) {
+		this.__setDepTimeInfo = function (leg, depTimeInMs, arrTimeInMs, dwell_times, placeDepTimes, row_index) {
 			var infoStr = "";
-			if (arrTimeInMs != depTimeInMs) {
+//			if (arrTimeInMs != depTimeInMs) {
+			if (row_index === 0) {
 				//出発地以外は、到着時刻を表示する
 				infoStr = "";
-				var arrDateTime = new Date(arrTimeInMs);
+//				var arrDateTime = new Date(arrTimeInMs);
+				var arrDateTime = new Date(placeDepTimes[row_index + 1]);
 				arrDateTimeString[row_index + 1] = toDateTimeString(arrDateTime);
 				infoStr += arrDateTimeString[row_index] + " 着";
-				arrTimeInMs += dwell_times.shift();
+//				arrTimeInMs += dwell_times.shift();
 			}
-			var depDateTime = new Date(arrTimeInMs);
+//			var depDateTime = new Date(arrTimeInMs);
+			var depDateTime = new Date(placeDepTimes[row_index]);
 			depDateTimeString[row_index] = toDateTimeString(depDateTime);
 			infoStr += "<br>" + depDateTimeString[row_index] + " 発";
 			leg.start_address += infoStr;
-			arrTimeInMs += leg.duration.value * 1000;
+//			arrTimeInMs += leg.duration.value * 1000;
 
-			var arrDateTime = new Date(arrTimeInMs);
+//			var arrDateTime = new Date(arrTimeInMs);
+			var arrDateTime = depDateTime + leg.duration.value * 1000;
 			arrDateTimeString[row_index + 1] = toDateTimeString(arrDateTime);
 			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 着";
 			depDateTimeString[row_index + 1] = "";
 
-			return arrTimeInMs;
+//			return arrTimeInMs;
 		}
 
 		this.__createMarker = function (latlng, msg){
@@ -176,7 +181,9 @@ var MapCanvas = (function(){
 		this.__setDwellTimes = function (argDwellTimes) {
 			dwellTimes = argDwellTimes;
 		}
-
+		this.__setPlaceDepTimes = function (argPlaceDepTimes) {
+			placeDepTimes = argPlaceDepTimes;
+		}
 		this.__setDepDateTime = function (argDepDateTime) {
 			depDateTime = argDepDateTime;
 		}
@@ -301,6 +308,7 @@ var MapCanvas = (function(){
 		addPlaceDescription : function(argPlaceDescription) { this.__addPlaceDescription(argPlaceDescription); },
 		setWaypoints : function(argWaypoints) { this.__setWaypoints(argWaypoints); },
 		setDwellTimes : function(argDwellTimes) { this.__setDwellTimes(argDwellTimes); },
+		setPlaceDepTimes : function(argPlaceDepTimes) { this.__setPlaceDepTimes(argPlaceDepTimes); },
 		setDepDateTime : function(argDepDateTime) { this.__setDepDateTime(argDepDateTime); },
 		getArrDateTimeString : function() { return this.__getArrDateTimeString(); },
 		getDepDateTimeString : function() { return this.__getDepDateTimeString(); },

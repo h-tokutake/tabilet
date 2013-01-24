@@ -181,6 +181,7 @@ var ItineraryEditView = (function(){
 		var place_names = [];
 		var place_urls = [];
 		var place_descriptions = [];
+		var place_deptimes = [];
 		var waypoints = [];
 		var dwell_times = [];
 		var waypoint_obj = $(".waypoint")
@@ -204,23 +205,26 @@ var ItineraryEditView = (function(){
 				place_urls.push(place_url);
 				var place_description = waypoint_obj.eq(i).find(".place_description").val();
 				place_descriptions.push(place_description);
-				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
-				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-				var dwell_time = departure_time - arrival_time;
-				if (dwell_time < 0) {
-					dwell_time = 0;
+//				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
+//				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
+				var place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
+//				var dwell_time = departure_time - arrival_time;
+//				if (dwell_time < 0) {
+				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT")) {
+//					dwell_time = 0;
 					waypoint_obj.eq(i).find(".place_arrtime").val(waypoint_obj.eq(i).find(".place_deptime").val());
 				}
-				if (dwell_time === null || isNaN(dwell_time)) {
-					dwell_times.push(0);
-				} else {
-					dwell_times.push(dwell_time);
-				}
+//				if (dwell_time === null || isNaN(dwell_time)) {
+//					dwell_times.push(0);
+//				} else {
+//					dwell_times.push(dwell_time);
+//				}
 			}
 		}
-		dwell_times.pop();
-		dwell_times.shift();
-		mapCanvas.setDwellTimes(dwell_times);
+//		dwell_times.pop();
+//		dwell_times.shift();
+//		mapCanvas.setDwellTimes(dwell_times);
+		mapCanvas.setPlaceDepTime(place_deptimes);
 		mapCanvas.setPlaceNames(place_names);
 		mapCanvas.setPlaceUrls(place_urls);
 		mapCanvas.setPlaceDescriptions(place_descriptions);
@@ -247,23 +251,26 @@ var ItineraryEditView = (function(){
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name = waypoint_obj.eq(i).find(".place_name").val();
 			if (place_name != "" && place_name != undefined) {
-				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
-				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-				var dwell_time = departure_time - arrival_time;
-				if (dwell_time < 0) {
-					dwell_time = 0;
+//				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
+//				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
+				var place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
+//				var dwell_time = departure_time - arrival_time;
+//				if (dwell_time < 0) {
+				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT")) {
+//					dwell_time = 0;
 					waypoint_obj.eq(i).find(".place_arrtime").val(waypoint_obj.eq(i).find(".place_deptime").val());
 				}
-				if (dwell_time === null || isNaN(dwell_time)) {
-					dwell_times.push(0);
-				} else {
-					dwell_times.push(dwell_time);
-				}
+//				if (dwell_time === null || isNaN(dwell_time)) {
+//					dwell_times.push(0);
+//				} else {
+//					dwell_times.push(dwell_time);
+//				}
 			}
 		}
-		dwell_times.pop();
-		dwell_times.shift();
-		mapCanvas.setDwellTimes(dwell_times);
+//		dwell_times.pop();
+//		dwell_times.shift();
+//		mapCanvas.setDwellTimes(dwell_times);
+		mapCanvas.setPlaceDepTime(place_deptimes);
 		mapCanvas.updateTimeline();
 		updateArrDepDateTime(force_update_flag);
 
@@ -284,7 +291,8 @@ var ItineraryEditView = (function(){
 
 		for(var i=0; i<waypoint_obj.length; i++) {
 			waypoint_obj.eq(i).find(".place_arrtime").val(arrDateTime[i]);
-			if(force_update || waypoint_obj.eq(i).find(".place_deptime").val() === '') {
+			if(force_update || waypoint_obj.eq(i).find(".place_deptime").val() === '' ||
+					waypoint_obj.eq(i).find(".place_arrtime").val() > waypoint_obj.eq(i).find(".place_deptime").val()) {
 				waypoint_obj.eq(i).find(".place_deptime").val(depDateTime[i]);
 			}
 		}
