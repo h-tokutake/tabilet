@@ -85,7 +85,7 @@ public class ItineraryDataHandler extends DataHandler {
 		String[] placePositionList = {};
 		String[] placeUrlList = {};
 		String[] placeDescriptionList = {};
-		String[] dwellTimeList = {};
+		String[] placeDepTimeList = {};
 
 		@SuppressWarnings("unchecked")
 		Map<String, String[]> paramMap = req.getParameterMap();
@@ -111,15 +111,15 @@ public class ItineraryDataHandler extends DataHandler {
 			if("place_description[]".equals(entry.getKey())){
 				placeDescriptionList = entry.getValue();
 			} else
-			if("dwell_time[]".equals(entry.getKey())){
-				dwellTimeList = entry.getValue();
+			if("place_deptime[]".equals(entry.getKey())){
+				placeDepTimeList = entry.getValue();
 			}
 		}
 		((ItinerarySkeletonData) this.getData()).setPlaceNameList(new ArrayList<String>(Arrays.asList(placeNameList)));
 		((ItinerarySkeletonData) this.getData()).setPlacePositionList(new ArrayList<String>(Arrays.asList(placePositionList)));
 		((ItinerarySkeletonData) this.getData()).setPlaceUrlList(new ArrayList<String>(Arrays.asList(placeUrlList)));
 		((ItinerarySkeletonData) this.getData()).setPlaceDescriptionList(new ArrayList<String>(Arrays.asList(placeDescriptionList)));
-		((ItineraryData) this.getData()).setDwellTimeList(new ArrayList<String>(Arrays.asList(dwellTimeList)));
+		((ItineraryData) this.getData()).setPlaceDepTimeList(new ArrayList<String>(Arrays.asList(placeDepTimeList)));
 	}
 
 	public final void sendOne(HttpSession session){
@@ -131,7 +131,7 @@ public class ItineraryDataHandler extends DataHandler {
 		ArrayList<String> placePositionList = new ArrayList<String>();
 		ArrayList<String> placeUrlList      = new ArrayList<String>();
 		ArrayList<String> placeDescriptionList = new ArrayList<String>();
-		ArrayList<String> dwellTimeList     = new ArrayList<String>();
+		ArrayList<String> placeDepTimeList     = new ArrayList<String>();
 
 		if(this.getData() != null){
 			ItineraryData data = (ItineraryData) this.getData();
@@ -143,7 +143,7 @@ public class ItineraryDataHandler extends DataHandler {
 			placePositionList = data.getPlacePositionList();
 			placeUrlList      = data.getPlaceUrlList();
 			placeDescriptionList = data.getPlaceDescriptionList();
-			dwellTimeList     = data.getDwellTimeList();
+			placeDepTimeList     = data.getPlaceDepTimeList();
 		}
 		session.setAttribute("itinerary_id"         , id         );
 		session.setAttribute("itinerary_summary"    , summary    );
@@ -153,7 +153,7 @@ public class ItineraryDataHandler extends DataHandler {
 		session.setAttribute("place_position_list"  , placePositionList.toArray());
 		session.setAttribute("place_siteurl_list"   , placeUrlList.toArray()     );
 		session.setAttribute("place_description_list", placeDescriptionList.toArray());
-		session.setAttribute("dwell_time_list"      , dwellTimeList.toArray()    );
+		session.setAttribute("place_deptime_list"   , placeDepTimeList.toArray()    );
 	}
 
 	public final HttpServletResponse sendOne(HttpServletResponse resp) throws Exception { return resp; }

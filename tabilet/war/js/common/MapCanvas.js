@@ -109,18 +109,18 @@ var MapCanvas = (function(){
 				//出発地以外は、到着時刻を表示する
 				infoStr = "";
 				var arrDateTime = new Date(arrTimeInMs);
-				arrDateTimeString[row_index + 1] = toDateTimeString2(arrDateTime);
+				arrDateTimeString[row_index + 1] = toDateTimeString(arrDateTime);
 				infoStr += arrDateTimeString[row_index] + " 着";
 				arrTimeInMs += dwell_times.shift();
 			}
 			var depDateTime = new Date(arrTimeInMs);
-			depDateTimeString[row_index] = toDateTimeString2(depDateTime);
+			depDateTimeString[row_index] = toDateTimeString(depDateTime);
 			infoStr += "<br>" + depDateTimeString[row_index] + " 発";
 			leg.start_address += infoStr;
 			arrTimeInMs += leg.duration.value * 1000;
 
 			var arrDateTime = new Date(arrTimeInMs);
-			arrDateTimeString[row_index + 1] = toDateTimeString2(arrDateTime);
+			arrDateTimeString[row_index + 1] = toDateTimeString(arrDateTime);
 			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 着";
 			depDateTimeString[row_index + 1] = "";
 

@@ -183,14 +183,14 @@ var ItineraryEditMenu = (function() {
 		var placePositionList = [];
 		var placeUrlList = [];
 		var placeDescriptionList = [];
-		var dwellTimeList = [];
+		var placeDepTimeList = [];
 
 		$(".waypoint").each(function(){
 			placeNameList.push($(this).find(".place_name").val());
 			placePositionList.push($(this).find(".place_position").val());
 			placeUrlList.push($(this).find(".place_siteurl").val());
 			placeDescriptionList.push($(this).find(".place_description").val());
-			dwellTimeList.push($(this).find(".dwell_time").val());
+			placeDepTimeList.push($(this).find(".place_deptime").val());
 		});
 
 		var json = {
@@ -198,13 +198,12 @@ var ItineraryEditMenu = (function() {
 			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
 			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
 			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
-			itinerary_depdate     : $("#itinerary_edit_itinerary_depdate").val(),
 			itinerary_deptime     : $("#itinerary_edit_itinerary_deptime").val(),
 			place_name            : placeNameList,
 			place_position        : placePositionList,
 			place_siteurl         : placeUrlList,
 			place_description     : placeDescriptionList,
-			dwell_time            : dwellTimeList
+			place_deptime         : placeDepTimeList
 		};
 
 		return json;

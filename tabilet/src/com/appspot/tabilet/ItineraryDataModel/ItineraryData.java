@@ -10,7 +10,7 @@ import javax.jdo.annotations.Persistent;
 class ItineraryData extends ItinerarySkeletonData {
 
 	@Persistent private String depTime = "";
-	@Persistent private ArrayList<String> dwellTimeList;
+	@Persistent private ArrayList<String> placeDepTimeList;
 	@Persistent private ArrayList<String> waypointCommentList;
 
 	ItineraryData(){
@@ -35,7 +35,7 @@ class ItineraryData extends ItinerarySkeletonData {
 	}
 	final void setAll(ItineraryData source) {
 		super.setAll(source);
-		this.dwellTimeList = source.getDwellTimeList();
+		this.placeDepTimeList = source.getPlaceDepTimeList();
 		this.waypointCommentList = source.getWaypointCommentList();
 	}
 	final boolean isDuplicateOf(ItineraryData other) {
@@ -49,16 +49,16 @@ class ItineraryData extends ItinerarySkeletonData {
 	}
 
 	/* getter */
-	final ArrayList<String> getDwellTimeList() {
-		return dwellTimeList;
+	final ArrayList<String> getPlaceDepTimeList() {
+		return placeDepTimeList;
 	}
 	final ArrayList<String> getWaypointCommentList() {
 		return waypointCommentList;
 	}
 
 	/* setter */
-	final void setDwellTimeList(ArrayList<String> dwellTimeList) {
-		this.dwellTimeList = dwellTimeList;
+	final void setPlaceDepTimeList(ArrayList<String> placeDepTimeList) {
+		this.placeDepTimeList = placeDepTimeList;
 	}
 	final void setWaypointCommentList(ArrayList<String> waypointCommentList) {
 		this.waypointCommentList = waypointCommentList;

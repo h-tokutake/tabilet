@@ -118,12 +118,13 @@
 						class="place_name"
 						name="place_name"
 						value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>"
-					></input><input type="text"
-						class="dwell_time"
-						name="dwell_time"
-						value="<c:if test="${not empty dwell_time_list}"><c:out value="${dwell_time_list[status.index]}" /></c:if>"
-					></input></td><td class="waypoint_column_datetime"><div class="waypoint_arrival_datetime"></div></td><td> ～ </td>
-					<td class="waypoint_column_datetime"><div class="waypoint_departure_datetime"></div></td></tr></table>
+					></input></td><td class="waypoint_column_datetime"><input type="text" class="place_arrtime" readonly="readonly"></input></td>
+					<td> ～ </td>
+					<td class="waypoint_column_datetime"><input type="text"
+						class="place_deptime"
+						name="place_deptime"
+						value="<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>"
+					></input></td></tr></table>
 				</div>
 			</c:forEach>
 			<div class="waypoint"><table><tr><td>

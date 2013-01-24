@@ -98,14 +98,6 @@ div.movable_drag {
 div.movable_drop {
 	background-color: orangered;
 }
-div.waypoint_arrival_datetime {
-	display: inline;
-	min-width: 200px;
-}
-div.waypoint_departure_datetime {
-	display: inline;
-	min-width: 200px;
-}
 td.waypoint_column_datetime {
 	width: 110px;
 }
