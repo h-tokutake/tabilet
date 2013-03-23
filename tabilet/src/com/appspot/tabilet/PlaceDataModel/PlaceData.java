@@ -13,7 +13,6 @@ class PlaceData extends Data {
 	@Persistent private String placePosition = "";
 	@Persistent private String siteUrl = "";
 
-	/* コンストラクタ */
 	PlaceData(){
 	}
 	PlaceData(String placeName, String placePosition, String siteUrl) {

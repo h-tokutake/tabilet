@@ -31,7 +31,7 @@ public class CalendarServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		out.println("<html>");
 		out.println("<head>");
-		out.println("<title>ã‚µãƒ³ãƒ—ãƒ«</title>");
+		out.println("<title>ƒJƒŒƒ“ƒ_[</title>");
 		out.println("</head>");
 		out.println("<body>");
 		out.println(user);

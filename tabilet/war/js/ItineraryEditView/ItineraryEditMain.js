@@ -2,7 +2,7 @@ $(function () {
 	var view = new ItineraryEditView();
 });
 
-//ItineraryEditViewクラス
+//ItineraryEditView
 
 var ItineraryEditView = (function(){
 	var MAX_WAYPOINTS = 10;
@@ -207,7 +207,7 @@ var ItineraryEditView = (function(){
 				place_descriptions.push(place_description);
 //				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
 //				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-				var place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
+				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
 //				var dwell_time = departure_time - arrival_time;
 //				if (dwell_time < 0) {
 				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT")) {
@@ -224,7 +224,7 @@ var ItineraryEditView = (function(){
 //		dwell_times.pop();
 //		dwell_times.shift();
 //		mapCanvas.setDwellTimes(dwell_times);
-		mapCanvas.setPlaceDepTime(place_deptimes);
+		mapCanvas.setPlaceDepTimes(place_deptimes);
 		mapCanvas.setPlaceNames(place_names);
 		mapCanvas.setPlaceUrls(place_urls);
 		mapCanvas.setPlaceDescriptions(place_descriptions);
@@ -242,6 +242,7 @@ var ItineraryEditView = (function(){
 
 	function __updateTimeline (set_dirty_flag, force_update_flag) {
 		var dwell_times = [];
+		var place_deptimes = [];
 		var waypoint_obj = $(".waypoint");
 
 		var dateString = $("#itinerary_edit_itinerary_deptime").val() + " GMT";
@@ -253,7 +254,7 @@ var ItineraryEditView = (function(){
 			if (place_name != "" && place_name != undefined) {
 //				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
 //				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-				var place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
+				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
 //				var dwell_time = departure_time - arrival_time;
 //				if (dwell_time < 0) {
 				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT")) {
@@ -270,7 +271,7 @@ var ItineraryEditView = (function(){
 //		dwell_times.pop();
 //		dwell_times.shift();
 //		mapCanvas.setDwellTimes(dwell_times);
-		mapCanvas.setPlaceDepTime(place_deptimes);
+		mapCanvas.setPlaceDepTimes(place_deptimes);
 		mapCanvas.updateTimeline();
 		updateArrDepDateTime(force_update_flag);
 
@@ -315,7 +316,7 @@ var ItineraryEditView = (function(){
 		target.find("td").eq(1)
 			.append('<input type="text" class="place_arrtime" value="" readonly="readonly"></input>');
 		target.find("td").eq(2)
-			.append(' ～ ');
+			.append(' ==> ');
 		target.find("td").eq(3)
 			.append('<input type="text" class="place_deptime" name="place_deptime" value=""></input>');
 		setEventsInRow(target);

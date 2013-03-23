@@ -23,12 +23,12 @@
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja-JP.js"></script>
 <script type="text/JavaScript" src="/js/lib/timepicker.js"></script>
-<script type="text/JavaScript" src="/js/common/CommonFunctions.js"></script>
-<script type="text/JavaScript" src="/js/common/CommonDialogs.js"></script>
-<script type="text/JavaScript" src="/js/common/MapCanvas.js"></script>
-<script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js"></script>
-<script type="text/JavaScript" src="/js/ItineraryEditView/WaypointEditDialog.js"></script>
-<script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMain.js"></script>
+<script type="text/JavaScript" src="/js/common/CommonFunctions.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/common/MapCanvas.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/ItineraryEditView/WaypointEditDialog.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMain.js" charset="utf-8"></script>
 <title>タブレットで旅をする - Tabilet</title>
 </head>
 <body>

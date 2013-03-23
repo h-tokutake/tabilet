@@ -19,7 +19,6 @@ class ItinerarySkeletonData extends Data {
 	@Persistent private ArrayList<String> placeUrlList;
 	@Persistent private ArrayList<String> placeDescriptionList;
 
-	/* コンストラクタ */
 	ItinerarySkeletonData(){
 		super();
 	}

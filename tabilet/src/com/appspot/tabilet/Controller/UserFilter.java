@@ -29,7 +29,6 @@ public class UserFilter implements Filter {
 			User user = userService.getCurrentUser();
 			req.setAttribute("user", user);
 
-			/* ニックネームを保存する */
 			if(user.getNickname() != null && !"".equals(user.getNickname())) {
 				req.setAttribute("nickname", user.getNickname());
 			} else if (user.getEmail() != null && !"".equals(user.getEmail())) {

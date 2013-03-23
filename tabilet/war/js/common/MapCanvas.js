@@ -1,4 +1,4 @@
-//MapCanvasクラス
+//MapCanvas
 
 var MapCanvas = (function(){
 	var mainView;
@@ -28,11 +28,10 @@ var MapCanvas = (function(){
 		var canvasId = map_canvas_id;
 		var centerPosition = new google.maps.LatLng(35.681382, 139.766084);
 
-		/* 倍率、中心位置、地図の種類(ROADMAP)をオプションとして用意する */
 		var mapOptions = {
 				zoom : 14, center : centerPosition, mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
-		/* 地図オブジェクトを作成する */
+
 		var mapDiv = document.getElementById(map_canvas_id);
 		var map = new google.maps.Map(mapDiv, mapOptions);
 
@@ -70,7 +69,7 @@ var MapCanvas = (function(){
 
 		this.__getDirectionsCallback = function (result, status) {
 			if (status === google.maps.DirectionsStatus.OK) {
-				//出発時刻をミリ秒単位で取得
+
 				var depTimeInMs = this.__getDepTimeInMs();
 				var arrTimeInMs = depTimeInMs;
 
@@ -93,7 +92,7 @@ var MapCanvas = (function(){
 					directionsDisplay.setDirections(result);
 				}
 			} else {
-				mainView.getCommonDialog().error("経路が見つかりませんでした");
+				mainView.getCommonDialog().error("経路情報の取得に失敗しました。");
 			}
 		}
 
@@ -108,32 +107,28 @@ var MapCanvas = (function(){
 			var infoStr = "";
 //			if (arrTimeInMs != depTimeInMs) {
 			if (row_index === 0) {
-				//出発地以外は、到着時刻を表示する
 				infoStr = "";
 //				var arrDateTime = new Date(arrTimeInMs);
-				var arrDateTime = new Date(placeDepTimes[row_index + 1]);
-				arrDateTimeString[row_index + 1] = toDateTimeString(arrDateTime);
-				infoStr += arrDateTimeString[row_index] + " 着";
+				arrDateTimeString[row_index + 1] = toDateTimeString(new Date(placeDepTimes[row_index + 1]));
+				infoStr += arrDateTimeString[row_index] + " 到着";
 //				arrTimeInMs += dwell_times.shift();
 			}
 //			var depDateTime = new Date(arrTimeInMs);
 			var depDateTime = new Date(placeDepTimes[row_index]);
 			depDateTimeString[row_index] = toDateTimeString(depDateTime);
-			infoStr += "<br>" + depDateTimeString[row_index] + " 発";
+			infoStr += "<br>" + depDateTimeString[row_index] + " 出発";
 			leg.start_address += infoStr;
 //			arrTimeInMs += leg.duration.value * 1000;
 
 //			var arrDateTime = new Date(arrTimeInMs);
-			var arrDateTime = depDateTime + leg.duration.value * 1000;
-			arrDateTimeString[row_index + 1] = toDateTimeString(arrDateTime);
-			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 着";
+			arrDateTimeString[row_index + 1] = toDateTimeString(depDateTime + leg.duration.value * 1000);
+			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 到着";
 			depDateTimeString[row_index + 1] = "";
 
 //			return arrTimeInMs;
 		}
 
 		this.__createMarker = function (latlng, msg){
-			//マーカーを作成
 			marker.setMap(null);
 			marker.setPosition(latlng);
 			google.maps.event.addListener(map, 'idle', function() {
@@ -143,10 +138,8 @@ var MapCanvas = (function(){
 			});
 			marker.setMap(map);
 
-			//情報ウインドウを作成
 			infoWnd.setContent('<h3>' + msg + '</h3>');
 
-			//マーカーがクリックされたら、情報ウィンドウを表示
 			google.maps.event.addListener(marker, "click", function(){
 				infoWnd.open(map, this);
 			});
@@ -234,7 +227,7 @@ var MapCanvas = (function(){
 							map.setCenter(latlng);
 							if(callback != null) callback(latlng.toString());
 						} else {
-							mainView.getCommonDialog().error("地点が見つかりませんでした。");
+							mainView.getCommonDialog().error("位置情報の取得に失敗しました。");
 						}
 					}
 				);
@@ -261,7 +254,6 @@ var MapCanvas = (function(){
 			} catch (e) {}
 			if (geo == null) return;
 
-			/* 位置情報を取得する */
 			var count = 0;
 			var that = this;
 			var watchId = geo.watchPosition(function(position) {
@@ -274,12 +266,10 @@ var MapCanvas = (function(){
 					return;
 				}
 				if(count++ >= 5){
-					//位置情報の精度が低い
 					geo.clearWatch(watchId);
 					return;
 				}
 			}, function(e) {
-				//位置情報の取得に失敗
 				geo.clearWatch(watchId);
 				return;
 			}, {
@@ -295,7 +285,7 @@ var MapCanvas = (function(){
 			}
 		}
 	}
-
+	
 	//--------------
 	//    public
 	//--------------
