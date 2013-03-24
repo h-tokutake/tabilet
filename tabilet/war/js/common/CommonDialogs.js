@@ -17,7 +17,7 @@ var CommonDialogs = (function() {
 
 	CommonDialogs.prototype = {
 		error : function (msg) {
-			this.ok("ämîF", msg);
+			this.ok("Á¢∫Ë™ç", msg);
 		},
 		ok : function (title, msg, callback) {
 			this.dialogObj.text(msg).dialog({
@@ -43,7 +43,7 @@ var CommonDialogs = (function() {
 			this.dialogObj
 				.text(msg)
 				.dialog({
-					title    : "ämîF",
+					title    : "Á¢∫Ë™ç",
 					autoOpen : false,
 					modal    : true,
 					resizable: false,
@@ -54,7 +54,7 @@ var CommonDialogs = (function() {
 							callback();
 							return false;
 						},
-						"ÉLÉÉÉìÉZÉã" : function(){
+						"„Ç≠„É£„É≥„Çª„É´" : function(){
 							$(this).dialog("close");
 							return false;
 						}

@@ -37,7 +37,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-document" },
 			text : true
 		}).click(function(){
-			var msg = 's’ö "' + $("#itinerary_edit_itinerary_summary").val() + '" ‚Ì•ÏX‚ª”jŠü‚³‚ê‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H';
+			var msg = 'è¡Œç¨‹ "' + $("#itinerary_edit_itinerary_summary").val() + '" ã®å¤‰æ›´ãŒç ´æ£„ã•ã‚Œã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
 				submitForm("itinerary_edit", "get");
 			});
@@ -48,7 +48,7 @@ var ItineraryEditMenu = (function() {
 			text : true
 		}).click(function(){
 			$( document ).click();
-			var msg = 's’ö "' + $("#itinerary_edit_itinerary_summary").val() + '" ‚Ì•ÏX‚ª”jŠü‚³‚ê‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H';
+			var msg = 'è¡Œç¨‹ "' + $("#itinerary_edit_itinerary_summary").val() + '" ã®å¤‰æ›´ãŒç ´æ£„ã•ã‚Œã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, ajaxToGetItineraryList);
 			return false;
 		});
@@ -57,14 +57,14 @@ var ItineraryEditMenu = (function() {
 			text : true
 		}).click(function(){
 			if ($("#itinerary_edit_itinerary_summary").val() === "") {
-				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_summary").text() + '‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B');
+				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_summary").text() + 'ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚');
 				return false;
 			}
 			if ($("#itinerary_edit_itinerary_deptime").val() === "") {
-				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_deptime").text() + '‚ª“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B');
+				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_deptime").text() + 'ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚');
 				return false;
 			}
-			var msg = 's’ö "' + $("#itinerary_edit_itinerary_summary").val() + '" ‚ğ•Û‘¶‚µ‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H';
+			var msg = 'è¡Œç¨‹ "' + $("#itinerary_edit_itinerary_summary").val() + '" ã‚’ä¿å­˜ã—ã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToSaveItineraryData();
 			});
@@ -74,7 +74,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-refresh" },
 			text : true
 		}).click(function(){
-			var msg = 's’ö "' + $("#itinerary_edit_itinerary_summary").val() + '" ‚Ì•ÏX‚ª”jŠü‚³‚ê‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H';
+			var msg = 'è¡Œç¨‹ "' + $("#itinerary_edit_itinerary_summary").val() + '" ã‚’ä¿å­˜ã—ã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
 				if($("#itinerary_edit_itinerary_id").val() == "") {
 					submitForm("itinerary_edit", "get");
@@ -88,7 +88,7 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-trash" },
 			text : true
 		}).click(function(event) {
-			var msg = 's’ö "' + $("#itinerary_edit_itinerary_summary").val() + '" ‚Ì•ÏX‚ª”jŠü‚³‚ê‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H';
+			var msg = 'è¡Œç¨‹ "' + $("#itinerary_edit_itinerary_summary").val() + '" ã‚’ä¿å­˜ã—ã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToDeleteItineraryData();
 			});
@@ -115,7 +115,7 @@ var ItineraryEditMenu = (function() {
 		$(document.body).append($(document.createElement("ul")).attr("id", "itinerary_list_menu"));
 		$("#itinerary_list_menu").menu().hide();
 		$("#itinerary_list_menu").html("");
-		$("#itinerary_list_menu").append('<li>s’öˆê——‚ğ“Ç‚İ‚ñ‚Å‚¢‚Ü‚·EEE</li>');
+		$("#itinerary_list_menu").append('<li>è¡Œç¨‹ä¸€è¦§ã‚’èª­ã¿è¾¼ã‚“ã§ã„ã¾ã™ãƒ»ãƒ»ãƒ»</li>');
 
 		$("#title_logo").click(function(){
 			window.open("http://www.tabilet.net/", "_top");
@@ -220,16 +220,16 @@ var ItineraryEditMenu = (function() {
 			url: "itinerary_edit",
 			success: function(result){
 				if(result.returnCode == "0") {
-					mainView.getCommonDialog().ok('•Û‘¶Š®—¹', 's’ö "' + itinerary_data_json.itinerary_summary + '" ‚ª•Û‘¶‚³‚ê‚Ü‚µ‚½B');
+					mainView.getCommonDialog().ok('ä¿å­˜å®Œäº†', 'è¡Œç¨‹ "' + itinerary_data_json.itinerary_summary + '" ã‚’ä¿å­˜ã—ã¾ã—ãŸã€‚');
 					mainView.setItineraryId(result.strInfo);
 					mainView.setDirtyFlag(false);
 					__disableSaveMenu();
 				} else {
-					mainView.getCommonDialog().error('s’ö "' + itinerary_data_json.itinerary_summary + '" ‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½B');
+					mainView.getCommonDialog().error('è¡Œç¨‹ "' + itinerary_data_json.itinerary_summary + '" ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('s’ö "' + itinerary_data_json.itinerary_summary + '" ‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½B');
+				mainView.getCommonDialog().error('è¡Œç¨‹ "' + itinerary_data_json.itinerary_summary + '" ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 			}
 		});
 	}
@@ -245,15 +245,15 @@ var ItineraryEditMenu = (function() {
 			url: "itinerary_edit",
 			success: function(result){
 				if(result.returnCode == "0") {
-					mainView.getCommonDialog().ok('íœŠ®—¹', 's’ö "' + itinerary_data_json.itinerary_summary + '" ‚ªíœ‚³‚ê‚Ü‚µ‚½B', function(){
+					mainView.getCommonDialog().ok('å‰Šé™¤å®Œäº†', 'è¡Œç¨‹ "' + itinerary_data_json.itinerary_summary + '" ã‚’å‰Šé™¤ã—ã¾ã—ãŸã€‚', function(){
 						submitForm("itinerary_edit", "get");
 					});
 				} else {
-					mainView.getCommonDialog().error('s’ö "' + itinerary_data_json.itinerary_summary + '" ‚Ìíœ‚É¸”s‚µ‚Ü‚µ‚½B');
+					mainView.getCommonDialog().error('è¡Œç¨‹ "' + itinerary_data_json.itinerary_summary + '" ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('s’ö "' + itinerary_data_json.itinerary_summary + '" ‚Ìíœ‚É¸”s‚µ‚Ü‚µ‚½B');
+				mainView.getCommonDialog().error('è¡Œç¨‹ "' + itinerary_data_json.itinerary_summary + '" ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 			}
 		});
 	}

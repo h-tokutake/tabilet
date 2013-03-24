@@ -64,7 +64,7 @@ var WaypointEditDialog = (function(){
 		$("#waypoint_edit_place_position").val(place_position_obj.val());
 		$("#waypoint_edit_place_name").val(place_name_obj.val());
 		$("#itinerary_edit_screen_waypoint_edit").show().dialog({
-			title   : "’n“_î•ñ“ü—Í",
+			title   : "åœ°ç‚¹æƒ…å ±å…¥åŠ›",
 			autoOpen: true,
 			modal   : true,
 			height  : window.innerHeight * 0.9,
@@ -103,8 +103,8 @@ var WaypointEditDialog = (function(){
 				position_dirty_flag = false;
 
 				if(!mainView.isLoggedIn()) {
-					$('.ui-dialog-buttonpane').find('button:contains("s’ö•Û‘¶")').button("disable");
-					$('.ui-dialog-buttonpane').find('button:contains("s’öíœ")').button("disable");
+					$('.ui-dialog-buttonpane').find('button:contains("åœ°ç‚¹ä¿å­˜")').button("disable");
+					$('.ui-dialog-buttonpane').find('button:contains("åœ°ç‚¹å‰Šé™¤")').button("disable");
 				}
 			},
 			close   : function() {
@@ -119,10 +119,10 @@ var WaypointEditDialog = (function(){
 			},
 			buttons : [
 				{
-					text: "Œ»İ’n•\¦",
+					text: "ç¾åœ¨åœ°è¡¨ç¤º",
 					click: function() {
 						smallMapCanvas.getCurrentPosition(function(place_position) {
-							$("#waypoint_edit_place_name"    ).val("Œ»İ’n");
+							$("#waypoint_edit_place_name"    ).val("ç¾åœ¨åœ°");
 							$("#waypoint_edit_place_position").val(place_position);
 							$("#waypoint_edit_place_description").val("");
 							$("#waypoint_edit_place_siteurl").val("");
@@ -134,10 +134,10 @@ var WaypointEditDialog = (function(){
 					}
 				},
 				{
-					text: "’n“_•Û‘¶",
+					text: "åœ°ç‚¹ä¿å­˜",
 					click: function() {
 						if(!mainView.isLoggedIn()) {
-							mainView.getCommonDialog().error("ƒƒOƒCƒ“‚µ‚Ä‚­‚¾‚³‚¢B");
+							mainView.getCommonDialog().error("ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦ãã ã•ã„ã€‚");
 						} else {
 							$("#place_edit_button_search_url").button({
 								icons : {
@@ -153,7 +153,7 @@ var WaypointEditDialog = (function(){
 							$("#place_edit_place_siteurl").val($("#waypoint_edit_place_siteurl").val());
 							$("#place_edit_place_description").val($("#waypoint_edit_place_description").val());
 							$("#itinerary_edit_screen_place_edit").show().dialog({
-								title   : "’n“_•Û‘¶",
+								title   : "åœ°ç‚¹æƒ…å ±å…¥åŠ›",
 								autoOpen: true,
 								modal   : true,
 								width   : 600,
@@ -162,10 +162,10 @@ var WaypointEditDialog = (function(){
 										text: "OK",
 										click: function() {
 											if($("#place_edit_place_name").val() == "") {
-												mainView.getCommonDialog().error("–¼Ì‚ğ“üA‚µ‚Ä‚­‚¾‚³‚¢B");
+												mainView.getCommonDialog().error("åç§°ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
 												$("#place_edit_place_name").focus();
 											} else {
-												var msg = '’n“_ "' + $("#place_edit_place_name").val() + '" ‚Ìî•ñ‚ğ•Û‘¶‚µ‚Ü‚·B';
+												var msg = 'åœ°ç‚¹ "' + $("#place_edit_place_name").val() + '" ã®æƒ…å ±ã‚’ä¿å­˜ã—ã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ';
 												mainView.getCommonDialog().confirm(true, msg, function(){
 													ajaxToSavePlaceData(
 														$("#place_edit_place_name").val(),
@@ -189,7 +189,7 @@ var WaypointEditDialog = (function(){
 										}
 									},
 									{
-										text: "ƒLƒƒƒ“ƒZƒ‹",
+										text: "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",
 										click: function() {
 											$(this).dialog("close");
 											return false;
@@ -202,18 +202,18 @@ var WaypointEditDialog = (function(){
 					}
 				},
 				{
-					text: "’n“_íœ",
+					text: "åœ°ç‚¹å‰Šé™¤",
 					click: function() {
 						if(!mainView.isLoggedIn()) {
-							mainView.getCommonDialog().error("ƒƒOƒCƒ“‚µ‚Ä‚­‚¾‚³‚¢B");
+							mainView.getCommonDialog().error("ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦ãã ã•ã„ã€‚");
 						} else
 						if($("#waypoint_edit_place_name").val() == "") {
-							mainView.getCommonDialog().error("–¼Ì‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+							mainView.getCommonDialog().error("åç§°ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
 							$("#waypoint_edit_place_name").focus();
 						} else if(position_dirty_flag) {
-							mainView.getCommonDialog().error("’n“_î•ñ‚ğíœ‚Å‚«‚Ü‚¹‚ñB");
+							mainView.getCommonDialog().error("åœ°ç‚¹æƒ…å ±ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 						} else {
-							var msg = '’n“_ "' + $("#waypoint_edit_place_name").val() + '" ‚Ìî•ñ‚ğíœ‚µ‚Ü‚·B';
+							var msg = 'åœ°ç‚¹ "' + $("#waypoint_edit_place_name").val() + '" ã®æƒ…å ±ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚';
 							mainView.getCommonDialog().confirm(true, msg, function(){
 								ajaxToDeletePlaceData($("#waypoint_edit_place_name").val());
 							});
@@ -235,7 +235,7 @@ var WaypointEditDialog = (function(){
 					}
 				},
 				{
-					text: "ƒLƒƒƒ“ƒZƒ‹",
+					text: "ã‚­ãƒ£ãƒ³ã‚»ãƒ«",
 					click: function() {
 						$(this).dialog("close");
 						return false;
@@ -252,7 +252,7 @@ var WaypointEditDialog = (function(){
 
 	function ajaxToGetPlaceList () {
 		$("#place_list_menu").html("");
-		$("#place_list_menu").append('<li>’n“_î•ñ‚ğ“Ç‚İ‚ñ‚Å‚¢‚Ü‚·EEE</li>');
+		$("#place_list_menu").append('<li>åœ°ç‚¹æƒ…å ±ä¸€è¦§ã‚’èª­ã¿è¾¼ã‚“ã§ã„ã¾ã™ãƒ»ãƒ»ãƒ»</li>');
 		var menu = $("#place_list_menu").show().position({
 			my: "left top",
 			at: "left bottom",
@@ -331,13 +331,13 @@ var WaypointEditDialog = (function(){
 			url: "place_edit",
 			success: function(result){
 				if(result.returnCode == "0") {
-					mainView.getCommonDialog().ok('•Û‘¶Š®—¹', '’n“_ "' + place_name + '" ‚Ìî•ñ‚ğ•Û‘¶‚µ‚Ü‚µ‚½B');
+					mainView.getCommonDialog().ok('ä¿å­˜å®Œäº†', 'åœ°ç‚¹ "' + place_name + '" ã®æƒ…å ±ã‚’ä¿å­˜ã—ã¾ã—ãŸã€‚');
 				} else {
-					mainView.getCommonDialog().error('’n“_ "' + place_name + '" ‚Ìî•ñ‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½B');
+					mainView.getCommonDialog().error('åœ°ç‚¹ "' + place_name + '" ã®æƒ…å ±ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('’n“_ "' + place_name + '" ‚Ìî•ñ‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½B');
+				mainView.getCommonDialog().error('åœ°ç‚¹ "' + place_name + '" ã®æƒ…å ±ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 			}
 		});
 	}
@@ -351,13 +351,13 @@ var WaypointEditDialog = (function(){
 			url: "place_edit",
 			success: function(result){
 				if(result.returnCode == "0") {
-					mainView.getCommonDialog().ok('íœŠ®—¹', '’n“_ "' + place_name + '" ‚Ìî•ñ‚ğíœ‚µ‚Ü‚µ‚½B');
+					mainView.getCommonDialog().ok('å‰Šé™¤å®Œäº†', 'åœ°ç‚¹ "' + place_name + '" ã®æƒ…å ±ã‚’å‰Šé™¤ã—ã¾ã—ãŸã€‚');
 				} else {
-					mainView.getCommonDialog().error('’n“_ "' + place_name + '" ‚Ìî•ñ‚Ìíœ‚É¸”s‚µ‚Ü‚µ‚½B');
+					mainView.getCommonDialog().error('åœ°ç‚¹ "' + place_name + '" ã®æƒ…å ±ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('’n“_ "' + place_name + '" ‚Ìî•ñ‚Ìíœ‚É¸”s‚µ‚Ü‚µ‚½B');
+				mainView.getCommonDialog().error('åœ°ç‚¹ "' + place_name + '" ã®æƒ…å ±ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚');
 			}
 		});
 	}
