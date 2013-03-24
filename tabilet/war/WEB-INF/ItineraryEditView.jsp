@@ -24,6 +24,7 @@
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja-JP.js"></script>
 <script type="text/JavaScript" src="/js/lib/timepicker.js"></script>
 <script type="text/JavaScript" src="/js/common/CommonFunctions.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/common/Localization.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/MapCanvas.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>

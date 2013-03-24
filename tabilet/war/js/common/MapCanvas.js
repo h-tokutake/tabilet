@@ -92,7 +92,7 @@ var MapCanvas = (function(){
 					directionsDisplay.setDirections(result);
 				}
 			} else {
-				mainView.getCommonDialog().error("経路情報の取得に失敗しました。");
+				mainView.getCommonDialog().error(getMsg('FAIL_GET_ROUTE'));
 			}
 		}
 
@@ -227,7 +227,7 @@ var MapCanvas = (function(){
 							map.setCenter(latlng);
 							if(callback != null) callback(latlng.toString());
 						} else {
-							mainView.getCommonDialog().error("位置情報の取得に失敗しました。");
+							mainView.getCommonDialog().error(getMsg('FAIL_GET_POSITION'));
 						}
 					}
 				);

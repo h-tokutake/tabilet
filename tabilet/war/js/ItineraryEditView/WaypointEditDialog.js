@@ -119,7 +119,7 @@ var WaypointEditDialog = (function(){
 			},
 			buttons : [
 				{
-					text: "現在地表示",
+					text: getMsg('BUTTON_SHOW_HERE'),
 					click: function() {
 						smallMapCanvas.getCurrentPosition(function(place_position) {
 							$("#waypoint_edit_place_name"    ).val("現在地");

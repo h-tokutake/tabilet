@@ -17,7 +17,7 @@ var CommonDialogs = (function() {
 
 	CommonDialogs.prototype = {
 		error : function (msg) {
-			this.ok("確認", msg);
+			this.ok(getMsg('DIALOG_CONFIRM'), msg);
 		},
 		ok : function (title, msg, callback) {
 			this.dialogObj.text(msg).dialog({
@@ -43,22 +43,26 @@ var CommonDialogs = (function() {
 			this.dialogObj
 				.text(msg)
 				.dialog({
-					title    : "確認",
+					title    : getMsg('DIALOG_CONFIRM'),
 					autoOpen : false,
 					modal    : true,
 					resizable: false,
 					width    : "600px",
-					buttons  : {
-						"OK" : function(){
+					buttons  : [{
+						text  : getMsg('BUTTON_OK'),
+						click : function(){
 							$(this).dialog("close");
 							callback();
 							return false;
-						},
-						"キャンセル" : function(){
+						}
+					},
+					{
+						text : getMsg('BUTTON_CANCEL'),
+						click : function(){
 							$(this).dialog("close");
 							return false;
 						}
-					}
+					}]
 				}).dialog("open");
 		}
 	};
