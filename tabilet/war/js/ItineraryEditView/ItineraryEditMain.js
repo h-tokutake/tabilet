@@ -205,25 +205,19 @@ var ItineraryEditView = (function(){
 				place_urls.push(place_url);
 				var place_description = waypoint_obj.eq(i).find(".place_description").val();
 				place_descriptions.push(place_description);
-//				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
-//				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-//				var dwell_time = departure_time - arrival_time;
-//				if (dwell_time < 0) {
-				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT")) {
-//					dwell_time = 0;
+				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val());
+				if (place_deptimes[i] == '' || isNaN(place_deptimes[i]) || place_deptimes[i] === null) {
+					if (i == 0) {
+						place_deptimes[i] = Date.now();
+					} else {
+						place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val());
+					}
+				}
+				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val())) {
 					waypoint_obj.eq(i).find(".place_arrtime").val(waypoint_obj.eq(i).find(".place_deptime").val());
 				}
-//				if (dwell_time === null || isNaN(dwell_time)) {
-//					dwell_times.push(0);
-//				} else {
-//					dwell_times.push(dwell_time);
-//				}
 			}
 		}
-//		dwell_times.pop();
-//		dwell_times.shift();
-//		mapCanvas.setDwellTimes(dwell_times);
 		mapCanvas.setPlaceDepTimes(place_deptimes);
 		mapCanvas.setPlaceNames(place_names);
 		mapCanvas.setPlaceUrls(place_urls);
@@ -252,25 +246,19 @@ var ItineraryEditView = (function(){
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name = waypoint_obj.eq(i).find(".place_name").val();
 			if (place_name != "" && place_name != undefined) {
-//				var arrival_time   = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT");
-//				var departure_time = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val() + " GMT");
-//				var dwell_time = departure_time - arrival_time;
-//				if (dwell_time < 0) {
-				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val() + " GMT")) {
-//					dwell_time = 0;
+				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val());
+				if (place_deptimes[i] == '' || isNaN(place_deptimes[i]) || place_deptimes[i] === null) {
+					if (i == 0) {
+						place_deptimes[i] = Date.now();
+					} else {
+						place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val());
+					}
+				}
+				if (place_deptimes[i] < Date.parse(waypoint_obj.eq(i).find(".place_arrtime").val())) {
 					waypoint_obj.eq(i).find(".place_arrtime").val(waypoint_obj.eq(i).find(".place_deptime").val());
 				}
-//				if (dwell_time === null || isNaN(dwell_time)) {
-//					dwell_times.push(0);
-//				} else {
-//					dwell_times.push(dwell_time);
-//				}
 			}
 		}
-//		dwell_times.pop();
-//		dwell_times.shift();
-//		mapCanvas.setDwellTimes(dwell_times);
 		mapCanvas.setPlaceDepTimes(place_deptimes);
 		mapCanvas.updateTimeline();
 		updateArrDepDateTime(force_update_flag);

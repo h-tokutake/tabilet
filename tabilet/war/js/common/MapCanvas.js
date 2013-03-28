@@ -105,27 +105,18 @@ var MapCanvas = (function(){
 
 		this.__setDepTimeInfo = function (leg, depTimeInMs, arrTimeInMs, dwell_times, placeDepTimes, row_index) {
 			var infoStr = "";
-//			if (arrTimeInMs != depTimeInMs) {
 			if (row_index === 0) {
 				infoStr = "";
-//				var arrDateTime = new Date(arrTimeInMs);
 				arrDateTimeString[row_index + 1] = toDateTimeString(new Date(placeDepTimes[row_index + 1]));
 				infoStr += arrDateTimeString[row_index] + " 到着";
-//				arrTimeInMs += dwell_times.shift();
 			}
-//			var depDateTime = new Date(arrTimeInMs);
-			var depDateTime = new Date(placeDepTimes[row_index]);
-			depDateTimeString[row_index] = toDateTimeString(depDateTime);
+			depDateTimeString[row_index] = toDateTimeString(new Date(placeDepTimes[row_index]));
 			infoStr += "<br>" + depDateTimeString[row_index] + " 出発";
 			leg.start_address += infoStr;
-//			arrTimeInMs += leg.duration.value * 1000;
 
-//			var arrDateTime = new Date(arrTimeInMs);
-			arrDateTimeString[row_index + 1] = toDateTimeString(depDateTime + leg.duration.value * 1000);
+			arrDateTimeString[row_index + 1] = toDateTimeString(new Date(placeDepTimes[row_index] + leg.duration.value * 1000));
 			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 到着";
 			depDateTimeString[row_index + 1] = "";
-
-//			return arrTimeInMs;
 		}
 
 		this.__createMarker = function (latlng, msg){
