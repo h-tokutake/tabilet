@@ -304,7 +304,7 @@ var ItineraryEditView = (function(){
 		target.find("td").eq(1)
 			.append('<input type="text" class="place_arrtime" value="" readonly="readonly"></input>');
 		target.find("td").eq(2)
-			.append(' ==> ');
+			.append('〜');
 		target.find("td").eq(3)
 			.append('<input type="text" class="place_deptime" name="place_deptime" value=""></input>');
 		setEventsInRow(target);
