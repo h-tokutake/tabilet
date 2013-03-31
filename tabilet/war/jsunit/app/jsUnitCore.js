@@ -203,8 +203,10 @@ JsUnit._checkNotNull = function(aVar) {
  * @private
  */
 JsUnit._assert = function(comment, booleanValue, failureMessage) {
-    if (!booleanValue)
+    if (!booleanValue) {
+    	debug(failureMessage);
         throw new JsUnit.Failure(comment, failureMessage);
+    }
 }
 
 /**

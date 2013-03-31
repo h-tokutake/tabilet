@@ -6,9 +6,17 @@
 <script language="JavaScript" type="text/javascript" src="/jsunit/app/jsUnitCore.js"></script>
 <script language="JavaScript" type="text/javascript" src="/js/common/CommonFunctions.js"></script>
 <script language="JavaScript" type="text/javascript">
-function testCommonFunctions() {
-	  var el = document.createElement('DIV');
-	  assertNotUndefined(el.addEventListener);
+function testToDateTimeString() {
+	assertEquals(toDateTimeString(new Date(2013, 11, 31, 23, 59, 59)), "2013/12/31 23:59");
+}
+function testToDateTimeString2() {
+	assertEquals(toDateTimeString2(new Date(2013, 11, 31, 23, 59, 59)), "2013/<b>12/31 23:59</b>");
+}
+function testToDateString() {
+	assertEquals(toDateString(new Date(2013, 11, 31, 23, 59, 59)), "2013/12/31");
+}
+function testToTimeString() {
+	assertEquals(toTimeString(new Date(2013, 11, 31, 23, 59, 59)), "23:59");
 }
 </script>
 </head>
