@@ -73,18 +73,6 @@ var ItineraryEditView = (function(){
 
 	function setEvents() {
 		var that = this;
-		$( "#itinerary_edit_itinerary_deptime" ).datetimepicker({
-			defaultValue: toDateTimeString(new Date()),
-			dateFormat: 'yy/mm/dd',
-			separator : ' ',
-			timeFormat: 'HH:mm',
-			onClose   : function () {
-				if($("#itinerary_edit_itinerary_summary").val() != '' && $( "#itinerary_edit_itinerary_deptime" ).val() != '') {
-					mainMenu.enableSaveMenu();
-				}
-				__updateTimeline(true, true);
-			}
-		});
 		$( ".place_deptime" ).datetimepicker({
 			dateFormat: 'yy/mm/dd',
 			separator : ' ',
@@ -95,7 +83,7 @@ var ItineraryEditView = (function(){
 		});
 		$("#itinerary_edit_itinerary_summary").change(function(){
 			dirty_flag = true;
-			if($("#itinerary_edit_itinerary_summary").val() != '' && $( "#itinerary_edit_itinerary_deptime" ).val() != '') {
+			if($("#itinerary_edit_itinerary_summary").val() != '') {
 				mainMenu.enableSaveMenu();
 			}
 		});
@@ -186,10 +174,6 @@ var ItineraryEditView = (function(){
 		var dwell_times = [];
 		var waypoint_obj = $(".waypoint")
 
-		var dateString = $("#itinerary_edit_itinerary_deptime").val() + " GMT";
-		var dateTimeInMs = Date.parse(dateString);
-		mapCanvas.setDepDateTime(dateTimeInMs);
-
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name     = waypoint_obj.eq(i).find(".place_name").val();
 			if (place_name != "" && place_name != undefined) {
@@ -238,10 +222,6 @@ var ItineraryEditView = (function(){
 		var dwell_times = [];
 		var place_deptimes = [];
 		var waypoint_obj = $(".waypoint");
-
-		var dateString = $("#itinerary_edit_itinerary_deptime").val() + " GMT";
-		var dateTimeInMs = Date.parse(dateString);
-		mapCanvas.setDepDateTime(dateTimeInMs);
 
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name = waypoint_obj.eq(i).find(".place_name").val();

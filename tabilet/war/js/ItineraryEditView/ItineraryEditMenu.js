@@ -60,10 +60,6 @@ var ItineraryEditMenu = (function() {
 				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_summary").text() + 'が入力されていません。');
 				return false;
 			}
-			if ($("#itinerary_edit_itinerary_deptime").val() === "") {
-				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_deptime").text() + 'が入力されていません。');
-				return false;
-			}
 			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToSaveItineraryData();
@@ -198,7 +194,6 @@ var ItineraryEditMenu = (function() {
 			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
 			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
 			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
-			itinerary_deptime     : $("#itinerary_edit_itinerary_deptime").val(),
 			place_name            : placeNameList,
 			place_position        : placePositionList,
 			place_siteurl         : placeUrlList,
@@ -225,11 +220,11 @@ var ItineraryEditMenu = (function() {
 					mainView.setDirtyFlag(false);
 					__disableSaveMenu();
 				} else {
-					mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。');
+					mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。(1)');
 				}
 			},
 			error: function() {
-				mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。');
+				mainView.getCommonDialog().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。(2)');
 			}
 		});
 	}
@@ -264,7 +259,7 @@ var ItineraryEditMenu = (function() {
 		$("#itinerary_edit_menu_main_delete_itinerary").button("enable");
 		__checkLoggedIn();
 	}
-	
+
 	function __checkLoggedIn(){
 		if(!mainView.isLoggedIn()) {
 			$("#itinerary_edit_menu_main_save_itinerary").button("disable");

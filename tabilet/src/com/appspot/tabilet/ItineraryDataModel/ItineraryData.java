@@ -59,6 +59,7 @@ class ItineraryData extends ItinerarySkeletonData {
 	/* setter */
 	final void setPlaceDepTimeList(ArrayList<String> placeDepTimeList) {
 		this.placeDepTimeList = placeDepTimeList;
+		this.setDepTime(placeDepTimeList.get(0));
 	}
 	final void setWaypointCommentList(ArrayList<String> waypointCommentList) {
 		this.waypointCommentList = waypointCommentList;

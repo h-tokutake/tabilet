@@ -96,9 +96,6 @@ public class ItineraryDataHandler extends DataHandler {
 			if("itinerary_description".equals(entry.getKey())){
 				this.getData().setDescription(entry.getValue()[0]);
 			} else
-			if("itinerary_deptime".equals(entry.getKey())){
-				((ItineraryData) this.getData()).setDepTime(entry.getValue()[0]);
-			} else
 			if("place_name[]".equals(entry.getKey())){
 				placeNameList = entry.getValue();
 			} else
@@ -126,7 +123,6 @@ public class ItineraryDataHandler extends DataHandler {
 		String id          = "";
 		String summary     = "";
 		String description = "";
-		String depTime     = "";
 		ArrayList<String> placeNameList     = new ArrayList<String>();
 		ArrayList<String> placePositionList = new ArrayList<String>();
 		ArrayList<String> placeUrlList      = new ArrayList<String>();
@@ -138,7 +134,6 @@ public class ItineraryDataHandler extends DataHandler {
 			id          = data.getId();
 			summary     = data.getSummary();
 			description = data.getDescription();
-			depTime     = data.getDepTime();
 			placeNameList     = data.getPlaceNameList();
 			placePositionList = data.getPlacePositionList();
 			placeUrlList      = data.getPlaceUrlList();
@@ -148,7 +143,6 @@ public class ItineraryDataHandler extends DataHandler {
 		session.setAttribute("itinerary_id"         , id         );
 		session.setAttribute("itinerary_summary"    , summary    );
 		session.setAttribute("itinerary_description", description);
-		session.setAttribute("itinerary_deptime"    , depTime    );
 		session.setAttribute("place_name_list"      , placeNameList.toArray()    );
 		session.setAttribute("place_position_list"  , placePositionList.toArray());
 		session.setAttribute("place_siteurl_list"   , placeUrlList.toArray()     );

@@ -42,7 +42,6 @@ var MapCanvas = (function(){
 		var geocoder = new google.maps.Geocoder();
 		var infoWnd = new google.maps.InfoWindow();
 
-		var depDateTime = "";
 		var placeNames = [];
 		var placeUrls = [];
 		var placeDescriptions = [];
@@ -70,8 +69,7 @@ var MapCanvas = (function(){
 		this.__getDirectionsCallback = function (result, status) {
 			if (status === google.maps.DirectionsStatus.OK) {
 
-				var depTimeInMs = this.__getDepTimeInMs();
-				var arrTimeInMs = depTimeInMs;
+				var arrTimeInMs = "";
 
 				var k=0;
 				arrDateTimeString[0] = "";
@@ -85,7 +83,7 @@ var MapCanvas = (function(){
 							'<p><a href="' + placeUrls[k + 1] + '" target="_blank">' + placeUrls[k + 1] + '</a></p>' +
 							'<p>' + placeDescriptions[k + 1] + '</p>';
 						}
-						arrTimeInMs = this.__setDepTimeInfo(result.routes[i].legs[j], depTimeInMs, arrTimeInMs, dwellTimes, placeDepTimes, k++);
+						arrTimeInMs = this.__setDepTimeInfo(result.routes[i].legs[j], dwellTimes, placeDepTimes, k++);
 					}
 				}
 				if(directionsDisplay != null) {
@@ -96,14 +94,7 @@ var MapCanvas = (function(){
 			}
 		}
 
-		this.__getDepTimeInMs = function () {
-			var depTimeInMs = depDateTime;
-			var currentTime = new Date();
-			if(depTimeInMs === null || isNaN(depTimeInMs)) return currentTime.getTime();
-			return depTimeInMs + currentTime.getTimezoneOffset() * 60000;
-		}
-
-		this.__setDepTimeInfo = function (leg, depTimeInMs, arrTimeInMs, dwell_times, placeDepTimes, row_index) {
+		this.__setDepTimeInfo = function (leg, dwell_times, placeDepTimes, row_index) {
 			var infoStr = "";
 			if (row_index === 0) {
 				infoStr = "";
@@ -165,11 +156,9 @@ var MapCanvas = (function(){
 		this.__setDwellTimes = function (argDwellTimes) {
 			dwellTimes = argDwellTimes;
 		}
+		
 		this.__setPlaceDepTimes = function (argPlaceDepTimes) {
 			placeDepTimes = argPlaceDepTimes;
-		}
-		this.__setDepDateTime = function (argDepDateTime) {
-			depDateTime = argDepDateTime;
 		}
 
 		this.__getArrDateTimeString = function () {
@@ -290,7 +279,6 @@ var MapCanvas = (function(){
 		setWaypoints : function(argWaypoints) { this.__setWaypoints(argWaypoints); },
 		setDwellTimes : function(argDwellTimes) { this.__setDwellTimes(argDwellTimes); },
 		setPlaceDepTimes : function(argPlaceDepTimes) { this.__setPlaceDepTimes(argPlaceDepTimes); },
-		setDepDateTime : function(argDepDateTime) { this.__setDepDateTime(argDepDateTime); },
 		getArrDateTimeString : function() { return this.__getArrDateTimeString(); },
 		getDepDateTimeString : function() { return this.__getDepDateTimeString(); },
 		showDirections : function(callback) { this.__showDirections(callback); },
