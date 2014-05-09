@@ -91,15 +91,7 @@
 				name="itinerary_description"
 			><c:out value="${itinerary_description}" /></textarea>
 			<br />
-			<label for="itinerary_edit_itinerary_deptime" accesskey="t">出発日時 : </label>
-			<input type="text"
-				id="itinerary_edit_itinerary_deptime"
-				class="datetime"
-				name="itinerary_deptime"
-				value="<c:out value="${itinerary_deptime}" />"
-			></input>
-
-			<br />
+			
 			<label>目的地リスト</label>
 			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
 				<div class="waypoint movable"><table><tr><td>
