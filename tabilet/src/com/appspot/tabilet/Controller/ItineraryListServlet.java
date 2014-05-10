@@ -18,7 +18,7 @@ public class ItineraryListServlet extends HttpServlet {
 		ItineraryDataHandler handler = new ItineraryDataHandler();
 		try {
 			handler.loadAll();
-			resp = handler.sendAll(resp);
+			handler.sendAll(resp);
 		} catch (Exception e) {
 			handler.getResult().setReturnCode(1);
 		} finally {
