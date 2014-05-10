@@ -29,6 +29,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/itinerary_list</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>ItineraryEdit</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>PlaceEdit</servlet-name>
 		<url-pattern>/place_edit</url-pattern>
 	</servlet-mapping>
@@ -57,6 +61,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<welcome-file-list>
-		<welcome-file>itinerary_edit</welcome-file>
+		<welcome-file>index</welcome-file>
 	</welcome-file-list>
 </web-app>
