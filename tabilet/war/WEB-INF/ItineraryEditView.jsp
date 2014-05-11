@@ -11,25 +11,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/le-frog/jquery-ui.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/le-frog/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" media="screen and (max-device-width:480px)"/>
 <link rel="stylesheet" type="text/css" href="/css/timepicker.css" />
 <link rel="stylesheet" type="text/css" href="/css/pc.css" />
 <link rel="stylesheet" type="text/css" href="/css/tablet.css" media="screen and (max-device-width:768px)" />
 <link rel="stylesheet" type="text/css" href="/css/mobile.css" media="screen and (max-device-width:480px)" />
-<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
+<script type="text/JavaScript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 <script type="text/JavaScript" src="/js/lib/jquery.ui.touch-punch.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<script type="text/JavaScript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<!--
+<script type="text/JavaScript" src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js'"></script>
+-->
+
 <script type="text/JavaScript" src="/js/lib/globalize.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja-JP.js"></script>
 <script type="text/JavaScript" src="/js/lib/timepicker.js"></script>
 <script type="text/JavaScript" src="/js/common/CommonFunctions.js" charset="utf-8"></script>
-<script type="text/javascript" src="/js/common/Localization.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/common/Localization.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/MapCanvas.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
