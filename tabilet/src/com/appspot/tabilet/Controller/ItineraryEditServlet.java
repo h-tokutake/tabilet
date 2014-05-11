@@ -45,8 +45,7 @@ public class ItineraryEditServlet extends HttpServlet {
 			req.setAttribute(providerName, loginUrl);
 		}
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/ItineraryEditView.jsp");
-		dispatcher.forward(req, resp);
+		dispatchScreen(req, resp);
 	}
 
 	@Override
@@ -78,10 +77,29 @@ public class ItineraryEditServlet extends HttpServlet {
 			handler.close();
 		}
 		if("itinerary_edit".equals(operation)){
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/ItineraryEditView.jsp");
-			dispatcher.forward(req, resp);
+			dispatchScreen(req, resp);
 			session.invalidate();
 		} else
 			resp = handler.sendResult(resp);
+	}
+
+	private void dispatchScreen(HttpServletRequest req, HttpServletResponse resp)
+		throws ServletException, IOException {
+
+		String userAgent = req.getHeader("user-agent");
+		RequestDispatcher dispatcher;
+
+		if (userAgent.indexOf("iPhone") != -1 ||
+			userAgent.indexOf("iPad") != -1 ||
+			userAgent.indexOf("Android") != -1 ||
+			userAgent.indexOf("Windows Phone") != -1)
+		{
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/mobile/ItineraryEditView.jsp");
+		}
+		else
+		{
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/ItineraryEditView.jsp");
+		}
+		dispatcher.forward(req, resp);
 	}
 }
