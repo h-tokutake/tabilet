@@ -13,7 +13,7 @@ html,body,form {
 table,tr,td,th {
 	text-align: left;
 }
-input,textarea {
+input, textarea {
 	text-align: left;
 	vertical-align: center;
 	z-index: 100;
@@ -47,6 +47,7 @@ span {
 input.summary {
 	width: 400px;
 	autocomplete: on;
+	font-size: 20px;
 }
 input.user_id{
 	display: inline;
@@ -58,15 +59,24 @@ textarea.description {
 input.place_name {
 	width: 240px;
 	autocomplete: off;
+	font-size: 20px;
+}
+input.place_arrtime {
+	font-size: 20px;
+}
+input.place_deptime {
+	font-size: 20px;
 }
 input#waypoint_edit_place_name {
 	width: 400px;
 	autocomplete: off;
 	display: inline;
+	font-size: 20px;
 }
 input#place_edit_place_name {
 	width: 400px;
 	autocomplete: off;
+	font-size: 20px;
 }
 input#place_edit_place_siteurl {
 	width: 400px;

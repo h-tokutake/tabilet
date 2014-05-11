@@ -91,7 +91,7 @@
 				name="itinerary_description"
 			><c:out value="${itinerary_description}" /></textarea>
 			<br />
-			
+
 			<label>目的地リスト</label>
 			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
 				<div class="waypoint movable"><table><tr><td>
@@ -111,7 +111,7 @@
 						class="place_name"
 						name="place_name"
 						value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>"
-					></input></td><td class="waypoint_column_datetime"><input type="text" class="place_arrtime" readonly="readonly"></input></td>
+					></input></td><td class="waypoint_column_datetime"><input type="text" class="place_arrtime" name="place_arrtime" readonly="readonly"></input></td>
 					<td> ～ </td>
 					<td class="waypoint_column_datetime"><input type="text"
 						class="place_deptime"
