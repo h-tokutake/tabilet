@@ -1,0 +1,138 @@
+@CHARSET "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	vertical-align: top;
+	font-family: "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+html,body,form {
+	width: 100%;
+	height: 100%;
+}
+table,tr,td,th {
+	text-align: left;
+}
+input, textarea {
+	text-align: left;
+	vertical-align: center;
+	z-index: 100;
+}
+input.dwell_time {
+	width: 40px;
+}
+button {
+	display: inline;
+}
+label {
+	font-weight: bold;
+	font-size: 14px;
+}
+label#title_logo {
+	font-weight: bold;
+	font-size: 20px;
+	border-style: ridge;
+	border-width: 6px;
+	border-radius: 25px;
+	border-color: blue;
+	background-color: blue;
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	cursor: pointer;
+}
+span {
+	display: inline;
+}
+input.summary {
+	width: 400px;
+	autocomplete: on;
+	font-size: 20px;
+}
+input.user_id{
+	display: inline;
+}
+textarea.description {
+	width: 430px;
+	max-width: 430px;
+}
+input.place_name {
+	width: 400px;
+	autocomplete: off;
+	font-size: 20px;
+}
+input.place_arrtime {
+	font-size: 20px;
+}
+input.place_deptime {
+	font-size: 20px;
+}
+input#waypoint_edit_place_name {
+	width: 400px;
+	autocomplete: off;
+	display: inline;
+	font-size: 20px;
+}
+input#place_edit_place_name {
+	width: 400px;
+	autocomplete: off;
+	font-size: 20px;
+}
+input#place_edit_place_siteurl {
+	width: 400px;
+	autocomplete: off;
+}
+div#itinerary_edit_screen_main {
+	width: 100%;
+}
+div#itinerary_edit_menu_main {
+	display: inline;
+}
+div#itinerary_edit_login_info {
+	display: inline;
+	float: right;
+	font-weight: bold;
+}
+div.map_canvas {
+	width: 100%;
+	color: black;
+}
+div.info_window {
+}
+div.movable:hover {
+	background-color: navy;
+}
+div.movable_drag {
+	background-color: rgba(128,128,128,0.6);
+}
+div.movable_drop {
+	background-color: orangered;
+}
+td.waypoint_column_datetime {
+	width: 110px;
+}
+.ui-button-text {
+	font-size: 12px;
+	font-weight: bold;
+}
+.ui-menu {
+	z-index: 3000;
+}
+.ui-menu#itinerary_edit_menu_login {
+	width: 250px;
+}
+.ui-menu#itinerary_list_menu {
+	width: 400px;
+}
+.ui-menu#place_list_menu {
+	width: 400px;
+}
+.ui-menu a {
+	text-decoration: none;
+}
+.ui-menu li.selectable:hover {
+	background-color: gray;
+}
+.ui-dialog {
+	width: 90%;
+}
