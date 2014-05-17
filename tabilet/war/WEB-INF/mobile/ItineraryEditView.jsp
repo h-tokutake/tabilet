@@ -11,19 +11,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/tablet.css" media="screen and (max-device-width:768px)" />
-<link rel="stylesheet" type="text/css" href="/css/mobile.css" media="screen and (max-device-width:480px)" />
+<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
+
 <script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
 <script type="text/JavaScript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-
-<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
-<script type="text/JavaScript" src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js'"></script>
+<script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
 
 <script type="text/JavaScript" src="/js/lib/globalize.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja-JP.js"></script>
-<script type="text/JavaScript" src="/js/lib/timepicker.js"></script>
 <script type="text/JavaScript" src="/js/common/CommonFunctions.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/Localization.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
@@ -35,41 +32,25 @@
 </head>
 <body>
 
-<!-- タイトル -->
-<label id="title_logo">Tabilet</label>
+<div data-role="page" id="itinerary_edit_screen_summary">
+	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
+		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
+		<h1>Tabilet</h1>
+		<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
+		<a href="#itinerary_edit_menu_login" data-role="button" data-icon="user"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
 
-<!-- メニュー欄表示 -->
-<div id="itinerary_edit_menu_main">
-	<button id="itinerary_edit_menu_main_create_itinerary"          class="menu_main">新規作成</button>
-	<button id="itinerary_edit_menu_main_move_ItineraryListView"    class="menu_main">行程一覧</button>
-	<button id="itinerary_edit_menu_main_refresh_ItineraryEditView" class="menu_main">変更破棄</button>
-	<button id="itinerary_edit_menu_main_save_itinerary"            class="menu_main">行程保存</button>
-	<button id="itinerary_edit_menu_main_delete_itinerary"          class="menu_main">行程削除</button>
-<!--
-	<button id="itinerary_edit_menu_main_export_calendar"           class="menu_main">カレンダー</button>
--->
-</div>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#itinerary_edit_screen_summary" class="ui-btn-active">行程概要</a></li>
+				<li><a href="#itinerary_edit_screen_main">行程編集</a></li>
+				<li><a href="#itinerary_edit_screen_map_canvas">地図表示</a></li>
+			</ul>
+		</div>
+	</div>
 
-<div id="itinerary_edit_login_info">
-	<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
-	<button id="itinerary_edit_menu_main_login"                     class="menu_main">
-		<c:if test="${not empty user}"><c:out value="${nickname}" /></c:if>
-		<c:if test="${empty user}">ゲスト</c:if>
-	</button>
-</div>
-
-<!-- タブメニュー -->
-<div id="itinerary_edit_menu_tabs">
-	<ul>
-		<li><a href="#itinerary_edit_screen_main" id="itinerary_edit_menu_main_move_ItineraryEditView">行程編集</a></li>
-		<li><a href="#itinerary_edit_screen_map_canvas"  id="itinerary_edit_menu_main_show_map">地図表示</a></li>
-	</ul>
-
-	<!-- 地図表示 -->
-	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
-
-	<!-- 行程入力欄を表示 -->
-	<div id="itinerary_edit_screen_main">
+	<div data-role="content">
 		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
 			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
 			<input type="hidden"
@@ -77,90 +58,172 @@
 				name="itinerary_id"
 				value="<c:out value="${itinerary_id}" />"
 			></input>
-			<label for="itinerary_edit_itinerary_summary" accesskey="s">コースタイトル : </label>
-			<input type="text"
-				id="itinerary_edit_itinerary_summary"
-				class="summary"
-				name="itinerary_summary"
-				value="<c:out value="${itinerary_summary}" />"
-			></input>
-			<br />
-			<label for="itinerary_edit_itinerary_description" accesskey="d">行程概要 : </label>
-			<textarea
-				id="itinerary_edit_itinerary_description"
-				class="description"
-				name="itinerary_description"
-			><c:out value="${itinerary_description}" /></textarea>
-			<br />
-
-			<label>目的地リスト</label>
-			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
-				<div class="waypoint movable"><table><tr><td>
-					<buttonset><button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button></buttonset><input type="hidden"
-						class="place_position"
-						name="place_position"
-						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>"
-					></input><input type="hidden"
-						class="place_siteurl"
-						name="place_siteurl"
-						value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>"
-					><input type="hidden"
-						class="place_description"
-						name="place_description"
-						value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>"
-					><input type="text"
-						class="place_name"
-						name="place_name"
-						value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>"
-					></input></td><td class="waypoint_column_datetime"><input type="text" class="place_arrtime" name="place_arrtime" readonly="readonly"></input></td>
-					<td> ～ </td>
-					<td class="waypoint_column_datetime"><input type="text"
-						class="place_deptime"
-						name="place_deptime"
-						value="<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>"
-					></input></td></tr></table>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible">
+					<h3><input type="text" data-mini="true"
+						id="itinerary_edit_itinerary_summary"
+						class="summary"
+						name="itinerary_summary"
+						placeholder="行程のタイトルを入れてください"
+						value="<c:out value="${itinerary_summary}" />"
+					></input></h3>
+					<p><textarea data-mini="true"
+						id="itinerary_edit_itinerary_description"
+						class="description"
+						name="itinerary_description"
+						placeholder="行程の概要を入れてください"
+					><c:out value="${itinerary_description}" /></textarea></p>
 				</div>
-			</c:forEach>
-			<div class="waypoint"><table><tr><td>
-				<buttonset><button class="button_delete_place" disabled>削除</button><button class="button_insert_place">追加</button></buttonset>
-			</td></tr></table></div>
+			</div>
 		</form>
 	</div>
-
 </div>
 
-<!-- 経由地編集画面 -->
-<div id="itinerary_edit_screen_waypoint_edit">
-	<input type="text" id="waypoint_edit_place_name" name="waypoint_place_name" value=""></input><button id="waypoint_edit_button_place_list">保存地点一覧</button>
-	<input type="hidden" id="waypoint_edit_place_position" name="waypoint_place_position" value=""></input>
-	<input type="hidden" id="waypoint_edit_place_siteurl" name="waypoint_place_siteurl" value=""></input>
-	<input type="hidden" id="waypoint_edit_place_description" name="waypoint_place_description" value=""></input>
-	<button id="waypoint_edit_button_search_position">位置検索</button>
-	<button id="waypoint_edit_button_place_url">ホームページを開く</button>
-	<div id="waypoint_edit_screen_map_canvas" class="map_canvas"></div>
+<div data-role="page" id="itinerary_edit_screen_main">
+	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
+		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
+		<h1>Tabilet</h1>
+		<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
+		<a href="#itinerary_edit_menu_login" data-role="button" data-icon="user"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
+
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#itinerary_edit_screen_summary">行程概要</a></li>
+				<li><a href="#itinerary_edit_screen_main" class="ui-btn-active">行程編集</a></li>
+				<li><a href="#itinerary_edit_screen_map_canvas">地図表示</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="content">
+		<!-- 行程入力欄を表示 -->
+		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
+			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
+			<input type="hidden"
+				id="itinerary_edit_itinerary_id"
+				name="itinerary_id"
+				value="<c:out value="${itinerary_id}" />"
+			></input>
+
+			<ul data-role="listview" data-split-icon="delete">
+				<li><a href="#waypoint_edit_screen_datetime" data-transition="slide">
+					<p><strong>東京スカイツリー</strong></p>
+					<p>2014/06/01 09:00 - 2014/06/01 10:30</p>
+					</a><a href="#">削除</a>
+				</li>
+				<li><a href="#waypoint_edit_screen_datetime" data-transition="slide">
+					<p><strong>東京ディズニーランド＆東京ディズニーシー</strong></p>
+					<p>2014/06/01 12:00 - 2014/06/01 17:30</p>
+					</a><a href="#">削除</a>
+				</li>
+			</ul>
+		</form>
+	</div>
 </div>
 
-<!-- 地点情報登録画面 -->
-<div id="itinerary_edit_screen_place_edit">
-	<table>
-		<tr><td><label for="place_edit_place_name">名称：</label><input type="text" id="place_edit_place_name" value=""></input>
-		<button id="place_edit_button_search_url">Googleで検索する</button>
-		<input type="hidden" id="place_edit_place_position" name="place_position" value=""></input></td></tr>
-		<tr><td><label for="place_edit_place_siteurl">URL：</label><input type="text" id="place_edit_place_siteurl" value=""></input></td></tr>
-		<tr><td><label for="place_edit_place_description">コメント：</label><textarea id="place_edit_place_description" class="description" value=""></textarea></td></tr>
-	</table>
+<div data-role="page" id="itinerary_edit_screen_map_canvas">
+	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
+		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
+		<h1>Tabilet</h1>
+		<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
+		<a href="#itinerary_edit_menu_login" data-role="button" data-icon="user"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
+
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#itinerary_edit_screen_summary">行程概要</a></li>
+				<li><a href="#itinerary_edit_screen_main">行程編集</a></li>
+				<li><a href="#itinerary_edit_screen_map_canvas" class="ui-btn-active">地図表示</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="content">
+	</div>
+</div>
+
+<div data-role="page" id="waypoint_edit_screen_datetime">
+	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
+		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="東京ディズニーランド＆東京ディズニーシー" />
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
+				<li><a href="#waypoint_edit_screen_location">位置設定</a></li>
+			</ul>
+		</div>
+	</div>
+	<div data-role="content">
+		<ul data-role="listview">
+			<li data-role="list-divider">到着: </li>
+			<li><div class="ui-grid-a">
+				<div class="ui-block-a"><input type="date" name="waypoint_arrdate" id="waypoint_arrdate" /></div>
+				<div class="ui-block-b"><input type="time" name="waypoint_arrtime" id="waypoint_arrtime" /></div>
+			</div></li>
+			<li data-role="list-divider">出発: </li>
+			<li><div class="ui-grid-a">
+				<div class="ui-block-a"><input type="date" name="waypoint_depdate" id="waypoint_depdate" /></div>
+				<div class="ui-block-b"><input type="time" name="waypoint_deptime" id="waypoint_deptime" /></div>
+			</div></li>
+		</ul>
+	</div>
+	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><button type="submit">設定</a></div>
+			<div class="ui-block-b"><button type="submit">キャンセル</a></div>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="waypoint_edit_screen_location">
+	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
+		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="東京ディズニーランド＆東京ディズニーシー" />
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#waypoint_edit_screen_datetime">到着/出発日時設定</a></li>
+				<li><a href="#waypoint_edit_screen_location" class="ui-btn-active">位置設定</a></li>
+			</ul>
+		</div>
+	</div>
+	<div data-role="content">
+	</div>
+	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><button type="submit">設定</a></div>
+			<div class="ui-block-b"><button type="submit">キャンセル</a></div>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="itinerary_edit_main_menu">
+	<div data-role="content">
+		<ul data-role="listview">
+			<li><a href="#" data-rel="back">新規作成</a></li>
+			<li><a href="#" data-rel="back">行程一覧</a></li>
+			<li><a href="#" data-rel="back">変更破棄</a></li>
+			<li><a href="#" data-rel="back">行程保存</a></li>
+			<li><a href="#" data-rel="back">行程削除</a></li>
+		</ul>
+	</div>
 </div>
 
 <!-- ログイン画面 -->
-<ul id="itinerary_edit_menu_login">
-	<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />">ログアウト</a></li></c:if>
-	<li><a href="<c:out value="${Google}"     />">Googleでログイン</a></li>
-	<li><a href="<c:out value="${YahooJAPAN}" />">Yahoo!JAPANでログイン</a></li>
-	<li><a href="<c:out value="${Yahoo}"      />">Yahoo!でログイン</a></li>
-	<li><a href="<c:out value="${mixi}"       />">mixiでログイン</a></li>
-	<li><a href="<c:out value="${AOL}"        />">AOLでログイン</a></li>
-	<li><a href="<c:out value="${MyOpenId}"   />">MyOpenId.comでログイン</a></li>
-</ul>
+<div data-role="page" id="itinerary_edit_menu_login">
+	<div data-role="content">
+		<ul data-role="listview">
+			<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />">ログアウト</a></li></c:if>
+			<li><a href="<c:out value="${Google}"     />">Googleでログイン</a></li>
+			<li><a href="<c:out value="${YahooJAPAN}" />">Yahoo!JAPANでログイン</a></li>
+			<li><a href="<c:out value="${Yahoo}"      />">Yahoo!でログイン</a></li>
+			<li><a href="<c:out value="${mixi}"       />">mixiでログイン</a></li>
+			<li><a href="<c:out value="${AOL}"        />">AOLでログイン</a></li>
+			<li><a href="<c:out value="${MyOpenId}"   />">MyOpenId.comでログイン</a></li>
+			<li><a href="#" data-rel="back">キャンセル</a></li>
+		</ul>
+	</div>
+</div>
 
 </body>
 </html>
