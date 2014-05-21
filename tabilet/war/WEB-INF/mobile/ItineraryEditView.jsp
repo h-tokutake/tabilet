@@ -25,9 +25,9 @@
 <script type="text/JavaScript" src="/js/common/Localization.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/MapCanvas.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/ItineraryEditView/WaypointEditDialog.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMain.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/ItineraryEditView/WaypointEditDialog.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMain.js" charset="utf-8"></script>
 <title>タブレットで旅をする - Tabilet</title>
 </head>
 <body>
@@ -45,7 +45,7 @@
 			<ul>
 				<li><a href="#itinerary_edit_screen_summary" class="ui-btn-active">行程概要</a></li>
 				<li><a href="#itinerary_edit_screen_main">行程編集</a></li>
-				<li><a href="#itinerary_edit_screen_map_canvas">地図表示</a></li>
+				<li><a href="#itinerary_edit_screen_map">地図表示</a></li>
 			</ul>
 		</div>
 	</div>
@@ -53,26 +53,14 @@
 	<div data-role="content">
 		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
 			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
-			<input type="hidden"
-				id="itinerary_edit_itinerary_id"
-				name="itinerary_id"
-				value="<c:out value="${itinerary_id}" />"
-			></input>
-			<div data-role="collapsible-set">
-				<div data-role="collapsible">
-					<h3><input type="text" data-mini="true"
-						id="itinerary_edit_itinerary_summary"
-						class="summary"
-						name="itinerary_summary"
-						placeholder="行程のタイトルを入れてください"
-						value="<c:out value="${itinerary_summary}" />"
-					></input></h3>
-					<p><textarea data-mini="true"
-						id="itinerary_edit_itinerary_description"
-						class="description"
-						name="itinerary_description"
-						placeholder="行程の概要を入れてください"
-					><c:out value="${itinerary_description}" /></textarea></p>
+			<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id"
+				value="<c:out value="${itinerary_id}" />" />
+				<input type="text" data-mini="true" id="itinerary_edit_itinerary_summary"
+					class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
+					value="<c:out value="${itinerary_summary}" />" />
+				<textarea data-mini="true" id="itinerary_edit_itinerary_description" class="description"
+					name="itinerary_description" rows="4" placeholder="行程の概要を入れてください"
+					><c:out value="${itinerary_description}" /></textarea>
 				</div>
 			</div>
 		</form>
@@ -80,7 +68,7 @@
 </div>
 
 <div data-role="page" id="itinerary_edit_screen_main">
-	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
+	<div data-role="header" data-position="inline" id="itinerary_edit_screen_header" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
 		<h1>Tabilet</h1>
@@ -92,7 +80,7 @@
 			<ul>
 				<li><a href="#itinerary_edit_screen_summary">行程概要</a></li>
 				<li><a href="#itinerary_edit_screen_main" class="ui-btn-active">行程編集</a></li>
-				<li><a href="#itinerary_edit_screen_map_canvas">地図表示</a></li>
+				<li><a href="#itinerary_edit_screen_map">地図表示</a></li>
 			</ul>
 		</div>
 	</div>
@@ -123,8 +111,8 @@
 	</div>
 </div>
 
-<div data-role="page" id="itinerary_edit_screen_map_canvas">
-	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
+<div data-role="page" id="itinerary_edit_screen_map">
+	<div data-role="header" data-position="inline" id="itinerary_edit_screen_header" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
 		<h1>Tabilet</h1>
@@ -136,17 +124,17 @@
 			<ul>
 				<li><a href="#itinerary_edit_screen_summary">行程概要</a></li>
 				<li><a href="#itinerary_edit_screen_main">行程編集</a></li>
-				<li><a href="#itinerary_edit_screen_map_canvas" class="ui-btn-active">地図表示</a></li>
+				<li><a href="#itinerary_edit_screen_map" class="ui-btn-active">地図表示</a></li>
 			</ul>
 		</div>
 	</div>
 
-	<div data-role="content">
-	</div>
+	<!-- 地図表示 -->
+	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
 </div>
 
 <div data-role="page" id="waypoint_edit_screen_datetime">
-	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
+	<div data-role="header" id="waypoint_edit_screen_header" data-id="waypoint_edit_screen_header" data-position="fixed">
 		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="東京ディズニーランド＆東京ディズニーシー" />
 		<div data-role="navbar">
 			<ul>
@@ -188,6 +176,7 @@
 		</div>
 	</div>
 	<div data-role="content">
+		<div id="waypoint_edit_screen_map_canvas" class="map_canvas"></div>
 	</div>
 	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
 		<div class="ui-grid-a">
