@@ -84,8 +84,7 @@ var ItineraryEditMenu = (function() {
 			$("#itinerary_list_menu")
 				.append(list_item_tag)
 				.find("li").eq(i).bind("tap", function(e) {
-					var selected_itinerary_id = $(e.target).find("a").attr("name");
-					if(e.target.tagName == "A") selected_itinerary_id = $(e.target).attr("name");
+					var selected_itinerary_id = $(e.target).find("a").context.name;
 					submitPostToItineraryEdit(selected_itinerary_id, "itinerary_edit");
 					return false;
 				});
@@ -96,6 +95,15 @@ var ItineraryEditMenu = (function() {
 		});
 		$.mobile.changePage("#itinerary_list_dialog");
 		$("#itinerary_list_menu").listview("refresh");
+	}
+
+	function submitPostToItineraryEdit (itinerary_id, itinerary_operation) {
+		$(document.createElement("form"))
+			.attr("action", "itinerary_edit")
+			.attr("method", "post")
+			.append('<input type="hidden" name="itinerary_id" value="' + itinerary_id + '"></input>')
+			.append('<input type="hidden" name="itinerary_operation" value="' + itinerary_operation + '"></input>')
+			.submit();
 	}
 
 	return ItineraryEditMenu;

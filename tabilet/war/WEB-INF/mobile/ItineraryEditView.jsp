@@ -104,11 +104,12 @@
 						<p><strong>
 							<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
 						</strong></p>
-						<p>2014/06/01 09:00 - 2014/06/01 10:30</p>
+						<p>出発日時：<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if></p>
 						</a><a href="#">削除</a>
 					</li>
 				</ul>
 			</c:forEach>
+
 		</form>
 	</div>
 </div>
@@ -135,37 +136,34 @@
 	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
 </div>
 
-<div data-role="page" id="waypoint_edit_screen_datetime">
-	<div data-role="header" id="waypoint_edit_screen_header" data-id="waypoint_edit_screen_header" data-position="fixed">
-		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="東京ディズニーランド＆東京ディズニーシー" />
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
-				<li><a href="#waypoint_edit_screen_location">位置設定</a></li>
+<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
+	<div data-role="page" id="waypoint_edit_screen_datetime">
+		<div data-role="header" id="waypoint_edit_screen_header" data-id="waypoint_edit_screen_header" data-position="fixed">
+			<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>" />
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
+					<li><a href="#waypoint_edit_screen_location">位置設定</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview">
+				<li data-role="list-divider">出発: </li>
+				<li><div class="ui-grid-a">
+					<div class="ui-block-a"><input type="date" name="waypoint_depdate" id="waypoint_depdate" /></div>
+					<div class="ui-block-b"><input type="time" name="waypoint_deptime" id="waypoint_deptime" /></div>
+				</div></li>
 			</ul>
 		</div>
-	</div>
-	<div data-role="content">
-		<ul data-role="listview">
-			<li data-role="list-divider">到着: </li>
-			<li><div class="ui-grid-a">
-				<div class="ui-block-a"><input type="date" name="waypoint_arrdate" id="waypoint_arrdate" /></div>
-				<div class="ui-block-b"><input type="time" name="waypoint_arrtime" id="waypoint_arrtime" /></div>
-			</div></li>
-			<li data-role="list-divider">出発: </li>
-			<li><div class="ui-grid-a">
-				<div class="ui-block-a"><input type="date" name="waypoint_depdate" id="waypoint_depdate" /></div>
-				<div class="ui-block-b"><input type="time" name="waypoint_deptime" id="waypoint_deptime" /></div>
-			</div></li>
-		</ul>
-	</div>
-	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
-		<div class="ui-grid-a">
-			<div class="ui-block-a"><button type="submit">設定</a></div>
-			<div class="ui-block-b"><button type="submit">キャンセル</a></div>
+		<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
+			<div class="ui-grid-a">
+				<div class="ui-block-a"><button type="submit">設定</a></div>
+				<div class="ui-block-b"><button type="submit">キャンセル</a></div>
+			</div>
 		</div>
 	</div>
-</div>
+</c:forEach>
 
 <div data-role="page" id="waypoint_edit_screen_location">
 	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
