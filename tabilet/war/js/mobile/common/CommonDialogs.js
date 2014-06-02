@@ -32,6 +32,13 @@ var CommonDialogs = (function() {
 			$.mobile.changePage("#error_dialog");
 			return;
 		}
+
+		//待ち時間用ダイアログ
+		this.__wait = function (message) {
+			$("#wait_dialog_message").empty().append(message);
+			$.mobile.changePage("#wait_dialog");
+			return;
+		}
 	}
 
 	//--------------
@@ -39,8 +46,9 @@ var CommonDialogs = (function() {
 	//--------------
 
 	CommonDialogs.prototype = {
-		confirm : function(title, content, callback) { this.__confirm(title, content, callback); },
-		error   : function(title, content, callback) { this.__error  (title, content, callback); }
+		confirm : function(message, callback) { this.__confirm(message, callback); },
+		error   : function(message) { this.__error(message); },
+		wait    : function(message) { this.__wait (message); }
 	};
 
 	return CommonDialogs;

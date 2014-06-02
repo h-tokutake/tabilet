@@ -65,6 +65,7 @@ var ItineraryEditMenu = (function() {
 
 	//private methods
 	function ajaxToGetItineraryList () {
+		mainView.getCommonDialogs().wait("行程データを読み込んでいます。しばらくお待ちください・・・");
 		$.ajax({
 			dataType: "json",
 			type: "GET",

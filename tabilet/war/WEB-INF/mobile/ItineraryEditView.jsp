@@ -240,6 +240,13 @@
 	</div>
 </div>
 
+<!-- 待ち時間用ダイアログ -->
+<div data-role="dialog" id="wait_dialog">
+	<div data-role="content">
+		<p id="wait_dialog_message"></p>
+	</div>
+</div>
+
 <!-- 行程一覧画面 -->
 <div data-role="dialog" id="itinerary_list_dialog">
 	<div data-role="content">
