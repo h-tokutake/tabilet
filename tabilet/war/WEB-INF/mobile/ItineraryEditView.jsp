@@ -16,18 +16,21 @@
 <script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
 <script type="text/JavaScript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
 
 <script type="text/JavaScript" src="/js/lib/globalize.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja-JP.js"></script>
-<script type="text/JavaScript" src="/js/common/CommonFunctions.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/common/Localization.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/common/MapCanvas.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/common/CommonFunctions.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/common/Localization.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/common/CommonDialogs.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/common/MapCanvas.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
+<!--
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/WaypointEditDialog.js" charset="utf-8"></script>
+-->
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMain.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
+
 <title>タブレットで旅をする - Tabilet</title>
 </head>
 <body>
@@ -95,18 +98,17 @@
 				value="<c:out value="${itinerary_id}" />"
 			></input>
 
-			<ul data-role="listview" data-split-icon="delete">
-				<li><a href="#waypoint_edit_screen_datetime" data-transition="slide">
-					<p><strong>東京スカイツリー</strong></p>
-					<p>2014/06/01 09:00 - 2014/06/01 10:30</p>
-					</a><a href="#">削除</a>
-				</li>
-				<li><a href="#waypoint_edit_screen_datetime" data-transition="slide">
-					<p><strong>東京ディズニーランド＆東京ディズニーシー</strong></p>
-					<p>2014/06/01 12:00 - 2014/06/01 17:30</p>
-					</a><a href="#">削除</a>
-				</li>
-			</ul>
+			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
+				<ul data-role="listview" data-split-icon="delete">
+					<li><a href="#waypoint_edit_screen_datetime" data-transition="slide">
+						<p><strong>
+							<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
+						</strong></p>
+						<p>2014/06/01 09:00 - 2014/06/01 10:30</p>
+						</a><a href="#">削除</a>
+					</li>
+				</ul>
+			</c:forEach>
 		</form>
 	</div>
 </div>
@@ -189,11 +191,12 @@
 <div data-role="page" id="itinerary_edit_main_menu">
 	<div data-role="content">
 		<ul data-role="listview">
-			<li><a href="#" data-rel="back">新規作成</a></li>
-			<li><a href="#" data-rel="back">行程一覧</a></li>
-			<li><a href="#" data-rel="back">変更破棄</a></li>
-			<li><a href="#" data-rel="back">行程保存</a></li>
-			<li><a href="#" data-rel="back">行程削除</a></li>
+			<li><a href="#" data-rel="back" id="itinerary_edit_menu_main_create_itinerary">新規作成</a></li>
+			<li><a href="#" data-rel="back" id="itinerary_edit_menu_main_move_ItineraryListView">行程一覧</a></li>
+			<li><a href="#" data-rel="back" id="itinerary_edit_menu_main_refresh_ItineraryEditView">変更破棄</a></li>
+			<li><a href="#" data-rel="back" id="itinerary_edit_menu_main_save_itinerary">行程保存</a></li>
+			<li><a href="#" data-rel="back" id="itinerary_edit_menu_main_delete_itinerary">行程削除</a></li>
+			<li><a href="#" data-rel="back">閉じる</a></li>
 		</ul>
 	</div>
 </div>
@@ -202,15 +205,45 @@
 <div data-role="page" id="itinerary_edit_menu_login">
 	<div data-role="content">
 		<ul data-role="listview">
-			<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />">ログアウト</a></li></c:if>
-			<li><a href="<c:out value="${Google}"     />">Googleでログイン</a></li>
-			<li><a href="<c:out value="${YahooJAPAN}" />">Yahoo!JAPANでログイン</a></li>
-			<li><a href="<c:out value="${Yahoo}"      />">Yahoo!でログイン</a></li>
-			<li><a href="<c:out value="${mixi}"       />">mixiでログイン</a></li>
-			<li><a href="<c:out value="${AOL}"        />">AOLでログイン</a></li>
-			<li><a href="<c:out value="${MyOpenId}"   />">MyOpenId.comでログイン</a></li>
+			<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />" rel="external">ログアウト</a></li></c:if>
+			<li><a href="<c:out value="${Google}"     />" rel="external">Googleでログイン</a></li>
+			<li><a href="<c:out value="${YahooJAPAN}" />" rel="external">Yahoo!JAPANでログイン</a></li>
+			<li><a href="<c:out value="${Yahoo}"      />" rel="external">Yahoo!でログイン</a></li>
+			<li><a href="<c:out value="${mixi}"       />" rel="external">mixiでログイン</a></li>
+			<li><a href="<c:out value="${AOL}"        />" rel="external">AOLでログイン</a></li>
+			<li><a href="<c:out value="${MyOpenId}"   />" rel="external">MyOpenId.comでログイン</a></li>
 			<li><a href="#" data-rel="back">キャンセル</a></li>
 		</ul>
+	</div>
+</div>
+
+<!-- 確認用ダイアログ -->
+<div data-role="dialog" id="confirm_dialog">
+	<div data-role="content">
+		<p id="confirm_dialog_message"></p>
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a href="#" data-role="button" id="confirm_dialog_ok">OK</a>
+			</div>
+			<div class="ui-block-b">
+				<a href="#" data-role="button" id="confirm_dialog_cancel" class="close_all_dialogs">キャンセル</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- エラー用ダイアログ -->
+<div data-role="dialog" id="error_dialog">
+	<div data-role="content">
+		<p id="error_dialog_message"></p>
+		<a href="#" data-role="button" data-rel="back">OK</a>
+	</div>
+</div>
+
+<!-- 行程一覧画面 -->
+<div data-role="dialog" id="itinerary_list_dialog">
+	<div data-role="content">
+		<ul data-role="listview" id="itinerary_list_menu"></ul>
 	</div>
 </div>
 

@@ -28,19 +28,6 @@ label {
 	font-weight: bold;
 	font-size: 14px;
 }
-label#title_logo {
-	font-weight: bold;
-	font-size: 20px;
-	border-style: ridge;
-	border-width: 6px;
-	border-radius: 25px;
-	border-color: blue;
-	background-color: blue;
-	color: white;
-	padding-left: 10px;
-	padding-right: 10px;
-	cursor: pointer;
-}
 span {
 	display: inline;
 }

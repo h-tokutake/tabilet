@@ -17,10 +17,22 @@ var ItineraryEditView = (function(){
 	//  constructor
 	//------------------
 	function ItineraryEditView() {
+		dialog = new CommonDialogs();
+		mainMenu = new ItineraryEditMenu(this);
 		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_screen_header").get(0).offsetHeight * 2 - 80);
 		$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth);
 		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
+		$( window ).resize(function(){
+			$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_screen_header").get(0).offsetHeight * 2 - 80);
+			$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth);
+			mapCanvas.refresh();
+		});
 	}
+
+	ItineraryEditView.prototype = {
+		getCommonDialogs : function() { return dialog },
+		getMainMenu : function() { return mainMenu }
+	};
 
 	return ItineraryEditView;
 }());
