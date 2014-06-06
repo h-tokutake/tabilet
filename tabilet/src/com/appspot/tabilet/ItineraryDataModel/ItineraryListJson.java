@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class ItineraryListJson {
 	private ArrayList<String> idList;
-	private ArrayList<String> depDateTimeList;
+	private ArrayList<String> depDateList;
+	private ArrayList<String> depTimeList;
 	private ArrayList<String> summaryList;
 	private ArrayList<String> originList;
 	private ArrayList<String> destinationList;
@@ -15,11 +16,17 @@ public class ItineraryListJson {
 	public final void setIdList(ArrayList<String> idList) {
 		this.idList = idList;
 	}
-	public final ArrayList<String> getDepDateTimeList() {
-		return depDateTimeList;
+	public final ArrayList<String> getDepDateList() {
+		return depDateList;
 	}
-	public final void setDepDateTimeList(ArrayList<String> depDateTimeList) {
-		this.depDateTimeList = depDateTimeList;
+	public final void setDepDateList(ArrayList<String> depDateList) {
+		this.depDateList = depDateList;
+	}
+	public final ArrayList<String> getDepTimeList() {
+		return depTimeList;
+	}
+	public final void setDepTimeList(ArrayList<String> depTimeList) {
+		this.depTimeList = depTimeList;
 	}
 	public final ArrayList<String> getSummaryList() {
 		return summaryList;

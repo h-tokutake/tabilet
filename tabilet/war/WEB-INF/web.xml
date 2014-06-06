@@ -20,6 +20,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Calendar</servlet-name>
 		<servlet-class>com.appspot.tabilet.Controller.CalendarServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Upgrade</servlet-name>
+		<servlet-class>com.appspot.tabilet.Controller.UpgradeDataServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ItineraryEdit</servlet-name>
 		<url-pattern>/itinerary_edit</url-pattern>
@@ -39,6 +43,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>Calendar</servlet-name>
 		<url-pattern>/calendar</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Upgrade</servlet-name>
+		<url-pattern>/upgrade</url-pattern>
 	</servlet-mapping>
 	<filter>
 	    <filter-name>Encoding</filter-name>

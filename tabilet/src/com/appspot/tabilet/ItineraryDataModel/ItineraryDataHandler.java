@@ -1,5 +1,6 @@
 package com.appspot.tabilet.ItineraryDataModel;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -41,8 +42,15 @@ public class ItineraryDataHandler extends DataHandler {
 	public final void loadAll() throws Exception {
 		Query query = this.getPm().newQuery(ItineraryData.class);
 		query.setFilter("ownerId == paramUserId");
-		query.setOrdering("depTime desc");
+		query.setOrdering("depDate desc");
 		query.declareParameters("String paramUserId");
+		@SuppressWarnings("unchecked")
+		List<ItineraryData> dataList = (List<ItineraryData>) query.execute(this.getUserId());
+		this.setDataList(new ArrayList<Data>(dataList));
+	}
+
+	public final void loadAllUser() throws Exception {
+		Query query = this.getPm().newQuery(ItineraryData.class);
 		@SuppressWarnings("unchecked")
 		List<ItineraryData> dataList = (List<ItineraryData>) query.execute(this.getUserId());
 		this.setDataList(new ArrayList<Data>(dataList));
@@ -60,6 +68,30 @@ public class ItineraryDataHandler extends DataHandler {
 		this.getPm().deletePersistent(this.getData());
 		this.getResult().setReturnCode(0);
 		this.getResult().setStrInfo(this.getData().getId());
+	}
+
+	public final void convert() {
+		Iterator<Data> iter = this.getDataList().iterator();
+		while(iter.hasNext()) {
+			ItineraryData data = (ItineraryData) iter.next();
+			data.upgrade();
+		}
+	}
+
+	public final void print(HttpServletResponse res) {
+		try {
+			PrintWriter out = res.getWriter();
+			out.println("--- new itinerary data ---<br>");
+			Iterator<Data> iter = this.getDataList().iterator();
+			while(iter.hasNext()) {
+				ItineraryData data = (ItineraryData) iter.next();
+				out.println(data.getId() + "<br>");
+				out.println(data.getPlaceDepDateList() + "<br>");
+				out.println(data.getPlaceDepTimeList() + "<br>");
+			}
+		} catch (Exception e) {
+			//Do nothing
+		}
 	}
 
 	public final boolean checkDuplicate() throws Exception {
@@ -85,6 +117,7 @@ public class ItineraryDataHandler extends DataHandler {
 		String[] placePositionList = {};
 		String[] placeUrlList = {};
 		String[] placeDescriptionList = {};
+		String[] placeDepDateList = {};
 		String[] placeDepTimeList = {};
 
 		@SuppressWarnings("unchecked")
@@ -108,6 +141,9 @@ public class ItineraryDataHandler extends DataHandler {
 			if("place_description[]".equals(entry.getKey())){
 				placeDescriptionList = entry.getValue();
 			} else
+			if("place_depdate[]".equals(entry.getKey())){
+				placeDepDateList = entry.getValue();
+			} else
 			if("place_deptime[]".equals(entry.getKey())){
 				placeDepTimeList = entry.getValue();
 			}
@@ -116,6 +152,7 @@ public class ItineraryDataHandler extends DataHandler {
 		((ItinerarySkeletonData) this.getData()).setPlacePositionList(new ArrayList<String>(Arrays.asList(placePositionList)));
 		((ItinerarySkeletonData) this.getData()).setPlaceUrlList(new ArrayList<String>(Arrays.asList(placeUrlList)));
 		((ItinerarySkeletonData) this.getData()).setPlaceDescriptionList(new ArrayList<String>(Arrays.asList(placeDescriptionList)));
+		((ItineraryData) this.getData()).setPlaceDepDateList(new ArrayList<String>(Arrays.asList(placeDepDateList)));
 		((ItineraryData) this.getData()).setPlaceDepTimeList(new ArrayList<String>(Arrays.asList(placeDepTimeList)));
 	}
 
@@ -127,6 +164,7 @@ public class ItineraryDataHandler extends DataHandler {
 		ArrayList<String> placePositionList = new ArrayList<String>();
 		ArrayList<String> placeUrlList      = new ArrayList<String>();
 		ArrayList<String> placeDescriptionList = new ArrayList<String>();
+		ArrayList<String> placeDepDateList     = new ArrayList<String>();
 		ArrayList<String> placeDepTimeList     = new ArrayList<String>();
 
 		if(this.getData() != null){
@@ -138,6 +176,7 @@ public class ItineraryDataHandler extends DataHandler {
 			placePositionList = data.getPlacePositionList();
 			placeUrlList      = data.getPlaceUrlList();
 			placeDescriptionList = data.getPlaceDescriptionList();
+			placeDepDateList     = data.getPlaceDepDateList();
 			placeDepTimeList     = data.getPlaceDepTimeList();
 		}
 		session.setAttribute("itinerary_id"         , id         );
@@ -147,6 +186,7 @@ public class ItineraryDataHandler extends DataHandler {
 		session.setAttribute("place_position_list"  , placePositionList.toArray());
 		session.setAttribute("place_siteurl_list"   , placeUrlList.toArray()     );
 		session.setAttribute("place_description_list", placeDescriptionList.toArray());
+		session.setAttribute("place_depdate_list"   , placeDepDateList.toArray()    );
 		session.setAttribute("place_deptime_list"   , placeDepTimeList.toArray()    );
 	}
 
@@ -155,6 +195,7 @@ public class ItineraryDataHandler extends DataHandler {
 	public final HttpServletResponse sendAll(HttpServletResponse resp) throws Exception {
 		ArrayList<String> itineraryIdList          = new ArrayList<String>();
 		ArrayList<String> itinerarySummaryList     = new ArrayList<String>();
+		ArrayList<String> itineraryDepdateList     = new ArrayList<String>();
 		ArrayList<String> itineraryDeptimeList     = new ArrayList<String>();
 		ArrayList<String> itineraryOriginList      = new ArrayList<String>();
 		ArrayList<String> itineraryDestinationList = new ArrayList<String>();
@@ -164,6 +205,7 @@ public class ItineraryDataHandler extends DataHandler {
 			ItineraryData data = (ItineraryData) iter.next();
 			itineraryIdList.add(data.getId());
 			itinerarySummaryList.add(data.getSummary());
+			itineraryDepdateList.add(data.getDepDate());
 			itineraryDeptimeList.add(data.getDepTime());
 			itineraryOriginList.add(data.getOriginName());
 			itineraryDestinationList.add(data.getDestinationName());
@@ -172,7 +214,8 @@ public class ItineraryDataHandler extends DataHandler {
 		ItineraryListJson json = new ItineraryListJson();
 		json.setIdList(itineraryIdList);
 		json.setSummaryList(itinerarySummaryList);
-		json.setDepDateTimeList(itineraryDeptimeList);
+		json.setDepDateList(itineraryDepdateList);
+		json.setDepTimeList(itineraryDeptimeList);
 		json.setOriginList(itineraryOriginList);
 		json.setDestinationList(itineraryDestinationList);
 

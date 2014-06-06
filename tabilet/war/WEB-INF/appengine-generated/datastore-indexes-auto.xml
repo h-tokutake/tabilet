@@ -1,9 +1,9 @@
-<!-- Indices written at Fri, 30 May 2014 23:40:12 JST -->
+<!-- Indices written at Tue, 3 Jun 2014 22:41:04 JST -->
 
 <datastore-indexes>
 
-    <!-- Used 25 times in query history -->
-    <datastore-index kind="ItineraryData" ancestor="false" source="auto">
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="ItineraryDataOld" ancestor="false" source="auto">
         <property name="ownerId" direction="asc"/>
         <property name="depTime" direction="desc"/>
     </datastore-index>

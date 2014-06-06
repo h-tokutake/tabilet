@@ -72,8 +72,9 @@ public abstract class DataHandler {
 		return this.pm;
 	}
 	public final String getUserId() {
-		return userId;
+		return this.userId;
 	}
+
 
 	/* setter */
 	public final void setData(Data data){
@@ -82,6 +83,7 @@ public abstract class DataHandler {
 	public final void setDataList(ArrayList<Data> dataList) {
 		this.dataList = dataList;
 	}
+
 
 	/* abstract methods */
 	public abstract void loadOne(String key) throws Exception;;
