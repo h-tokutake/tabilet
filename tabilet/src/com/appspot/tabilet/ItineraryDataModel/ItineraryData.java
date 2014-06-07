@@ -1,8 +1,6 @@
 package com.appspot.tabilet.ItineraryDataModel;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;

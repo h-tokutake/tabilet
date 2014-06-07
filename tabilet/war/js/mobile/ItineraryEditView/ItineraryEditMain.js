@@ -7,7 +7,7 @@ $(function () {
 var ItineraryEditView = (function(){
 	var MAX_WAYPOINTS = 10;
 	var MIN_WAYPOINTS = 2;
-	var waypointDialog;
+	var waypointEditMain;
 	var mainMenu;
 	var mapCanvas;
 	var dialog;
@@ -27,6 +27,7 @@ var ItineraryEditView = (function(){
 			$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth);
 			mapCanvas.refresh();
 		});
+		waypointEditMain = new WaypointEditMain(this);
 	}
 
 	ItineraryEditView.prototype = {

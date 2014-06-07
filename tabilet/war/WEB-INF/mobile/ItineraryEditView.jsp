@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
+<link type="text/css" rel="stylesheet" href="/css/mobile.css" />
 
 <script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
 <script type="text/JavaScript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -25,9 +26,7 @@
 <script type="text/JavaScript" src="/js/mobile/common/CommonDialogs.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/common/MapCanvas.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
-<!--
-<script type="text/JavaScript" src="/js/mobile/ItineraryEditView/WaypointEditDialog.js" charset="utf-8"></script>
--->
+<script type="text/JavaScript" src="/js/mobile/ItineraryEditView/WaypointEditMain.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMain.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
 
@@ -98,18 +97,28 @@
 				value="<c:out value="${itinerary_id}" />"
 			></input>
 
-			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
-				<ul data-role="listview" data-split-icon="delete">
-					<li><a href="#waypoint_edit_screen_datetime" data-transition="slide">
+			<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
+				<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
+					<li><a href="#" class="waypoint_edit" data-transition="slide">
 						<p><strong>
-							<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
+							<div class="waypoint_place_name">
+								<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
+							</div>
 						</strong></p>
-						<p>出発日時：<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if></p>
-						</a><a href="#">削除</a>
-					</li>
-				</ul>
-			</c:forEach>
-
+						<p>出発日時：
+							<div class="waypoint_depdate">
+								<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
+							</div>
+							<div class="waypoint_deptime">
+								<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
+							</div>
+						</p>
+					</a><a href="#">削除</a></li>
+				</c:forEach>
+				<li><a href="#" class="waypoint_create" data-transition="slide">
+					<p>クリックして立寄地の情報を入力してください</p>
+				</li>
+			</ul>
 		</form>
 	</div>
 </div>
@@ -136,34 +145,37 @@
 	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
 </div>
 
-<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
-	<div data-role="page" id="waypoint_edit_screen_datetime">
-		<div data-role="header" id="waypoint_edit_screen_header" data-id="waypoint_edit_screen_header" data-position="fixed">
-			<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>" />
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
-					<li><a href="#waypoint_edit_screen_location">位置設定</a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="content">
-			<ul data-role="listview">
-				<li data-role="list-divider">出発: </li>
-				<li><div class="ui-grid-a">
-					<div class="ui-block-a"><input type="date" name="waypoint_depdate" id="waypoint_depdate" /></div>
-					<div class="ui-block-b"><input type="time" name="waypoint_deptime" id="waypoint_deptime" /></div>
-				</div></li>
+<!-- 地点情報編集画面 -->
+<div data-role="page" id="waypoint_edit_screen_datetime">
+	<div data-role="header" id="waypoint_edit_screen_header" data-id="waypoint_edit_screen_header" data-position="fixed">
+		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="" />
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
+				<li><a href="#waypoint_edit_screen_location">位置設定</a></li>
 			</ul>
 		</div>
-		<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
-			<div class="ui-grid-a">
-				<div class="ui-block-a"><button type="submit">設定</a></div>
-				<div class="ui-block-b"><button type="submit">キャンセル</a></div>
-			</div>
+	</div>
+	<div data-role="content">
+		<ul data-role="listview">
+			<li data-role="list-divider">出発: </li>
+			<li><div class="ui-grid-a">
+				<div class="ui-block-a">
+					<input type="date" name="waypoint_depdate" id="waypoint_depdate" value=""/>
+				</div>
+				<div class="ui-block-b">
+					<input type="time" name="waypoint_deptime" id="waypoint_deptime" value=""/>
+				</div>
+			</div></li>
+		</ul>
+	</div>
+	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><button type="button" id="waypoint_edit_set" name="">設定</a></div>
+			<div class="ui-block-b"><button type="button" onClick="history.back();">キャンセル</a></div>
 		</div>
 	</div>
-</c:forEach>
+</div>
 
 <div data-role="page" id="waypoint_edit_screen_location">
 	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">

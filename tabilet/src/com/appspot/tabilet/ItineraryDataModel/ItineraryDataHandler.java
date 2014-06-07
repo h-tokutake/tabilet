@@ -42,7 +42,7 @@ public class ItineraryDataHandler extends DataHandler {
 	public final void loadAll() throws Exception {
 		Query query = this.getPm().newQuery(ItineraryData.class);
 		query.setFilter("ownerId == paramUserId");
-		query.setOrdering("depDate desc");
+		query.setOrdering("depTime desc");
 		query.declareParameters("String paramUserId");
 		@SuppressWarnings("unchecked")
 		List<ItineraryData> dataList = (List<ItineraryData>) query.execute(this.getUserId());

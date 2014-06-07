@@ -1,30 +1,28 @@
-//WaypointEditDialog
+//WaypointEditMain
 
-var WaypointEditDialog = (function(){
+var WaypointEditMain = (function(){
 	var position_dirty_flag = false;
 	var smallMapCanvas;
 	var mainView;
+	var originalObj;
 
 	//---------------
 	// constructor
 	//---------------
 
-	var WaypointEditDialog = function(view){
+	var WaypointEditMain = function(view){
 		mainView = view;
 		$("#waypoint_edit_screen_map_canvas").css("height", window.innerHeight * 0.9 - 130);
 		$("#waypoint_edit_screen_map_canvas").css("width", window.innerWidth * 0.9 - 30);
 		smallMapCanvas = new MapCanvas("waypoint_edit_screen_map_canvas", mainView);
-		$("#itinerary_edit_screen_waypoint_edit").hide();
+//		$("#itinerary_edit_screen_waypoint_edit").hide();
 
 		smallMapCanvas.setClickMapEvent(function(latlng_str) {
 			$("#waypoint_edit_place_position").val(latlng_str);
 			if($("#waypoint_edit_place_name").val() == "") $("#waypoint_edit_place_name").val(latlng_str);
 			position_dirty_flag = true;
 		});
-		$("#waypoint_edit_button_search_position").button({
-			icons: { primary: "ui-icon-search"},
-			text : false
-		}).click(function(){
+		$("#waypoint_edit_button_search_position").bind("tap", function(){
 			if ($("#waypoint_edit_place_name").val() == "") return;
 			smallMapCanvas.setLocation($("#waypoint_edit_place_name").val(), "", function(latlng_str){
 				$("#waypoint_edit_place_position").val(latlng_str);
@@ -35,20 +33,56 @@ var WaypointEditDialog = (function(){
 			});
 			return false;
 		});
-		$("#waypoint_edit_button_place_url").button({
-			icons: { primary: "ui-icon-extlink"},
-			text : false
-		}).click(function(){
-			window.open($("#waypoint_edit_place_siteurl").val());
-			return false;
-		}).button("disable");
-
-		$("#itinerary_edit_screen_place_edit").hide();
+		$(".waypoint_edit").bind("tap", function(){
+			originalObj = $(this);
+			$("#waypoint_place_name").val(originalObj.find(".waypoint_place_name").eq(0).html());
+			$("#waypoint_depdate").val(originalObj.find(".waypoint_depdate").eq(0).html());
+			$("#waypoint_deptime").val(originalObj.find(".waypoint_deptime").eq(0).html());
+			$("#waypoint_edit_set").attr("name", "waypoint_operation_edit");
+			$.mobile.changePage("#waypoint_edit_screen_datetime");
+		});
+		$(".waypoint_create").bind("tap", function(){
+			originalObj = $(this);
+			$("#waypoint_place_name").val("");
+			$("#waypoint_edit_set").attr("name", "waypoint_operation_create");
+			$.mobile.changePage("#waypoint_edit_screen_datetime");
+		});
+		$("#waypoint_edit_set").bind("tap", function(){
+			if ($(this).attr("name") == "waypoint_operation_edit"){
+				originalObj.find(".waypoint_place_name").eq(0).html($("#waypoint_place_name").val());
+				originalObj.find(".waypoint_depdate").eq(0).html($("#waypoint_depdate").val());
+				originalObj.find(".waypoint_deptime").eq(0).html($("#waypoint_deptime").val());
+			} else {
+				originalObj.closest("li").before('<li></li>');
+				var newObj = originalObj.closest("li").prev("li");
+				newObj.append('<a href="#" class="waypoint_edit" data-transition="slide"></a>');
+				newObj.append('<a href="#">削除</a>');
+				newObj.find('a').eq(0).append('<p></p>');
+				newObj.find('a').eq(0).append('<p>出発日時:&nbsp;</p>');
+				newObj.find('a > p').eq(0).append('<strong></strong>');
+				newObj.find('a > p > strong').append('<div class="waypoint_place_name"></div>');
+				newObj.find('a > p').eq(1).append('<div class="waypoint_depdate"></div>');
+				newObj.find('a > p').eq(1).append('<div class="waypoint_deptime"></div>');
+				newObj.find(".waypoint_place_name").eq(0).append($("#waypoint_place_name").val());
+				newObj.find(".waypoint_depdate").eq(0).append($("#waypoint_depdate").val());
+				newObj.find(".waypoint_deptime").eq(0).append($("#waypoint_deptime").val());
+				newObj.find(".waypoint_edit").bind("tap", function(){
+					originalObj = $(this);
+					$("#waypoint_place_name").val(originalObj.find(".waypoint_place_name").eq(0).html());
+					$("#waypoint_depdate").val(originalObj.find(".waypoint_depdate").eq(0).html());
+					$("#waypoint_deptime").val(originalObj.find(".waypoint_deptime").eq(0).html());
+					$("#waypoint_edit_set").attr("name", "waypoint_operation_edit");
+					$.mobile.changePage("#waypoint_edit_screen_datetime");
+				});
+			}
+			$("#waypoint_listview").listview('refresh');
+			$.mobile.changePage("#itinerary_edit_screen_main");
+		});
 	}
 
 	// public methods
 
-	WaypointEditDialog.prototype.open = function (target) {
+	WaypointEditMain.prototype.open = function (target) {
 		var place_name_obj = target;
 		var place_position_obj = target.siblings(".place_position");
 		var place_siteurl_obj = target.siblings(".place_siteurl");
@@ -315,7 +349,7 @@ var WaypointEditDialog = (function(){
 			}
 		});
 	}
-	
+
 	function ajaxToSavePlaceData (place_name, place_position, place_siteurl, place_description) {
 		$.ajax({
 			dataType: "json",
@@ -362,6 +396,6 @@ var WaypointEditDialog = (function(){
 		});
 	}
 
-	return WaypointEditDialog;
+	return WaypointEditMain;
 }());
 
