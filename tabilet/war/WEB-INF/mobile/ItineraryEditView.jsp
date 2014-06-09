@@ -113,7 +113,7 @@
 								<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
 							</div>
 						</p>
-					</a><a href="#">削除</a></li>
+					</a><a href="#" class="waypoint_delete">削除</a></li>
 				</c:forEach>
 				<li><a href="#" class="waypoint_create" data-transition="slide">
 					<p>クリックして立寄地の情報を入力してください</p>
