@@ -17,6 +17,8 @@
 <script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
 <script type="text/JavaScript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/JavaScript" src="/js/lib/jquery.ui.touch-punch.min.js"></script>
 
 <script type="text/JavaScript" src="/js/lib/globalize.js"></script>
 <script type="text/JavaScript" src="/js/lib/cultures/globalize.culture.ja.js"></script>
