@@ -4,3 +4,10 @@ div.waypoint_depdate, div.waypoint_deptime {
 	padding-left: 5px;
 	padding-right: 5px;
 }
+
+.transparent {
+	filter:alpha(opacity=50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+

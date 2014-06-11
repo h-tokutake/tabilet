@@ -27,6 +27,16 @@ var ItineraryEditView = (function(){
 			$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth);
 			mapCanvas.refresh();
 		});
+		$("#waypoint_listview").sortable({
+			items : 'li.list_sortable',
+			axis : 'y',
+			disabled : false,
+			revert : true,
+			tolerance : 'pointer'
+		});
+		$("#waypoint_listview").bind("sortupdate", function(){
+			$("#waypoint_listview").listview("refresh");
+		});
 		waypointEditMain = new WaypointEditMain(this);
 	}
 

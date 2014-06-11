@@ -53,7 +53,7 @@ var WaypointEditMain = (function(){
 				originalObj.find(".waypoint_depdate").eq(0).html($("#waypoint_depdate").val());
 				originalObj.find(".waypoint_deptime").eq(0).html($("#waypoint_deptime").val());
 			} else {
-				originalObj.closest("li").before('<li></li>');
+				originalObj.closest("li").before('<li class="list_sortable"></li>');
 				var newObj = originalObj.closest("li").prev("li");
 				newObj.append('<a href="#" class="waypoint_edit" data-transition="slide"></a>');
 				newObj.append('<a href="#" class="waypoint_delete">削除</a>');
@@ -79,11 +79,13 @@ var WaypointEditMain = (function(){
 					mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_place_name").eq(0).html() + "を旅程から削除します。", function(){
 						that.closest("li").remove();
 						$("#waypoint_listview").listview('refresh');
+						$("#waypoint_listview").sortable('refresh');
 						$.mobile.changePage("#itinerary_edit_screen_main");
 					});
 				});
 			}
 			$("#waypoint_listview").listview('refresh');
+			$("#waypoint_listview").sortable('refresh');
 			$.mobile.changePage("#itinerary_edit_screen_main");
 		});
 	}

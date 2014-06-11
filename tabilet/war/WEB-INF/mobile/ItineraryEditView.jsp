@@ -101,7 +101,7 @@
 
 			<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
 				<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
-					<li><a href="#" class="waypoint_edit" data-transition="slide">
+					<li class="list_sortable"><a href="#" class="waypoint_edit" data-transition="slide">
 						<p><strong>
 							<div class="waypoint_place_name">
 								<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
