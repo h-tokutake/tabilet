@@ -115,11 +115,17 @@
 								<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
 							</div>
 						</p>
+					<input type="hidden" class="place_position" name="place_position"
+						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
+					<input type="hidden" class="place_siteurl" name="place_siteurl"
+						value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>" />
+					<input type="hidden" class="place_description" name="place_description"
+						value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>" />
 					</a><a href="#" class="waypoint_delete">削除</a></li>
 				</c:forEach>
 				<li><a href="#" class="waypoint_create" data-transition="slide">
 					<p>クリックして立寄地の情報を入力してください</p>
-				</li>
+				</a></li>
 			</ul>
 		</form>
 	</div>
@@ -149,8 +155,8 @@
 
 <!-- 地点情報編集画面 -->
 <div data-role="page" id="waypoint_edit_screen_datetime">
-	<div data-role="header" id="waypoint_edit_screen_header" data-id="waypoint_edit_screen_header" data-position="fixed">
-		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="" />
+	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
+		<input type="text" name="waypoint_place_name_1" id="waypoint_place_name_1" value="" />
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
@@ -173,15 +179,15 @@
 	</div>
 	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
 		<div class="ui-grid-a">
-			<div class="ui-block-a"><button type="button" id="waypoint_edit_set" name="">設定</a></div>
-			<div class="ui-block-b"><button type="button" onClick="history.back();">キャンセル</a></div>
+			<div class="ui-block-a"><button type="button" class="waypoint_edit_set" name="">設定</button></div>
+			<div class="ui-block-b"><button type="button" class="waypoint_edit_cancel">キャンセル</button></div>
 		</div>
 	</div>
 </div>
 
 <div data-role="page" id="waypoint_edit_screen_location">
-	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
-		<input type="text" name="waypoint_place_name" id="waypoint_place_name" value="東京ディズニーランド＆東京ディズニーシー" />
+	<div data-role="header" data-id="waypoint_edit_screen_header" id="waypoint_edit_screen_header" data-position="fixed">
+		<input type="text" name="waypoint_place_name_2" id="waypoint_place_name_2" value="" />
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#waypoint_edit_screen_datetime">到着/出発日時設定</a></li>
@@ -189,13 +195,11 @@
 			</ul>
 		</div>
 	</div>
-	<div data-role="content">
-		<div id="waypoint_edit_screen_map_canvas" class="map_canvas"></div>
-	</div>
-	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
+	<div id="waypoint_edit_screen_map_canvas" class="map_canvas"></div>
+	<div data-role="footer" data-id="waypoint_edit_screen_footer" id="waypoint_edit_screen_footer" data-position="fixed">
 		<div class="ui-grid-a">
-			<div class="ui-block-a"><button type="submit">設定</a></div>
-			<div class="ui-block-b"><button type="submit">キャンセル</a></div>
+			<div class="ui-block-a"><button type="button" class="waypoint_edit_set" name="">設定</button></div>
+			<div class="ui-block-b"><button type="button" class="waypoint_edit_cancel">キャンセル</button></div>
 		</div>
 	</div>
 </div>

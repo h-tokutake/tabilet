@@ -156,7 +156,7 @@ var MapCanvas = (function(){
 		this.__setDwellTimes = function (argDwellTimes) {
 			dwellTimes = argDwellTimes;
 		}
-		
+
 		this.__setPlaceDepTimes = function (argPlaceDepTimes) {
 			placeDepTimes = argPlaceDepTimes;
 		}
@@ -265,7 +265,7 @@ var MapCanvas = (function(){
 			}
 		}
 	}
-	
+
 	//--------------
 	//    public
 	//--------------
