@@ -115,12 +115,12 @@
 								<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
 							</div>
 						</p>
-					<input type="hidden" class="place_position" name="place_position"
-						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
-					<input type="hidden" class="place_siteurl" name="place_siteurl"
-						value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>" />
-					<input type="hidden" class="place_description" name="place_description"
-						value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>" />
+						<input type="hidden" class="place_position" name="place_position"
+							value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
+						<input type="hidden" class="place_siteurl" name="place_siteurl"
+							value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>" />
+						<input type="hidden" class="place_description" name="place_description"
+							value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>" />
 					</a><a href="#" class="waypoint_delete">削除</a></li>
 				</c:forEach>
 				<li><a href="#" class="waypoint_create" data-transition="slide">
@@ -195,6 +195,9 @@
 			</ul>
 		</div>
 	</div>
+	<input type="hidden" id="place_position" value="" />
+	<input type="hidden" id="place_siteurl" value="" />
+	<input type="hidden" id="place_description" value="" />
 	<div id="waypoint_edit_screen_map_canvas" class="map_canvas"></div>
 	<div data-role="footer" data-id="waypoint_edit_screen_footer" id="waypoint_edit_screen_footer" data-position="fixed">
 		<div class="ui-grid-a">

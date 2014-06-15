@@ -55,6 +55,9 @@ var WaypointEditMain = (function(){
 				originalObj.find(".waypoint_place_name").eq(0).html($("#waypoint_place_name_2").val());
 				originalObj.find(".waypoint_depdate").eq(0).html($("#waypoint_depdate").val());
 				originalObj.find(".waypoint_deptime").eq(0).html($("#waypoint_deptime").val());
+				originalObj.find(".place_position").eq(0).val($("#place_position").val());
+				originalObj.find(".place_siteurl").eq(0).val($("#place_siteurl").val());
+				originalObj.find(".place_description").eq(0).val($("#place_description").val());
 			} else {
 				originalObj.closest("li").before('<li class="list_sortable"></li>');
 				var newObj = originalObj.closest("li").prev("li");
@@ -66,10 +69,16 @@ var WaypointEditMain = (function(){
 				newObj.find('a > p > strong').append('<div class="waypoint_place_name"></div>');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_depdate"></div>');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_deptime"></div>');
+				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_position" name="place_position" value="" />');
+				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_siteurl" name="place_siteurl" value="" />');
+				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_description" name="place_description" value="" />');
 				newObj.find(".waypoint_place_name").eq(0).append($("#waypoint_place_name_1").val());
 				newObj.find(".waypoint_place_name").eq(0).append($("#waypoint_place_name_2").val());
 				newObj.find(".waypoint_depdate").eq(0).append($("#waypoint_depdate").val());
 				newObj.find(".waypoint_deptime").eq(0).append($("#waypoint_deptime").val());
+				newObj.find(".place_position").eq(0).val($("#place_position").val());
+				newObj.find(".place_siteurl").eq(0).val($("#place_siteurl").val());
+				newObj.find(".place_description").eq(0).val($("#place_description").val());
 				newObj.find(".waypoint_edit").bind("tap", function(){
 					originalObj = $(this);
 					$("#waypoint_place_name_1").val(originalObj.find(".waypoint_place_name").eq(0).html());
