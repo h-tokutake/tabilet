@@ -15,20 +15,12 @@ var WaypointEditMain = (function(){
 		smallMapCanvas = new MapCanvas("waypoint_edit_screen_map_canvas", mainView);
 
 		smallMapCanvas.setClickMapEvent(function(latlng_str) {
-			$("#waypoint_edit_place_position").val(latlng_str);
-			if($("#waypoint_edit_place_name").val() == "") $("#waypoint_edit_place_name").val(latlng_str);
+			$("#place_position").val(latlng_str);
+			if($("#waypoint_place_name_2").val() == "") {
+				$("#waypoint_place_name_1").val(latlng_str);
+				$("#waypoint_place_name_2").val(latlng_str);
+			}
 			position_dirty_flag = true;
-		});
-		$("#waypoint_edit_button_search_position").bind("tap", function(){
-			if ($("#waypoint_edit_place_name").val() == "") return;
-			smallMapCanvas.setLocation($("#waypoint_edit_place_name").val(), "", function(latlng_str){
-				$("#waypoint_edit_place_position").val(latlng_str);
-				$("#waypoint_edit_place_siteurl").val("");
-				$("#waypoint_edit_place_description").val("");
-				$("#waypoint_edit_button_place_url").button("disable");
-				smallMapCanvas.refresh();
-			});
-			return false;
 		});
 		$(".waypoint_edit").bind("tap", function(){
 			originalObj = $(this);
@@ -72,7 +64,6 @@ var WaypointEditMain = (function(){
 				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_position" name="place_position" value="" />');
 				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_siteurl" name="place_siteurl" value="" />');
 				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_description" name="place_description" value="" />');
-				newObj.find(".waypoint_place_name").eq(0).append($("#waypoint_place_name_1").val());
 				newObj.find(".waypoint_place_name").eq(0).append($("#waypoint_place_name_2").val());
 				newObj.find(".waypoint_depdate").eq(0).append($("#waypoint_depdate").val());
 				newObj.find(".waypoint_deptime").eq(0).append($("#waypoint_deptime").val());
@@ -85,6 +76,9 @@ var WaypointEditMain = (function(){
 					$("#waypoint_place_name_2").val(originalObj.find(".waypoint_place_name").eq(0).html());
 					$("#waypoint_depdate").val(originalObj.find(".waypoint_depdate").eq(0).html());
 					$("#waypoint_deptime").val(originalObj.find(".waypoint_deptime").eq(0).html());
+					$("#place_position").val(originalObj.find(".place_position").eq(0).val());
+					$("#place_siteurl").val(originalObj.find(".place_siteurl").eq(0).val());
+					$("#place_description").val(originalObj.find(".place_description").eq(0).val());
 					$(".waypoint_edit_set").attr("name", "waypoint_operation_edit");
 					$.mobile.changePage("#waypoint_edit_screen_datetime");
 				});
@@ -104,19 +98,19 @@ var WaypointEditMain = (function(){
 		});
 		$("#waypoint_place_name_1").bind("change", function(){
 			$("#waypoint_place_name_2").val($("#waypoint_place_name_1").val());
-			updateMap("#waypoint_place_name_2");
+			updateMap("#waypoint_place_name_2", "");
 		});
 		$("#waypoint_place_name_2").bind("change", function(){
 			$("#waypoint_place_name_1").val($("#waypoint_place_name_2").val());
-			updateMap("#waypoint_place_name_1");
+			updateMap("#waypoint_place_name_1", "");
 		});
 		$("#waypoint_edit_screen_location").bind("pageshow", function(){
 			resizeMap();
-			updateMap("#waypoint_place_name_2");
+			updateMap("#waypoint_place_name_1", $("#place_position").val());
 		})
 		$(window).resize(function(){
 			resizeMap();
-			updateMap("#waypoint_place_name_2");
+			updateMap("#waypoint_place_name_1", $("#place_position").val());
 		});
 	}
 
@@ -327,12 +321,9 @@ var WaypointEditMain = (function(){
 		$("#waypoint_edit_screen_map_canvas").css("width", window.innerWidth);
 	}
 
-	function updateMap (place_name) {
-		smallMapCanvas.setLocation($(place_name).val(), "", function(latlng_str){
-			$("#waypoint_edit_place_position").val(latlng_str);
-			$("#waypoint_edit_place_siteurl").val("");
-			$("#waypoint_edit_place_description").val("");
-			$("#waypoint_edit_button_place_url").button("disable");
+	function updateMap (place_name, latlng) {
+		smallMapCanvas.setLocation($(place_name).val(), latlng, function(latlng_str){
+			$("#place_position").val(latlng_str);
 			smallMapCanvas.refresh();
 		});
 	}
