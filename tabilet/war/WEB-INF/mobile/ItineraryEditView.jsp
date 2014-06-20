@@ -12,6 +12,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
+<link rel="stylesheet" href="/themes/EmeraldBlue.min.css" />
+<link rel="stylesheet" href="/themes/jquery.mobile.icons.min.css" />
 <link type="text/css" rel="stylesheet" href="/css/mobile.css" />
 
 <script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
@@ -54,21 +56,19 @@
 		</div>
 	</div>
 
-	<div data-role="content">
-		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
-			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
-			<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id"
-				value="<c:out value="${itinerary_id}" />" />
-				<input type="text" data-mini="true" id="itinerary_edit_itinerary_summary"
-					class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
-					value="<c:out value="${itinerary_summary}" />" />
-				<textarea data-mini="true" id="itinerary_edit_itinerary_description" class="description"
-					name="itinerary_description" rows="4" placeholder="行程の概要を入れてください"
-					><c:out value="${itinerary_description}" /></textarea>
-				</div>
+	<form id="itinerary_edit_form" action="itinerary_edit" method="post">
+		<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
+		<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id"
+			value="<c:out value="${itinerary_id}" />" />
+			<input type="text" data-mini="true" id="itinerary_edit_itinerary_summary"
+				class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
+				value="<c:out value="${itinerary_summary}" />" />
+			<textarea data-mini="true" id="itinerary_edit_itinerary_description" class="description"
+				name="itinerary_description" rows="4" placeholder="行程の概要を入れてください"
+				><c:out value="${itinerary_description}" /></textarea>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 </div>
 
 <div data-role="page" id="itinerary_edit_screen_main">
@@ -89,49 +89,47 @@
 		</div>
 	</div>
 
-	<div data-role="content">
-		<!-- 行程入力欄を表示 -->
-		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
-			<input type="hidden" id="itinerary_edit_itinerary_operation" name="itinerary_operation" value="itinerary_save" />
-			<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
+	<!-- 行程入力欄を表示 -->
+	<form id="itinerary_edit_form" action="itinerary_edit" method="post">
+		<input type="hidden" id="itinerary_edit_itinerary_operation" name="itinerary_operation" value="itinerary_save" />
+		<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
 
-			<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
-				<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
-					<li class="list_sortable"><a href="#" class="waypoint_edit" data-transition="slide">
-						<p><strong>
-							<div class="waypoint_place_name">
-								<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
-							</div>
-						</strong></p>
-						<p>到着日時：
-							<div class="waypoint_arrdate">
-								<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
-							</div>
-							<div class="waypoint_arrtime">
-								<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
-							</div>
-							出発日時：
-							<div class="waypoint_depdate">
-								<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
-							</div>
-							<div class="waypoint_deptime">
-								<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
-							</div>
-						</p>
-						<input type="hidden" class="place_position" name="place_position"
-							value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
-						<input type="hidden" class="place_siteurl" name="place_siteurl"
-							value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>" />
-						<input type="hidden" class="place_description" name="place_description"
-							value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>" />
-					</a><a href="#" class="waypoint_delete">削除</a></li>
-				</c:forEach>
-				<li><a href="#" class="waypoint_create" data-transition="slide">
-					<p>クリックして立寄地の情報を入力してください</p>
-				</a></li>
-			</ul>
-		</form>
-	</div>
+		<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
+			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
+				<li class="list_sortable"><a href="#" class="waypoint_edit" data-transition="slide">
+					<p><strong>
+						<div class="waypoint_place_name">
+							<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
+						</div>
+					</strong></p>
+					<p>到着日時：
+						<div class="waypoint_arrdate">
+							<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
+						</div>
+						<div class="waypoint_arrtime">
+							<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
+						</div>
+						出発日時：
+						<div class="waypoint_depdate">
+							<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
+						</div>
+						<div class="waypoint_deptime">
+							<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
+						</div>
+					</p>
+					<input type="hidden" class="place_position" name="place_position"
+						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
+					<input type="hidden" class="place_siteurl" name="place_siteurl"
+						value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>" />
+					<input type="hidden" class="place_description" name="place_description"
+						value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>" />
+				</a><a href="#" class="waypoint_delete">削除</a></li>
+			</c:forEach>
+			<li><a href="#" class="waypoint_create" data-transition="slide">
+				<p>クリックして立寄地の情報を入力してください</p>
+			</a></li>
+		</ul>
+	</form>
 </div>
 
 <div data-role="page" id="itinerary_edit_screen_map">
@@ -167,19 +165,17 @@
 			</ul>
 		</div>
 	</div>
-	<div data-role="content">
-		<ul data-role="listview">
-			<li data-role="list-divider">出発: </li>
-			<li><div class="ui-grid-a">
-				<div class="ui-block-a">
-					<input type="date" name="waypoint_depdate" id="waypoint_depdate" value=""/>
-				</div>
-				<div class="ui-block-b">
-					<input type="time" name="waypoint_deptime" id="waypoint_deptime" value=""/>
-				</div>
-			</div></li>
-		</ul>
-	</div>
+	<ul data-role="listview">
+		<li data-role="list-divider">出発: </li>
+		<li><div class="ui-grid-a">
+			<div class="ui-block-a">
+				<input type="date" name="waypoint_depdate" id="waypoint_depdate" value=""/>
+			</div>
+			<div class="ui-block-b">
+				<input type="time" name="waypoint_deptime" id="waypoint_deptime" value=""/>
+			</div>
+		</div></li>
+	</ul>
 	<div data-role="footer" data-id="waypoint_edit_screen_footer" data-position="fixed">
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><button type="button" class="waypoint_edit_set" name="">設定</button></div>

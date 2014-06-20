@@ -172,7 +172,10 @@ var MapCanvas = (function(){
 		this.__showDirections = function (callback) {
 			var request = new DirectionsRequestHolder();
 			request.waypoints = waypoints;
-			if(request.waypoints.length <= 1) return;
+			if(request.waypoints.length <= 1) {
+				if (callback != null) callback();
+				return;
+			}
 
 			request.origin = request.waypoints.shift().location;
 			request.destination = request.waypoints.pop().location;
@@ -183,7 +186,7 @@ var MapCanvas = (function(){
 			directionsService.route(request.getRequest(), function(result, status) {
 				directionResult = result;
 				that.__getDirectionsCallback(result, status);
-				callback();
+				if (callback != null) callback();
 			});
 		}
 
