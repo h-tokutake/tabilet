@@ -38,7 +38,7 @@
 </head>
 <body>
 
-<div data-role="page" id="itinerary_edit_screen_summary">
+<div data-role="page" id="itinerary_edit_screen_summary" data-theme="b">
 	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
@@ -71,7 +71,7 @@
 	</form>
 </div>
 
-<div data-role="page" id="itinerary_edit_screen_main">
+<div data-role="page" id="itinerary_edit_screen_main" data-theme="b">
 	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
@@ -132,7 +132,7 @@
 	</form>
 </div>
 
-<div data-role="page" id="itinerary_edit_screen_map">
+<div data-role="page" id="itinerary_edit_screen_map" data-theme="b">
 	<div data-role="header" data-position="inline" id="itinerary_edit_screen_header" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
@@ -155,7 +155,7 @@
 </div>
 
 <!-- 地点情報編集画面 -->
-<div data-role="page" id="waypoint_edit_screen_datetime">
+<div data-role="page" id="waypoint_edit_screen_datetime" data-theme="b">
 	<div data-role="header" data-id="waypoint_edit_screen_header" data-position="fixed">
 		<input type="text" name="waypoint_place_name_1" id="waypoint_place_name_1" value="" />
 		<div data-role="navbar">
@@ -184,7 +184,7 @@
 	</div>
 </div>
 
-<div data-role="page" id="waypoint_edit_screen_location">
+<div data-role="page" id="waypoint_edit_screen_location" data-theme="b">
 	<div data-role="header" data-id="waypoint_edit_screen_header" id="waypoint_edit_screen_header" data-position="fixed">
 		<input type="text" name="waypoint_place_name_2" id="waypoint_place_name_2" value="" />
 		<div data-role="navbar">
@@ -206,7 +206,7 @@
 	</div>
 </div>
 
-<div data-role="page" id="itinerary_edit_main_menu">
+<div data-role="page" id="itinerary_edit_main_menu" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview">
 			<li><a href="#" data-rel="back" id="itinerary_edit_menu_main_create_itinerary">新規作成</a></li>
@@ -220,7 +220,7 @@
 </div>
 
 <!-- ログイン画面 -->
-<div data-role="page" id="itinerary_edit_menu_login">
+<div data-role="page" id="itinerary_edit_menu_login" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview">
 			<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />" rel="external">ログアウト</a></li></c:if>

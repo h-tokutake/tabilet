@@ -310,7 +310,6 @@ var WaypointEditMain = (function(){
 		});
 	}
 
-	// private methods
 	function resizeMap () {
 		var header_height = $("#waypoint_edit_screen_header").outerHeight();
 		var footer_height = $("#waypoint_edit_screen_footer").outerHeight();
