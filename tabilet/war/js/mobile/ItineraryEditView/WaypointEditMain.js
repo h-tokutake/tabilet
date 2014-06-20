@@ -48,12 +48,12 @@ var WaypointEditMain = (function(){
 				newObj.append('<a href="#" class="waypoint_edit" data-transition="slide"></a>');
 				newObj.append('<a href="#" class="waypoint_delete">削除</a>');
 				newObj.find('a').eq(0).append('<p></p>');
-				newObj.find('a').eq(0).append('<p>到着日時:&nbsp;</p>');
+				newObj.find('a').eq(0).append('<p>到着：&nbsp;</p>');
 				newObj.find('a > p').eq(0).append('<strong></strong>');
 				newObj.find('a > p > strong').append('<div class="waypoint_place_name"></div>');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_arrdate"></div>');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_arrtime"></div>');
-				newObj.find('a > p').eq(1).append('&nbsp;出発日時：&nbsp;');
+				newObj.find('a > p').eq(1).append('<br>出発：&nbsp;');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_depdate"></div>');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_deptime"></div>');				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_position" name="place_position" value="" />');
 				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_siteurl" name="place_siteurl" value="" />');

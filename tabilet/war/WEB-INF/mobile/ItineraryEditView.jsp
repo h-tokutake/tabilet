@@ -102,14 +102,14 @@
 							<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
 						</div>
 					</strong></p>
-					<p>到着日時：
+					<p>到着：&nbsp;
 						<div class="waypoint_arrdate">
 							<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
 						</div>
 						<div class="waypoint_arrtime">
 							<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
 						</div>
-						出発日時：
+						<br>出発：&nbsp;
 						<div class="waypoint_depdate">
 							<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
 						</div>

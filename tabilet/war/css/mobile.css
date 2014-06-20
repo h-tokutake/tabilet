@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-div.waypoint_depdate, div.waypoint_deptime {
+div.waypoint_depdate, div.waypoint_deptime, div.waypoint_arrdate, div.waypoint_arrtime {
 	display: inline;
 	padding-left: 5px;
 	padding-right: 5px;

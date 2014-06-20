@@ -9,7 +9,7 @@ function toDateTimeString(src) {
 	var min = src.getMinutes();
 	if (min < 10) min = "0" + min;
 
-	var strDateTime = year + '/' + month + '/' + date + ' ' + hour + ':' + min;
+	var strDateTime = year + '-' + month + '-' + date + ' ' + hour + ':' + min;
 
 	return strDateTime;
 }

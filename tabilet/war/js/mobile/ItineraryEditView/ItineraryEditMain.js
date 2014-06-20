@@ -113,7 +113,7 @@ var ItineraryEditView = (function(){
 
 		for(var i=0; i<waypoint_obj.length; i++) {
 			if (arrDateTime[i] != null) {
-				var arrDateTimeSplit = arrDateTime[i].split('T');
+				var arrDateTimeSplit = arrDateTime[i].split(' ');
 				var arrDate = arrDateTimeSplit[0];
 				var arrTime = arrDateTimeSplit[1];
 				waypoint_obj.eq(i).find(".waypoint_arrdate").html(arrDate);
