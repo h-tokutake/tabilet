@@ -4,7 +4,7 @@ function toDateTimeString(src) {
 	if (month < 10) month = "0" + month;
 	var date = src.getDate();
 	if (date < 10) date = "0" + date;
-	var hour = src.getHours();
+	var hour = src.getUTCHours();
 	if (hour < 10) hour = "0" + hour;
 	var min = src.getMinutes();
 	if (min < 10) min = "0" + min;
@@ -27,7 +27,7 @@ function toDateString(src) {
 }
 
 function toTimeString(src) {
-	var hour = src.getHours();
+	var hour = src.getUTCHours();
 	if (hour < 10) hour = "0" + hour;
 	var min = src.getMinutes();
 	if (min < 10) min = "0" + min;
@@ -43,7 +43,7 @@ function toDateTimeString2(src) {
 	if (month < 10) month = "0" + month;
 	var date = src.getDate();
 	if (date < 10) date = "0" + date;
-	var hour = src.getHours();
+	var hour = src.getUTCHours();
 	if (hour < 10) hour = "0" + hour;
 	var min = src.getMinutes();
 	if (min < 10) min = "0" + min;

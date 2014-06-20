@@ -236,7 +236,7 @@
 </div>
 
 <!-- 確認用ダイアログ -->
-<div data-role="dialog" id="confirm_dialog">
+<div data-role="dialog" id="confirm_dialog" data-theme="b">
 	<div data-role="content">
 		<p id="confirm_dialog_message"></p>
 		<div class="ui-grid-a">
@@ -251,7 +251,7 @@
 </div>
 
 <!-- エラー用ダイアログ -->
-<div data-role="dialog" id="error_dialog">
+<div data-role="dialog" id="error_dialog" data-theme="b">
 	<div data-role="content">
 		<p id="error_dialog_message"></p>
 		<a href="#" data-role="button" data-rel="back">OK</a>
@@ -259,14 +259,14 @@
 </div>
 
 <!-- 待ち時間用ダイアログ -->
-<div data-role="dialog" id="wait_dialog">
+<div data-role="dialog" id="wait_dialog" data-theme="b">
 	<div data-role="content">
 		<p id="wait_dialog_message"></p>
 	</div>
 </div>
 
 <!-- 行程一覧画面 -->
-<div data-role="dialog" id="itinerary_list_dialog">
+<div data-role="dialog" id="itinerary_list_dialog" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview" id="itinerary_list_menu"></ul>
 	</div>
