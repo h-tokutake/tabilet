@@ -72,7 +72,7 @@
 </div>
 
 <div data-role="page" id="itinerary_edit_screen_main">
-	<div data-role="header" data-position="inline" id="itinerary_edit_screen_header" data-id="itinerary_edit_screen_header" data-position="fixed">
+	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
 		<h1>Tabilet</h1>
@@ -92,12 +92,8 @@
 	<div data-role="content">
 		<!-- 行程入力欄を表示 -->
 		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
-			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
-			<input type="hidden"
-				id="itinerary_edit_itinerary_id"
-				name="itinerary_id"
-				value="<c:out value="${itinerary_id}" />"
-			></input>
+			<input type="hidden" id="itinerary_edit_itinerary_operation" name="itinerary_operation" value="itinerary_save" />
+			<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
 
 			<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
 				<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
@@ -107,7 +103,14 @@
 								<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
 							</div>
 						</strong></p>
-						<p>出発日時：
+						<p>到着日時：
+							<div class="waypoint_arrdate">
+								<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
+							</div>
+							<div class="waypoint_arrtime">
+								<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
+							</div>
+							出発日時：
 							<div class="waypoint_depdate">
 								<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
 							</div>

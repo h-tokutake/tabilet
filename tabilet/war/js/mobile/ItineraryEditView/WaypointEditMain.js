@@ -56,18 +56,19 @@ var WaypointEditMain = (function(){
 				newObj.append('<a href="#" class="waypoint_edit" data-transition="slide"></a>');
 				newObj.append('<a href="#" class="waypoint_delete">削除</a>');
 				newObj.find('a').eq(0).append('<p></p>');
-				newObj.find('a').eq(0).append('<p>出発日時:&nbsp;</p>');
+				newObj.find('a').eq(0).append('<p>到着日時:&nbsp;</p>');
 				newObj.find('a > p').eq(0).append('<strong></strong>');
 				newObj.find('a > p > strong').append('<div class="waypoint_place_name"></div>');
+				newObj.find('a > p').eq(1).append('<div class="waypoint_arrdate"></div>');
+				newObj.find('a > p').eq(1).append('<div class="waypoint_arrtime"></div>');
+				newObj.find('a > p').eq(1).append('&nbsp;出発日時：&nbsp;');
 				newObj.find('a > p').eq(1).append('<div class="waypoint_depdate"></div>');
-				newObj.find('a > p').eq(1).append('<div class="waypoint_deptime"></div>');
-				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_position" name="place_position" value="" />');
+				newObj.find('a > p').eq(1).append('<div class="waypoint_deptime"></div>');				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_position" name="place_position" value="" />');
 				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_siteurl" name="place_siteurl" value="" />');
 				newObj.find('a > p').eq(1).append('<input type="hidden" class="place_description" name="place_description" value="" />');
 				newObj.find(".waypoint_place_name").eq(0).append($("#waypoint_place_name_2").val());
 				newObj.find(".waypoint_depdate").eq(0).append($("#waypoint_depdate").val());
 				newObj.find(".waypoint_deptime").eq(0).append($("#waypoint_deptime").val());
-				newObj.find(".place_position").eq(0).val($("#place_position").val());
 				newObj.find(".place_siteurl").eq(0).val($("#place_siteurl").val());
 				newObj.find(".place_description").eq(0).val($("#place_description").val());
 				newObj.find(".waypoint_edit").bind("tap", function(){
@@ -94,7 +95,9 @@ var WaypointEditMain = (function(){
 			}
 			$("#waypoint_listview").listview('refresh');
 			$("#waypoint_listview").sortable('refresh');
-			$.mobile.changePage("#itinerary_edit_screen_main");
+			mainView.updateDirections(true, function() {
+				$.mobile.changePage("#itinerary_edit_screen_main");
+			});
 		});
 		$("#waypoint_place_name_1").bind("change", function(){
 			$("#waypoint_place_name_2").val($("#waypoint_place_name_1").val());
@@ -107,7 +110,7 @@ var WaypointEditMain = (function(){
 		$("#waypoint_edit_screen_location").bind("pageshow", function(){
 			resizeMap();
 			updateMap("#waypoint_place_name_1", $("#place_position").val());
-		})
+		});
 		$(window).resize(function(){
 			resizeMap();
 			updateMap("#waypoint_place_name_1", $("#place_position").val());
