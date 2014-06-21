@@ -75,13 +75,13 @@ var MapCanvas = (function(){
 				arrDateTimeString[0] = "";
 				for(var i=0; i<result.routes.length; i++){
 					for(var j=0; j<result.routes[i].legs.length; j++){
-						result.routes[i].legs[j].start_address = "<h3>" + placeNames[k] + "</h3>" +
-							'<p><a href="' + placeUrls[k] + '" target="_blank">' + placeUrls[k] + '</a></p>' +
-							'<p>' + placeDescriptions[k] + '</p>';
+						result.routes[i].legs[j].start_address = "<strong>" + placeNames[k] + "</strong>";
+//							+ '<p><a href="' + placeUrls[k] + '" target="_blank">' + placeUrls[k] + '</a></p>' +
+//							'<p>' + placeDescriptions[k] + '</p>';
 						if (i == result.routes.length - 1 && j == result.routes[i].legs.length - 1) {
-							result.routes[i].legs[j].end_address = "<h3>" + placeNames[k + 1] + "</h3>" +
-							'<p><a href="' + placeUrls[k + 1] + '" target="_blank">' + placeUrls[k + 1] + '</a></p>' +
-							'<p>' + placeDescriptions[k + 1] + '</p>';
+							result.routes[i].legs[j].end_address = "<strong>" + placeNames[k + 1] + "</strong>";
+//							+ '<p><a href="' + placeUrls[k + 1] + '" target="_blank">' + placeUrls[k + 1] + '</a></p>' +
+//							'<p>' + placeDescriptions[k + 1] + '</p>';
 						}
 						arrTimeInMs = this.__setDepTimeInfo(result.routes[i].legs[j], dwellTimes, placeDepTimes, k++);
 					}
@@ -96,17 +96,20 @@ var MapCanvas = (function(){
 
 		this.__setDepTimeInfo = function (leg, dwell_times, placeDepTimes, row_index) {
 			var infoStr = "";
-			if (row_index === 0) {
-				infoStr = "";
-				arrDateTimeString[row_index + 1] = toDateTimeString(new Date(placeDepTimes[row_index + 1]));
-				infoStr += arrDateTimeString[row_index] + " 到着";
+			arrDateTimeString[row_index + 1] = toDateTimeString(new Date(placeDepTimes[row_index + 1]));
+			if (arrDateTimeString[row_index] != '' && arrDateTimeString[row_index] != null) {
+				infoStr += "<br /><nobr />到着：" + arrDateTimeString[row_index] + '<nobr />';
 			}
 			depDateTimeString[row_index] = toDateTimeString(new Date(placeDepTimes[row_index]));
-			infoStr += "<br>" + depDateTimeString[row_index] + " 出発";
+			if (depDateTimeString[row_index] != '' && depDateTimeString[row_index] != null) {
+				infoStr += "<br /><nobr />出発：" + depDateTimeString[row_index] + '<nobr />';
+			}
 			leg.start_address += infoStr;
 
 			arrDateTimeString[row_index + 1] = toDateTimeString(new Date(placeDepTimes[row_index] + leg.duration.value * 1000));
-			leg.end_address += "<br>" + arrDateTimeString[row_index + 1] + " 到着";
+			if (arrDateTimeString[row_index + 1] != '' && arrDateTimeString[row_index + 1] != null) {
+				leg.end_address += "<br /><nobr />到着：" + arrDateTimeString[row_index + 1] + '<nobr />';
+			}
 			depDateTimeString[row_index + 1] = "";
 		}
 
