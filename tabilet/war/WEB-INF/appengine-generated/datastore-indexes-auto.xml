@@ -1,4 +1,11 @@
-<!-- Indices written at Sun, 8 Jun 2014 00:11:52 JST -->
+<!-- Indices written at Mon, 23 Jun 2014 19:46:50 JST -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 15 times in query history -->
+    <datastore-index kind="ItineraryData" ancestor="false" source="auto">
+        <property name="ownerId" direction="asc"/>
+        <property name="depTime" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

@@ -20,7 +20,9 @@ var ItineraryEditView = (function(){
 		dialog = new CommonDialogs();
 		mainMenu = new ItineraryEditMenu(this);
 		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
-		resizeMap();
+		__updateDirections(true, false, function() {
+			resizeMap();
+		});
 		$( window ).resize(function(){
 			resizeMap();
 		});
@@ -131,12 +133,17 @@ var ItineraryEditView = (function(){
 		}
 	}
 
+	function __setItineraryId(itineraryId) {
+		$("#itinerary_edit_itinerary_id").val(itineraryId);
+	}
+
 	ItineraryEditView.prototype = {
 		getCommonDialogs : function() { return dialog },
 		getMainMenu : function() { return mainMenu },
 		updateDirections : function (set_dirty_flag, callback) {
 			__updateDirections(set_dirty_flag, false, callback);
-		}
+		},
+		setItineraryId : function(itineraryId) { __setItineraryId(itineraryId); },
 	};
 
 	return ItineraryEditView;

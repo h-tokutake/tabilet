@@ -97,26 +97,23 @@
 		<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
 			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
 				<li class="list_sortable"><a href="#" class="waypoint_edit" data-transition="slide">
-					<p><strong>
-						<div class="waypoint_place_name">
-							<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
-						</div>
-					</strong></p>
-					<p>到着：&nbsp;
-						<div class="waypoint_arrdate">
-							<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
-						</div>
-						<div class="waypoint_arrtime">
-							<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
-						</div>
-						<br>出発：&nbsp;
-						<div class="waypoint_depdate">
-							<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
-						</div>
-						<div class="waypoint_deptime">
-							<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
-						</div>
-					</p>
+					<div class="waypoint_place_name">
+						<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
+					</div>
+					&nbsp;到着：&nbsp;
+					<div class="waypoint_arrdate">
+						<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
+					</div>
+					<div class="waypoint_arrtime">
+						<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
+					</div>
+					<br>&nbsp;出発：&nbsp;
+					<div class="waypoint_depdate">
+						<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
+					</div>
+					<div class="waypoint_deptime">
+						<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
+					</div>
 					<input type="hidden" class="place_position" name="place_position"
 						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
 					<input type="hidden" class="place_siteurl" name="place_siteurl"
@@ -250,11 +247,19 @@
 	</div>
 </div>
 
+<!-- 情報表示用ダイアログ -->
+<div data-role="dialog" id="info_dialog" data-theme="b">
+	<div data-role="content">
+		<p id="info_dialog_message"></p>
+		<a href="#" data-role="button" id="info_dialog_ok">OK</a>
+	</div>
+</div>
+
 <!-- エラー用ダイアログ -->
 <div data-role="dialog" id="error_dialog" data-theme="b">
 	<div data-role="content">
 		<p id="error_dialog_message"></p>
-		<a href="#" data-role="button" data-rel="back">OK</a>
+		<a href="#" data-role="button" id="error_dialog_ok">OK</a>
 	</div>
 </div>
 

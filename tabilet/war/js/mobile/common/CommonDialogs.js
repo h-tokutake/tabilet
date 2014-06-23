@@ -26,9 +26,22 @@ var CommonDialogs = (function() {
 			return;
 		}
 
+		//情報表示用ダイアログ
+		this.__info = function (message, callback) {
+			$("#info_dialog_message").empty().append(message);
+			$("#info_dialog_ok").one("tap", function(){
+				callback();
+			});
+			$.mobile.changePage("#info_dialog");
+			return;
+		}
+
 		//エラー表示用ダイアログ
 		this.__error = function (message) {
 			$("#error_dialog_message").empty().append(message);
+			$("#error_dialog_ok").one("tap", function(){
+				$.mobile.changePage("#itinerary_edit_screen_main");
+			});
 			$.mobile.changePage("#error_dialog");
 			return;
 		}
@@ -47,6 +60,7 @@ var CommonDialogs = (function() {
 
 	CommonDialogs.prototype = {
 		confirm : function(message, callback) { this.__confirm(message, callback); },
+		info    : function(message, callback) { this.__info(message, callback); },
 		error   : function(message) { this.__error(message); },
 		wait    : function(message) { this.__wait (message); }
 	};

@@ -90,7 +90,7 @@ var MapCanvas = (function(){
 					directionsDisplay.setDirections(result);
 				}
 			} else {
-				mainView.getCommonDialog().error(getMsg('FAIL_GET_ROUTE'));
+				mainView.getCommonDialogs().error(getMsg('FAIL_GET_ROUTE'));
 			}
 		}
 
@@ -213,7 +213,7 @@ var MapCanvas = (function(){
 							map.setCenter(latlng);
 							if(callback != null) callback(latlng.toString());
 						} else {
-							mainView.getCommonDialog().error(getMsg('FAIL_GET_POSITION'));
+							mainView.getCommonDialogs().error(getMsg('FAIL_GET_POSITION'));
 						}
 					}
 				);

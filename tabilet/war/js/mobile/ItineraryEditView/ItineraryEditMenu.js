@@ -80,7 +80,7 @@ var ItineraryEditMenu = (function() {
 		if(data == null) return false;
 		for(var i=0; i<data.idList.length; i++) {
 			var list_item_tag = '<li><a href="#" name="' + data.idList[i] + '">'
-				+ data.depDateTimeList[i].replace(/T/, ' ') + ' @ ' + data.summaryList[i] + '</a></li>';
+				+ data.depDateList[i] + ' ' + data.depTimeList[i] + ' @ ' + data.summaryList[i] + '</a></li>';
 			$("#itinerary_list_menu")
 				.append(list_item_tag)
 				.find("li").eq(i).bind("tap", function(e) {
@@ -104,6 +104,90 @@ var ItineraryEditMenu = (function() {
 			.append('<input type="hidden" name="itinerary_id" value="' + itinerary_id + '"></input>')
 			.append('<input type="hidden" name="itinerary_operation" value="' + itinerary_operation + '"></input>')
 			.submit();
+	}
+
+	function makeItineraryDataJson (itinerary_operation) {
+		var placeNameList = [];
+		var placePositionList = [];
+		var placeUrlList = [];
+		var placeDescriptionList = [];
+		var placeDepDateList = [];
+		var placeDepTimeList = [];
+
+		$(".waypoint_edit").each(function(){
+			placeNameList.push($(this).find(".waypoint_place_name").html());
+			placePositionList.push($(this).find(".place_position").val());
+			placeUrlList.push($(this).find(".place_siteurl").val());
+			placeDescriptionList.push($(this).find(".place_description").val());
+			placeDepDateList.push($(this).find(".waypoint_depdate").html());
+			placeDepTimeList.push($(this).find(".waypoint_deptime").html());
+		});
+
+		var json = {
+			itinerary_operation   : itinerary_operation,
+			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
+			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
+			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
+			place_name            : placeNameList,
+			place_position        : placePositionList,
+			place_siteurl         : placeUrlList,
+			place_description     : placeDescriptionList,
+			place_depdate         : placeDepDateList,
+			place_deptime         : placeDepTimeList
+		};
+
+		return json;
+	}
+
+	function ajaxToSaveItineraryData () {
+		var itinerary_data_json = makeItineraryDataJson("itinerary_save");
+		var that = this;
+		$.ajax({
+			dataType: "json",
+			data: itinerary_data_json,
+			type: "POST",
+			cache: false,
+			url: "itinerary_edit",
+			success: function(result){
+				if(result.returnCode == "0") {
+					mainView.getCommonDialogs().info('行程 "' + itinerary_data_json.itinerary_summary + '" を保存しました。', function() {
+						mainView.setItineraryId(result.strInfo);
+						$.mobile.changePage("#itinerary_edit_screen_main");
+//						mainView.setDirtyFlag(false);
+//						__disableSaveMenu();
+					});
+				} else {
+					mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。(1)');
+				}
+			},
+			error: function() {
+				mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。(2)');
+			}
+		});
+	}
+
+	function ajaxToDeleteItineraryData () {
+		var itinerary_data_json = makeItineraryDataJson("itinerary_delete");
+		var that = this;
+		$.ajax({
+			dataType: "json",
+			data: itinerary_data_json,
+			type: "POST",
+			cache: false,
+			url: "itinerary_edit",
+			success: function(result){
+				if(result.returnCode == "0") {
+					mainView.getCommonDialogs().info('行程 "' + itinerary_data_json.itinerary_summary + '" を削除しました。', function(){
+						submitForm("itinerary_edit", "get");
+					});
+				} else {
+					mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
+				}
+			},
+			error: function() {
+				mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
+			}
+		});
 	}
 
 	return ItineraryEditMenu;
