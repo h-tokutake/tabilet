@@ -65,13 +65,20 @@ var ItineraryEditMenu = (function() {
 
 	//private methods
 	function ajaxToGetItineraryList () {
-		mainView.getCommonDialogs().wait("行程データを読み込んでいます。しばらくお待ちください・・・");
+		mainView.getCommonDialogs().wait("行程データを読み込んでいます。<br />しばらくお待ちください・・・");
+		var that = this;
 		$.ajax({
 			dataType: "json",
 			type: "GET",
 			cache: false,
 			url: "itinerary_list",
-			success: openItineraryListMenu
+			success: openItineraryListMenu,
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				var msg = '行程データの読み込みに失敗しました。<br />XMLHttpRequest = ' + XMLHttpRequest.status;
+				msg += '<br />textStatus = ' + textStatus;
+				msg += '<br />errorThrown = ' + errorThrown.message;
+				mainView.getCommonDialogs().error(msg);
+			}
 		});
 	}
 
@@ -115,12 +122,12 @@ var ItineraryEditMenu = (function() {
 		var placeDepTimeList = [];
 
 		$(".waypoint_edit").each(function(){
-			placeNameList.push($(this).find(".waypoint_place_name").html());
+			placeNameList.push($.trim($(this).find(".waypoint_place_name").text()));
 			placePositionList.push($(this).find(".place_position").val());
 			placeUrlList.push($(this).find(".place_siteurl").val());
 			placeDescriptionList.push($(this).find(".place_description").val());
-			placeDepDateList.push($(this).find(".waypoint_depdate").html());
-			placeDepTimeList.push($(this).find(".waypoint_deptime").html());
+			placeDepDateList.push($.trim($(this).find(".waypoint_depdate").text()));
+			placeDepTimeList.push($.trim($(this).find(".waypoint_deptime").text()));
 		});
 
 		var json = {
@@ -128,12 +135,12 @@ var ItineraryEditMenu = (function() {
 			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
 			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
 			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
-			place_name            : placeNameList,
+			waypoint_place_name   : placeNameList,
 			place_position        : placePositionList,
 			place_siteurl         : placeUrlList,
 			place_description     : placeDescriptionList,
-			place_depdate         : placeDepDateList,
-			place_deptime         : placeDepTimeList
+			waypoint_depdate      : placeDepDateList,
+			waypoint_deptime      : placeDepTimeList
 		};
 
 		return json;
@@ -157,11 +164,14 @@ var ItineraryEditMenu = (function() {
 //						__disableSaveMenu();
 					});
 				} else {
-					mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。(1)');
+					mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。<br />returnCode = ' + result.returnCode);
 				}
 			},
-			error: function() {
-				mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。(2)');
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				var msg = '行程 "' + itinerary_data_json.itinerary_summary + '" の保存に失敗しました。<br />XMLHttpRequest = ' + XMLHttpRequest.status;
+				msg += '<br />textStatus = ' + textStatus;
+				msg += '<br />errorThrown = ' + errorThrown.message;
+				mainView.getCommonDialogs().error(msg);
 			}
 		});
 	}
@@ -184,8 +194,11 @@ var ItineraryEditMenu = (function() {
 					mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
 				}
 			},
-			error: function() {
-				mainView.getCommonDialogs().error('行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。');
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				var msg = '行程 "' + itinerary_data_json.itinerary_summary + '" の削除に失敗しました。<br />XMLHttpRequest = ' + XMLHttpRequest.status;
+				msg += '<br />textStatus = ' + textStatus;
+				msg += '<br />errorThrown = ' + errorThrown.message;
+				mainView.getCommonDialogs().error(msg);
 			}
 		});
 	}

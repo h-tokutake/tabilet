@@ -61,10 +61,6 @@ var WaypointEditMain = (function(){
 				newTag = document.createElement('div');
 				newTag.setAttribute('class', 'waypoint_place_name');
 				newObj.find('a').eq(0).append(newTag);
-
-				newTag = document.createElement('div');
-				newTag.setAttribute('class', 'waypoint_place_name');
-				newObj.find('a').eq(0).append(newTag);
 				newObj.find('a').eq(0).append('&nbsp;到着：&nbsp;');
 
 				newTag = document.createElement('div');
@@ -86,6 +82,13 @@ var WaypointEditMain = (function(){
 
 				newTag = document.createElement('input');
 				newTag.setAttribute('type', 'hidden');
+				newTag.setAttribute('class', 'place_position');
+				newTag.setAttribute('name', 'place_position');
+				newTag.setAttribute('value', '');
+				newObj.find('a').eq(0).append(newTag);
+
+				newTag = document.createElement('input');
+				newTag.setAttribute('type', 'hidden');
 				newTag.setAttribute('class', 'place_siteurl');
 				newTag.setAttribute('name', 'place_siteurl');
 				newTag.setAttribute('value', '');
@@ -100,10 +103,10 @@ var WaypointEditMain = (function(){
 
 				newObj.find(".waypoint_edit").bind("tap", function(){
 					originalObj = $(this);
-					$("#waypoint_place_name_1").val(originalObj.find(".waypoint_place_name").eq(0).text());
-					$("#waypoint_place_name_2").val(originalObj.find(".waypoint_place_name").eq(0).text());
-					$("#waypoint_depdate").val(originalObj.find(".waypoint_depdate").eq(0).text());
-					$("#waypoint_deptime").val(originalObj.find(".waypoint_deptime").eq(0).text());
+					$("#waypoint_place_name_1").val($.trim(originalObj.find(".waypoint_place_name").eq(0).text()));
+					$("#waypoint_place_name_2").val($.trim(originalObj.find(".waypoint_place_name").eq(0).text()));
+					$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
+					$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
 					$("#place_position").val(originalObj.find(".place_position").eq(0).val());
 					$("#place_siteurl").val(originalObj.find(".place_siteurl").eq(0).val());
 					$("#place_description").val(originalObj.find(".place_description").eq(0).val());
@@ -121,9 +124,9 @@ var WaypointEditMain = (function(){
 				});
 				originalObj = newObj;
 			}
-			originalObj.find(".waypoint_place_name").eq(0).text($("#waypoint_place_name_2").val());
-			originalObj.find(".waypoint_depdate").eq(0).text($("#waypoint_depdate").val());
-			originalObj.find(".waypoint_deptime").eq(0).text($("#waypoint_deptime").val());
+			originalObj.find(".waypoint_place_name").eq(0).text($.trim($("#waypoint_place_name_2").val()));
+			originalObj.find(".waypoint_depdate").eq(0).text($.trim($("#waypoint_depdate").val()));
+			originalObj.find(".waypoint_deptime").eq(0).text($.trim($("#waypoint_deptime").val()));
 			originalObj.find(".place_position").eq(0).val($("#place_position").val());
 			originalObj.find(".place_siteurl").eq(0).val($("#place_siteurl").val());
 			originalObj.find(".place_description").eq(0).val($("#place_description").val());

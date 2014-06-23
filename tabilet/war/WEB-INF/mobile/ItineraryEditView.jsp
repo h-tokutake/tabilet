@@ -95,25 +95,15 @@
 		<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
 
 		<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
-			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
+			<c:forEach var="waypoint_place_name" items="${waypoint_place_name_list}" varStatus="status">
 				<li class="list_sortable"><a href="#" class="waypoint_edit" data-transition="slide">
-					<div class="waypoint_place_name">
-						<c:if test="${not empty place_name}"><c:out value="${place_name}" /></c:if>
-					</div>
+					<div class="waypoint_place_name"><c:if test="${not empty waypoint_place_name}"><c:out value="${waypoint_place_name}" /></c:if></div>
 					&nbsp;到着：&nbsp;
-					<div class="waypoint_arrdate">
-						<c:if test="${not empty place_arrdate_list}"><c:out value="${place_arrdate_list[status.index]}" /></c:if>
-					</div>
-					<div class="waypoint_arrtime">
-						<c:if test="${not empty place_arrtime_list}"><c:out value="${place_arrtime_list[status.index]}" /></c:if>
-					</div>
+					<div class="waypoint_arrdate"></div>
+					<div class="waypoint_arrtime"></div>
 					<br>&nbsp;出発：&nbsp;
-					<div class="waypoint_depdate">
-						<c:if test="${not empty place_depdate_list}"><c:out value="${place_depdate_list[status.index]}" /></c:if>
-					</div>
-					<div class="waypoint_deptime">
-						<c:if test="${not empty place_deptime_list}"><c:out value="${place_deptime_list[status.index]}" /></c:if>
-					</div>
+					<div class="waypoint_depdate"><c:if test="${not empty waypoint_depdate_list}"><c:out value="${waypoint_depdate_list[status.index]}" /></c:if></div>
+					<div class="waypoint_deptime"><c:if test="${not empty waypoint_deptime_list}"><c:out value="${waypoint_deptime_list[status.index]}" /></c:if></div>
 					<input type="hidden" class="place_position" name="place_position"
 						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>" />
 					<input type="hidden" class="place_siteurl" name="place_siteurl"

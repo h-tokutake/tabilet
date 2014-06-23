@@ -129,7 +129,7 @@ public class ItineraryDataHandler extends DataHandler {
 			if("itinerary_description".equals(entry.getKey())){
 				this.getData().setDescription(entry.getValue()[0]);
 			} else
-			if("place_name[]".equals(entry.getKey())){
+			if("waypoint_place_name[]".equals(entry.getKey())){
 				placeNameList = entry.getValue();
 			} else
 			if("place_position[]".equals(entry.getKey())){
@@ -141,10 +141,10 @@ public class ItineraryDataHandler extends DataHandler {
 			if("place_description[]".equals(entry.getKey())){
 				placeDescriptionList = entry.getValue();
 			} else
-			if("place_depdate[]".equals(entry.getKey())){
+			if("waypoint_depdate[]".equals(entry.getKey())){
 				placeDepDateList = entry.getValue();
 			} else
-			if("place_deptime[]".equals(entry.getKey())){
+			if("waypoint_deptime[]".equals(entry.getKey())){
 				placeDepTimeList = entry.getValue();
 			}
 		}
@@ -182,12 +182,12 @@ public class ItineraryDataHandler extends DataHandler {
 		session.setAttribute("itinerary_id"         , id         );
 		session.setAttribute("itinerary_summary"    , summary    );
 		session.setAttribute("itinerary_description", description);
-		session.setAttribute("place_name_list"      , placeNameList.toArray()    );
+		session.setAttribute("waypoint_place_name_list", placeNameList.toArray()    );
 		session.setAttribute("place_position_list"  , placePositionList.toArray());
 		session.setAttribute("place_siteurl_list"   , placeUrlList.toArray()     );
 		session.setAttribute("place_description_list", placeDescriptionList.toArray());
-		session.setAttribute("place_depdate_list"   , placeDepDateList.toArray()    );
-		session.setAttribute("place_deptime_list"   , placeDepTimeList.toArray()    );
+		session.setAttribute("waypoint_depdate_list", placeDepDateList.toArray()    );
+		session.setAttribute("waypoint_deptime_list", placeDepTimeList.toArray()    );
 	}
 
 	public final HttpServletResponse sendOne(HttpServletResponse resp) throws Exception { return resp; }
