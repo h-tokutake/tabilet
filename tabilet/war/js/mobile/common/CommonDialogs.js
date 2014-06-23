@@ -9,7 +9,7 @@ var CommonDialogs = (function() {
 	function CommonDialogs (){
 
 		$(".close_all_dialogs").bind("tap", function(){
-			$.mobile.changePage("#itinerary_edit_screen_summary");
+			$.mobile.changePage("#itinerary_edit_screen_main");
 		});
 
 		//----------------

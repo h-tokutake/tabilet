@@ -40,7 +40,16 @@ var ItineraryEditView = (function(){
 		});
 		$("#waypoint_listview").bind("sortupdate", function(){
 			$("#waypoint_listview").listview("refresh");
+			__updateDirections(true, false);
 		});
+		$("#itinerary_edit_itinerary_summary").bind("change", function(){
+			$("#itinerary_edit_itinerary_summary_2").val($.trim($("#itinerary_edit_itinerary_summary").val()));
+		});
+		$("#itinerary_edit_itinerary_summary_2").bind("change", function(){
+			$("#itinerary_edit_itinerary_summary").val($.trim($("#itinerary_edit_itinerary_summary_2").val()));
+		});
+		$("#itinerary_edit_itinerary_summary_2").val($.trim($("#itinerary_edit_itinerary_summary").val()));
+
 		waypointEditMain = new WaypointEditMain(this);
 	}
 

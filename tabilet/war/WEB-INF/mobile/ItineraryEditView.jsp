@@ -38,63 +38,38 @@
 </head>
 <body>
 
-<div data-role="page" id="itinerary_edit_screen_summary" data-theme="b">
-	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
-		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
-			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
-		<h1>Tabilet</h1>
-		<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
-		<a href="#itinerary_edit_menu_login" data-role="button" data-icon="user"
-			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
-
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#itinerary_edit_screen_summary" class="ui-btn-active">行程概要</a></li>
-				<li><a href="#itinerary_edit_screen_main">行程編集</a></li>
-				<li><a href="#itinerary_edit_screen_map">地図表示</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<form id="itinerary_edit_form" action="itinerary_edit" method="post">
-		<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
-		<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id"
-			value="<c:out value="${itinerary_id}" />" />
-			<input type="text" data-mini="true" id="itinerary_edit_itinerary_summary"
-				class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
-				value="<c:out value="${itinerary_summary}" />" />
-			<textarea data-mini="true" id="itinerary_edit_itinerary_description" class="description"
-				name="itinerary_description" rows="4" placeholder="行程の概要を入れてください"
-				><c:out value="${itinerary_description}" /></textarea>
-			</div>
-		</div>
-	</form>
-</div>
+<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />" />
+<input type="hidden" id="itinerary_edit_itinerary_operation" name="itinerary_operation" value="itinerary_save" />
+<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
 
 <div data-role="page" id="itinerary_edit_screen_main" data-theme="b">
 	<div data-role="header" data-position="inline" data-id="itinerary_edit_screen_header" data-position="fixed">
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
 		<h1>Tabilet</h1>
-		<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
 		<a href="#itinerary_edit_menu_login" data-role="button" data-icon="user"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
+		<input type="text" data-mini="true" id="itinerary_edit_itinerary_summary"
+			class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
+			value="<c:out value="${itinerary_summary}" />" />
 
-		<div data-role="navbar">
+		<div data-role="navbar" data-iconpos='top'>
 			<ul>
-				<li><a href="#itinerary_edit_screen_summary">行程概要</a></li>
-				<li><a href="#itinerary_edit_screen_main" class="ui-btn-active">行程編集</a></li>
-				<li><a href="#itinerary_edit_screen_map">地図表示</a></li>
+				<li><a href="#itinerary_edit_screen_main" data-icon='edit' class="ui-btn-active">行程編集</a></li>
+				<li><a href="#itinerary_edit_screen_map" data-icon='location'>地図表示</a></li>
 			</ul>
 		</div>
 	</div>
 
 	<!-- 行程入力欄を表示 -->
+	<div data-role="collapsible">
+		<h5>概要</h5>
+		<textarea data-mini="true" id="itinerary_edit_itinerary_description" class="description"
+		name="itinerary_description" rows="4" placeholder="行程の概要を入れてください"
+		><c:out value="${itinerary_description}" /></textarea>
+	</div>
 	<form id="itinerary_edit_form" action="itinerary_edit" method="post">
-		<input type="hidden" id="itinerary_edit_itinerary_operation" name="itinerary_operation" value="itinerary_save" />
-		<input type="hidden" id="itinerary_edit_itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
-
-		<ul data-role="listview" data-split-icon="delete" id="waypoint_listview">
+		<ul data-role="listview" data-split-icon="delete" data-icon='plus' id="waypoint_listview">
 			<c:forEach var="waypoint_place_name" items="${waypoint_place_name_list}" varStatus="status">
 				<li class="list_sortable"><a href="#" class="waypoint_edit" data-transition="slide">
 					<div class="waypoint_place_name"><c:if test="${not empty waypoint_place_name}"><c:out value="${waypoint_place_name}" /></c:if></div>
@@ -124,15 +99,16 @@
 		<a href="#itinerary_edit_main_menu" data-role="button" data-icon="bars"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
 		<h1>Tabilet</h1>
-		<input type="hidden" id="user_id" name="user_id" value="<c:out value="${nickname}" />"></input>
 		<a href="#itinerary_edit_menu_login" data-role="button" data-icon="user"
 			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
+		<input type="text" data-mini="true" id="itinerary_edit_itinerary_summary_2"
+			class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
+			value="<c:out value="${itinerary_summary}" />" />
 
-		<div data-role="navbar">
+		<div data-role="navbar" data-iconpos='top'>
 			<ul>
-				<li><a href="#itinerary_edit_screen_summary">行程概要</a></li>
-				<li><a href="#itinerary_edit_screen_main">行程編集</a></li>
-				<li><a href="#itinerary_edit_screen_map" class="ui-btn-active">地図表示</a></li>
+				<li><a href="#itinerary_edit_screen_main" data-icon='edit'>行程編集</a></li>
+				<li><a href="#itinerary_edit_screen_map" data-icon='location' class="ui-btn-active">地図表示</a></li>
 			</ul>
 		</div>
 	</div>
@@ -147,8 +123,8 @@
 		<input type="text" name="waypoint_place_name_1" id="waypoint_place_name_1" value="" />
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#waypoint_edit_screen_datetime" class="ui-btn-active">到着/出発日時設定</a></li>
-				<li><a href="#waypoint_edit_screen_location">位置設定</a></li>
+				<li><a href="#waypoint_edit_screen_datetime" data-icon='clock' class="ui-btn-active">到着/出発日時設定</a></li>
+				<li><a href="#waypoint_edit_screen_location" data-icon='location'>位置設定</a></li>
 			</ul>
 		</div>
 	</div>
@@ -176,8 +152,8 @@
 		<input type="text" name="waypoint_place_name_2" id="waypoint_place_name_2" value="" />
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#waypoint_edit_screen_datetime">到着/出発日時設定</a></li>
-				<li><a href="#waypoint_edit_screen_location" class="ui-btn-active">位置設定</a></li>
+				<li><a href="#waypoint_edit_screen_datetime" data-icon='clock'>到着/出発日時設定</a></li>
+				<li><a href="#waypoint_edit_screen_location" data-icon='location' class="ui-btn-active">位置設定</a></li>
 			</ul>
 		</div>
 	</div>
