@@ -42,11 +42,11 @@
 
 <!-- メニュー欄表示 -->
 <div id="itinerary_edit_menu_main">
-	<button id="itinerary_edit_menu_main_create_itinerary"          class="menu_main">新規作成</button>
-	<button id="itinerary_edit_menu_main_move_ItineraryListView"    class="menu_main">行程一覧</button>
-	<button id="itinerary_edit_menu_main_refresh_ItineraryEditView" class="menu_main">変更破棄</button>
-	<button id="itinerary_edit_menu_main_save_itinerary"            class="menu_main">行程保存</button>
-	<button id="itinerary_edit_menu_main_delete_itinerary"          class="menu_main">行程削除</button>
+	<button id="action_itinerary_clear"          class="menu_main">新規作成</button>
+	<button id="action_itinerary_list"    class="menu_main">行程一覧</button>
+	<button id="action_itinerary_refresh" class="menu_main">変更破棄</button>
+	<button id="action_itinerary_save"            class="menu_main">行程保存</button>
+	<button id="action_itinerary_delete"          class="menu_main">行程削除</button>
 <!--
 	<button id="itinerary_edit_menu_main_export_calendar"           class="menu_main">カレンダー</button>
 -->
@@ -63,33 +63,33 @@
 <!-- タブメニュー -->
 <div id="itinerary_edit_menu_tabs">
 	<ul>
-		<li><a href="#itinerary_edit_screen_main" id="itinerary_edit_menu_main_move_ItineraryEditView">行程編集</a></li>
-		<li><a href="#itinerary_edit_screen_map_canvas"  id="itinerary_edit_menu_main_show_map">地図表示</a></li>
+		<li><a href="#page_itinerary_edit" id="itinerary_edit_menu_main_move_ItineraryEditView">行程編集</a></li>
+		<li><a href="#itinerary_map_canvas"  id="itinerary_edit_menu_main_show_map">地図表示</a></li>
 	</ul>
 
 	<!-- 地図表示 -->
-	<div id="itinerary_edit_screen_map_canvas" class="map_canvas"></div>
+	<div id="itinerary_map_canvas" class="map_canvas"></div>
 
 	<!-- 行程入力欄を表示 -->
-	<div id="itinerary_edit_screen_main">
+	<div id="page_itinerary_edit">
 		<form id="itinerary_edit_form" action="itinerary_edit" method="post">
 			<input type="hidden" name="itinerary_operation" value="itinerary_save"></input>
 			<input type="hidden"
-				id="itinerary_edit_itinerary_id"
+				id="itinerary_id"
 				name="itinerary_id"
 				value="<c:out value="${itinerary_id}" />"
 			></input>
-			<label for="itinerary_edit_itinerary_summary" accesskey="s">コースタイトル : </label>
+			<label for="itinerary_summary" accesskey="s">コースタイトル : </label>
 			<input type="text"
-				id="itinerary_edit_itinerary_summary"
+				id="itinerary_summary"
 				class="summary"
 				name="itinerary_summary"
 				value="<c:out value="${itinerary_summary}" />"
 			></input>
 			<br />
-			<label for="itinerary_edit_itinerary_description" accesskey="d">行程概要 : </label>
+			<label for="itinerary_description" accesskey="d">行程概要 : </label>
 			<textarea
-				id="itinerary_edit_itinerary_description"
+				id="itinerary_description"
 				class="description"
 				name="itinerary_description"
 			><c:out value="${itinerary_description}" /></textarea>
@@ -99,17 +99,17 @@
 			<c:forEach var="place_name" items="${place_name_list}" varStatus="status">
 				<div class="waypoint movable"><table><tr><td>
 					<buttonset><button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button></buttonset><input type="hidden"
-						class="place_position"
-						name="place_position"
-						value="<c:if test="${not empty place_position_list}"><c:out value="${place_position_list[status.index]}" /></c:if>"
+						class="waypoint_location"
+						name="waypoint_location"
+						value="<c:if test="${not empty waypoint_location_array}"><c:out value="${waypoint_location_array[status.index]}" /></c:if>"
 					></input><input type="hidden"
-						class="place_siteurl"
-						name="place_siteurl"
-						value="<c:if test="${not empty place_siteurl_list}"><c:out value="${place_siteurl_list[status.index]}" /></c:if>"
+						class="waypoint_url"
+						name="waypoint_url"
+						value="<c:if test="${not empty waypoint_url_array}"><c:out value="${waypoint_url_array[status.index]}" /></c:if>"
 					><input type="hidden"
-						class="place_description"
-						name="place_description"
-						value="<c:if test="${not empty place_description_list}"><c:out value="${place_description_list[status.index]}" /></c:if>"
+						class="waypoint_description"
+						name="waypoint_description"
+						value="<c:if test="${not empty waypoint_description_array}"><c:out value="${waypoint_description_array[status.index]}" /></c:if>"
 					><input type="text"
 						class="place_name"
 						name="place_name"
@@ -133,13 +133,13 @@
 
 <!-- 経由地編集画面 -->
 <div id="itinerary_edit_screen_waypoint_edit">
-	<input type="text" id="waypoint_edit_place_name" name="waypoint_place_name" value=""></input><button id="waypoint_edit_button_place_list">保存地点一覧</button>
+	<input type="text" id="waypoint_edit_place_name" name="waypoint_name" value=""></input><button id="waypoint_edit_button_place_list">保存地点一覧</button>
 	<input type="hidden" id="waypoint_edit_place_position" name="waypoint_place_position" value=""></input>
 	<input type="hidden" id="waypoint_edit_place_siteurl" name="waypoint_place_siteurl" value=""></input>
 	<input type="hidden" id="waypoint_edit_place_description" name="waypoint_place_description" value=""></input>
 	<button id="waypoint_edit_button_search_position">位置検索</button>
 	<button id="waypoint_edit_button_place_url">ホームページを開く</button>
-	<div id="waypoint_edit_screen_map_canvas" class="map_canvas"></div>
+	<div id="place_map_canvas" class="map_canvas"></div>
 </div>
 
 <!-- 地点情報登録画面 -->
@@ -147,14 +147,14 @@
 	<table>
 		<tr><td><label for="place_edit_place_name">名称：</label><input type="text" id="place_edit_place_name" value=""></input>
 		<button id="place_edit_button_search_url">Googleで検索する</button>
-		<input type="hidden" id="place_edit_place_position" name="place_position" value=""></input></td></tr>
+		<input type="hidden" id="place_edit_place_position" name="waypoint_location" value=""></input></td></tr>
 		<tr><td><label for="place_edit_place_siteurl">URL：</label><input type="text" id="place_edit_place_siteurl" value=""></input></td></tr>
 		<tr><td><label for="place_edit_place_description">コメント：</label><textarea id="place_edit_place_description" class="description" value=""></textarea></td></tr>
 	</table>
 </div>
 
 <!-- ログイン画面 -->
-<ul id="itinerary_edit_menu_login">
+<ul id="dialog_login_menu">
 	<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />">ログアウト</a></li></c:if>
 	<li><a href="<c:out value="${Google}"     />">Googleでログイン</a></li>
 	<li><a href="<c:out value="${YahooJAPAN}" />">Yahoo!JAPANでログイン</a></li>

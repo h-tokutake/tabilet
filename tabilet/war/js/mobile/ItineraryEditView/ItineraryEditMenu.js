@@ -12,7 +12,7 @@ var ItineraryEditMenu = (function() {
 		mainView = view;
 
 		//新規作成
-		$("#itinerary_edit_menu_main_create_itinerary").bind("tap", function(){
+		$("#action_itinerary_clear").bind("tap", function(){
 			mainView.getCommonDialogs().confirm("編集中の行程データは破棄されます。続行しますか？", function(){
 				submitForm("itinerary_edit", "get");
 			});
@@ -20,7 +20,7 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//行程一覧
-		$("#itinerary_edit_menu_main_move_ItineraryListView").bind("tap", function(){
+		$("#action_itinerary_list").bind("tap", function(){
 			mainView.getCommonDialogs().confirm("編集中の行程データは破棄されます。続行しますか？", function(){
 				ajaxToGetItineraryList();
 			});
@@ -28,20 +28,20 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//変更破棄
-		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").bind("tap", function(){
+		$("#action_itinerary_refresh").bind("tap", function(){
 			mainView.getCommonDialogs().confirm("編集中の行程データは破棄されます。続行しますか？", function(){
-				if($("#itinerary_edit_itinerary_id").val() == "") {
+				if($("#itinerary_id").val() == "") {
 					submitForm("itinerary_edit", "get");
 				} else {
-					submitPostToItineraryEdit($("#itinerary_edit_itinerary_id").val(), "itinerary_edit");
+					submitPostToItineraryEdit($("#itinerary_id").val(), "itinerary_edit");
 				}
 			});
 			return false;
 		});
 
 		//行程保存
-		$("#itinerary_edit_menu_main_save_itinerary").bind("tap", function(){
-			if ($("#itinerary_edit_itinerary_summary").val() === "") {
+		$("#action_itinerary_save").bind("tap", function(){
+			if ($("#itinerary_summary").val() === "") {
 				mainView.getCommonDialogs().error('行程のタイトルが入力されていません。');
 				return false;
 			}
@@ -52,7 +52,7 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//行程削除
-		$("#itinerary_edit_menu_main_delete_itinerary").bind("tap", function(event) {
+		$("#action_itinerary_delete").bind("tap", function(event) {
 			mainView.getCommonDialogs().confirm("行程データを保存します。続行しますか？", function(){
 				ajaxToDeleteItineraryData();
 			});
@@ -83,12 +83,12 @@ var ItineraryEditMenu = (function() {
 	}
 
 	function openItineraryListMenu (data) {
-		$("#itinerary_list_menu").empty();
+		$("#listview_itinerary_list").empty();
 		if(data == null) return false;
 		for(var i=0; i<data.idList.length; i++) {
 			var list_item_tag = '<li><a href="#" name="' + data.idList[i] + '">'
 				+ data.depDateList[i] + ' ' + data.depTimeList[i] + ' @ ' + data.summaryList[i] + '</a></li>';
-			$("#itinerary_list_menu")
+			$("#listview_itinerary_list")
 				.append(list_item_tag)
 				.find("li").eq(i).bind("tap", function(e) {
 					var selected_itinerary_id = $(e.target).find("a").context.name;
@@ -96,12 +96,12 @@ var ItineraryEditMenu = (function() {
 					return false;
 				});
 		}
-		$("#itinerary_list_menu").append('<li><a href="#" class="close_all_dialogs">閉じる</a></li>');
+		$("#listview_itinerary_list").append('<li><a href="#" class="close_all_dialogs">閉じる</a></li>');
 		$(".close_all_dialogs").bind("tap", function(){
-			$.mobile.changePage("#itinerary_edit_screen_main");
+			$.mobile.changePage("#page_itinerary_edit");
 		});
-		$.mobile.changePage("#itinerary_list_dialog");
-		$("#itinerary_list_menu").listview("refresh");
+		$.mobile.changePage("#dialog_itinerary_list");
+		$("#listview_itinerary_list").listview("refresh");
 	}
 
 	function submitPostToItineraryEdit (itinerary_id, itinerary_operation) {
@@ -121,24 +121,24 @@ var ItineraryEditMenu = (function() {
 		var placeDepDateList = [];
 		var placeDepTimeList = [];
 
-		$(".waypoint_edit").each(function(){
-			placeNameList.push($.trim($(this).find(".waypoint_place_name").text()));
-			placePositionList.push($(this).find(".place_position").val());
-			placeUrlList.push($(this).find(".place_siteurl").val());
-			placeDescriptionList.push($(this).find(".place_description").val());
+		$(".action_waypoint_edit").each(function(){
+			placeNameList.push($.trim($(this).find(".waypoint_name").text()));
+			placePositionList.push($(this).find(".waypoint_location").val());
+			placeUrlList.push($(this).find(".waypoint_url").val());
+			placeDescriptionList.push($(this).find(".waypoint_description").val());
 			placeDepDateList.push($.trim($(this).find(".waypoint_depdate").text()));
 			placeDepTimeList.push($.trim($(this).find(".waypoint_deptime").text()));
 		});
 
 		var json = {
 			itinerary_operation   : itinerary_operation,
-			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
-			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
-			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
-			waypoint_place_name   : placeNameList,
-			place_position        : placePositionList,
-			place_siteurl         : placeUrlList,
-			place_description     : placeDescriptionList,
+			itinerary_id          : $("#itinerary_id").val(),
+			itinerary_summary     : $("#itinerary_summary").val(),
+			itinerary_description : $("#itinerary_description").val(),
+			waypoint_name   : placeNameList,
+			waypoint_location        : placePositionList,
+			waypoint_url         : placeUrlList,
+			waypoint_description     : placeDescriptionList,
 			waypoint_depdate      : placeDepDateList,
 			waypoint_deptime      : placeDepTimeList
 		};
@@ -159,7 +159,7 @@ var ItineraryEditMenu = (function() {
 				if(result.returnCode == "0") {
 					mainView.getCommonDialogs().info('行程 "' + itinerary_data_json.itinerary_summary + '" を保存しました。', function() {
 						mainView.setItineraryId(result.strInfo);
-						$.mobile.changePage("#itinerary_edit_screen_main");
+						$.mobile.changePage("#page_itinerary_edit");
 //						mainView.setDirtyFlag(false);
 //						__disableSaveMenu();
 					});

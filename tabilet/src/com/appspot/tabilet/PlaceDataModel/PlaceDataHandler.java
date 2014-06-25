@@ -66,13 +66,13 @@ public class PlaceDataHandler extends DataHandler {
 			if ("place_name".equals(entry.getKey())){
 				((PlaceData) this.getData()).setPlaceName(entry.getValue()[0]);
 			} else
-			if ("place_position".equals(entry.getKey())){
+			if ("waypoint_location".equals(entry.getKey())){
 				((PlaceData) this.getData()).setPlacePosition(entry.getValue()[0]);
 			} else
-			if ("place_siteurl".equals(entry.getKey())) {
+			if ("waypoint_url".equals(entry.getKey())) {
 				((PlaceData) this.getData()).setSiteUrl(entry.getValue()[0]);
 			} else
-			if ("place_description".equals(entry.getKey())) {
+			if ("waypoint_description".equals(entry.getKey())) {
 				((PlaceData) this.getData()).setDescription(entry.getValue()[0]);
 			}
 		}

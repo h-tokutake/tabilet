@@ -9,7 +9,7 @@ var CommonDialogs = (function() {
 	function CommonDialogs (){
 
 		$(".close_all_dialogs").bind("tap", function(){
-			$.mobile.changePage("#itinerary_edit_screen_main");
+			$.mobile.changePage("#page_itinerary_edit");
 		});
 
 		//----------------
@@ -18,38 +18,38 @@ var CommonDialogs = (function() {
 
 		//確認用ダイアログ
 		this.__confirm = function (message, callback) {
-			$("#confirm_dialog_message").empty().append(message);
-			$("#confirm_dialog_ok").one("tap", function(){
+			$("#message_confirm_dialog").empty().append(message);
+			$("#action_confirm_ok").one("tap", function(){
 				callback();
 			});
-			$.mobile.changePage("#confirm_dialog");
+			$.mobile.changePage("#dialog_common_confirm");
 			return;
 		}
 
 		//情報表示用ダイアログ
 		this.__info = function (message, callback) {
-			$("#info_dialog_message").empty().append(message);
-			$("#info_dialog_ok").one("tap", function(){
+			$("#message_info_dialog").empty().append(message);
+			$("#action_info_ok").one("tap", function(){
 				callback();
 			});
-			$.mobile.changePage("#info_dialog");
+			$.mobile.changePage("#dialog_common_info");
 			return;
 		}
 
 		//エラー表示用ダイアログ
 		this.__error = function (message) {
-			$("#error_dialog_message").empty().append(message);
-			$("#error_dialog_ok").one("tap", function(){
-				$.mobile.changePage("#itinerary_edit_screen_main");
+			$("#message_error_dialog").empty().append(message);
+			$("#action_error_ok").one("tap", function(){
+				$.mobile.changePage("#page_itinerary_edit");
 			});
-			$.mobile.changePage("#error_dialog");
+			$.mobile.changePage("#dialog_common_error");
 			return;
 		}
 
 		//待ち時間用ダイアログ
 		this.__wait = function (message) {
-			$("#wait_dialog_message").empty().append(message);
-			$.mobile.changePage("#wait_dialog");
+			$("#message_wait_dialog").empty().append(message);
+			$.mobile.changePage("#dialog_common_wait");
 			return;
 		}
 	}

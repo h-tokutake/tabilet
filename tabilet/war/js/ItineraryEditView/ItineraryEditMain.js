@@ -19,12 +19,12 @@ var ItineraryEditView = (function(){
 	function ItineraryEditView() {
 		dialog = new CommonDialogs();
 		mainMenu = new ItineraryEditMenu(this);
-		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
-		$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth - 40);
-		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
+		$("#itinerary_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
+		$("#itinerary_map_canvas").css("width", window.innerWidth - 40);
+		mapCanvas = new MapCanvas("itinerary_map_canvas", this);
 		$( window ).resize(function(){
-			$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
-			$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth - 40);
+			$("#itinerary_map_canvas").css("height", window.innerHeight - $("#itinerary_edit_menu_main").get(0).offsetHeight * 2 - 80);
+			$("#itinerary_map_canvas").css("width", window.innerWidth - 40);
 			mapCanvas.refresh();
 		});
 		setEvents();
@@ -81,13 +81,13 @@ var ItineraryEditView = (function(){
 				__updateTimeline(true, false);
 			}
 		});
-		$("#itinerary_edit_itinerary_summary").change(function(){
+		$("#itinerary_summary").change(function(){
 			dirty_flag = true;
-			if($("#itinerary_edit_itinerary_summary").val() != '') {
+			if($("#itinerary_summary").val() != '') {
 				mainMenu.enableSaveMenu();
 			}
 		});
-		$("#itinerary_edit_itinerary_description").change(function(){
+		$("#itinerary_description").change(function(){
 			dirty_flag = true;
 			mainMenu.enableSaveMenu();
 		});
@@ -178,17 +178,17 @@ var ItineraryEditView = (function(){
 			var place_name     = waypoint_obj.eq(i).find(".place_name").val();
 			if (place_name != "" && place_name != undefined) {
 				place_names.push(place_name);
-				var place_position = waypoint_obj.eq(i).find(".place_position").val();
-				var latlng = stringToLatLng(place_position);
+				var waypoint_location = waypoint_obj.eq(i).find(".waypoint_location").val();
+				var latlng = stringToLatLng(waypoint_location);
 				if(latlng == null){
 					waypoints.push({location: place_name});
 				} else {
 					waypoints.push({location: latlng});
 				}
-				var place_url = waypoint_obj.eq(i).find(".place_siteurl").val();
+				var place_url = waypoint_obj.eq(i).find(".waypoint_url").val();
 				place_urls.push(place_url);
-				var place_description = waypoint_obj.eq(i).find(".place_description").val();
-				place_descriptions.push(place_description);
+				var waypoint_description = waypoint_obj.eq(i).find(".waypoint_description").val();
+				place_descriptions.push(waypoint_description);
 				place_deptimes[i] = Date.parse(waypoint_obj.eq(i).find(".place_deptime").val());
 				if (place_deptimes[i] == '' || isNaN(place_deptimes[i]) || place_deptimes[i] === null) {
 					if (i == 0) {
@@ -250,7 +250,7 @@ var ItineraryEditView = (function(){
 	}
 
 	function __setItineraryId(itineraryId) {
-		$("#itinerary_edit_itinerary_id").val(itineraryId);
+		$("#itinerary_id").val(itineraryId);
 	}
 
 	function updateArrDepDateTime(force_update){
@@ -277,9 +277,9 @@ var ItineraryEditView = (function(){
 		target.append('<table><tr><td></td><td class="waypoint_column_datetime"></td><td></td><td class="waypoint_column_datetime"></td></tr></table>');
 		target.find("td").eq(0)
 			.append('<buttonset><button class="button_delete_place">削除</button><button class="button_insert_place">挿入</button></buttonset>')
-			.append('<input type="hidden" class="place_position" name="place_position" value=""></input>')
-			.append('<input type="hidden" class="place_siteurl" name="place_siteurl" value=""></input>')
-			.append('<input type="hidden" class="place_description" name="place_description" value=""></input>')
+			.append('<input type="hidden" class="waypoint_location" name="waypoint_location" value=""></input>')
+			.append('<input type="hidden" class="waypoint_url" name="waypoint_url" value=""></input>')
+			.append('<input type="hidden" class="waypoint_description" name="waypoint_description" value=""></input>')
 			.append('<input type="text" class="place_name" name="place_name" value=""></input>');
 		target.find("td").eq(1)
 			.append('<input type="text" class="place_arrtime" value="" readonly="readonly"></input>');

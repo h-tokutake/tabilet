@@ -12,70 +12,70 @@ var WaypointEditMain = (function(){
 
 	var WaypointEditMain = function(view){
 		mainView = view;
-		smallMapCanvas = new MapCanvas("waypoint_edit_screen_map_canvas", mainView);
+		smallMapCanvas = new MapCanvas("place_map_canvas", mainView);
 
 		smallMapCanvas.setClickMapEvent(function(latlng_str) {
-			$("#place_position").val(latlng_str);
-			if($("#waypoint_place_name_2").val() == "") {
-				$("#waypoint_place_name_1").val(latlng_str);
-				$("#waypoint_place_name_2").val(latlng_str);
+			$("#waypoint_location").val(latlng_str);
+			if($("#place_name_2").val() == "") {
+				$("#place_name_1").val(latlng_str);
+				$("#place_name_2").val(latlng_str);
 			}
 			position_dirty_flag = true;
 		});
-		$(".waypoint_edit").bind("tap", function(){
+		$(".action_waypoint_edit").bind("tap", function(){
 			originalObj = $(this);
-			$("#waypoint_place_name_1").val($.trim(originalObj.find(".waypoint_place_name").eq(0).text()));
-			$("#waypoint_place_name_2").val($.trim(originalObj.find(".waypoint_place_name").eq(0).text()));
+			$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+			$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
 			$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
 			$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
-			$("#place_position").val(originalObj.find(".place_position").eq(0).val());
-			$("#place_siteurl").val(originalObj.find(".place_siteurl").eq(0).val());
-			$("#place_description").val(originalObj.find(".place_description").eq(0).val());
-			$(".waypoint_edit_set").attr("name", "waypoint_operation_edit");
-			$.mobile.changePage("#waypoint_edit_screen_datetime");
+			$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
+			$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
+			$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
+			$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
+			$.mobile.changePage("#header_place_edit");
 		});
-		$(".waypoint_delete").bind("tap", function(){
+		$(".action_waypoint_delete").bind("tap", function(){
 			var that = $(this);
-			mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_place_name").eq(0).text() + "を旅程から削除します。", function(){
+			mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
 				that.closest("li").remove();
-				$("#waypoint_listview").listview('refresh');
-				$("#waypoint_listview").sortable('refresh');
+				$("#listview_itinerary_edit").listview('refresh');
+				$("#listview_itinerary_edit").sortable('refresh');
 				mainView.updateDirections(true, function() {
-					$.mobile.changePage("#itinerary_edit_screen_main");
+					$.mobile.changePage("#page_itinerary_edit");
 				});
 			});
 		});
-		$(".waypoint_create").bind("tap", function(){
+		$(".action_waypoint_create").bind("tap", function(){
 			originalObj = $(this);
-			$("#waypoint_place_name_1").val("");
-			$("#waypoint_place_name_2").val("");
-			$(".waypoint_edit_set").attr("name", "waypoint_operation_create");
+			$("#place_name_1").val("");
+			$("#place_name_2").val("");
+			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
 			mainView.updateDirections(true, function() {
-				$.mobile.changePage("#waypoint_edit_screen_datetime");
+				$.mobile.changePage("#header_place_edit");
 			});
 		});
-		$(".waypoint_edit_cancel").bind("tap", function(){
-			$.mobile.changePage("#itinerary_edit_screen_main");
+		$(".action_waypoint_cancel").bind("tap", function(){
+			$.mobile.changePage("#page_itinerary_edit");
 		});
-		$(".waypoint_edit_set").bind("tap", function(){
+		$(".action_waypoint_set").bind("tap", function(){
 			if ($(this).attr("name") == "waypoint_operation_create"){
 				originalObj.closest("li").before('<li class="list_sortable"></li>');
 				var newObj = originalObj.closest("li").prev("li");
 				var newTag = document.createElement('a');
 				newTag.setAttribute('href', '#');
-				newTag.setAttribute('class', 'waypoint_edit');
+				newTag.setAttribute('class', 'action_waypoint_edit');
 				newTag.setAttribute('data-transition', 'slide');
 				newObj.append(newTag);
 
 				newTag = document.createElement('a');
 				newTag.setAttribute('href', '#');
-				newTag.setAttribute('class', 'waypoint_delete');
+				newTag.setAttribute('class', 'action_waypoint_delete');
 				newTag.setAttribute('data-transition', 'slide');
 				newTag.textContent = '削除';
 				newObj.append(newTag);
 
 				newTag = document.createElement('div');
-				newTag.setAttribute('class', 'waypoint_place_name');
+				newTag.setAttribute('class', 'waypoint_name');
 				newObj.find('a').eq(0).append(newTag);
 				newObj.find('a').eq(0).append('&nbsp;到着：&nbsp;');
 
@@ -98,92 +98,92 @@ var WaypointEditMain = (function(){
 
 				newTag = document.createElement('input');
 				newTag.setAttribute('type', 'hidden');
-				newTag.setAttribute('class', 'place_position');
-				newTag.setAttribute('name', 'place_position');
+				newTag.setAttribute('class', 'waypoint_location');
+				newTag.setAttribute('name', 'waypoint_location');
 				newTag.setAttribute('value', '');
 				newObj.find('a').eq(0).append(newTag);
 
 				newTag = document.createElement('input');
 				newTag.setAttribute('type', 'hidden');
-				newTag.setAttribute('class', 'place_siteurl');
-				newTag.setAttribute('name', 'place_siteurl');
+				newTag.setAttribute('class', 'waypoint_url');
+				newTag.setAttribute('name', 'waypoint_url');
 				newTag.setAttribute('value', '');
 				newObj.find('a').eq(0).append(newTag);
 
 				newTag = document.createElement('input');
 				newTag.setAttribute('type', 'hidden');
-				newTag.setAttribute('class', 'place_description');
-				newTag.setAttribute('name', 'place_description');
+				newTag.setAttribute('class', 'waypoint_description');
+				newTag.setAttribute('name', 'waypoint_description');
 				newTag.setAttribute('value', '');
 				newObj.find('a').eq(0).append(newTag);
 
-				newObj.find(".waypoint_edit").bind("tap", function(){
+				newObj.find(".action_waypoint_edit").bind("tap", function(){
 					originalObj = $(this);
-					$("#waypoint_place_name_1").val($.trim(originalObj.find(".waypoint_place_name").eq(0).text()));
-					$("#waypoint_place_name_2").val($.trim(originalObj.find(".waypoint_place_name").eq(0).text()));
+					$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+					$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
 					$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
 					$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
-					$("#place_position").val(originalObj.find(".place_position").eq(0).val());
-					$("#place_siteurl").val(originalObj.find(".place_siteurl").eq(0).val());
-					$("#place_description").val(originalObj.find(".place_description").eq(0).val());
-					$(".waypoint_edit_set").attr("name", "waypoint_operation_edit");
-					$.mobile.changePage("#waypoint_edit_screen_datetime");
+					$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
+					$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
+					$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
+					$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
+					$.mobile.changePage("#header_place_edit");
 				});
-				newObj.find(".waypoint_delete").bind("tap", function(){
+				newObj.find(".action_waypoint_delete").bind("tap", function(){
 					var that = $(this);
-					mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_place_name").eq(0).text() + "を旅程から削除します。", function(){
+					mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
 						that.closest("li").remove();
-						$("#waypoint_listview").listview('refresh');
-						$("#waypoint_listview").sortable('refresh');
+						$("#listview_itinerary_edit").listview('refresh');
+						$("#listview_itinerary_edit").sortable('refresh');
 						mainView.updateDirections(true, function() {
-							$.mobile.changePage("#itinerary_edit_screen_main");
+							$.mobile.changePage("#page_itinerary_edit");
 						});
 					});
 				});
 				originalObj = newObj;
 			}
-			originalObj.find(".waypoint_place_name").eq(0).text($.trim($("#waypoint_place_name_2").val()));
+			originalObj.find(".waypoint_name").eq(0).text($.trim($("#place_name_2").val()));
 			originalObj.find(".waypoint_depdate").eq(0).text($.trim($("#waypoint_depdate").val()));
 			originalObj.find(".waypoint_deptime").eq(0).text($.trim($("#waypoint_deptime").val()));
-			originalObj.find(".place_position").eq(0).val($("#place_position").val());
-			originalObj.find(".place_siteurl").eq(0).val($("#place_siteurl").val());
-			originalObj.find(".place_description").eq(0).val($("#place_description").val());
-			$("#waypoint_listview").listview('refresh');
-			$("#waypoint_listview").sortable('refresh');
+			originalObj.find(".waypoint_location").eq(0).val($("#waypoint_location").val());
+			originalObj.find(".waypoint_url").eq(0).val($("#waypoint_url").val());
+			originalObj.find(".waypoint_description").eq(0).val($("#waypoint_description").val());
+			$("#listview_itinerary_edit").listview('refresh');
+			$("#listview_itinerary_edit").sortable('refresh');
 			mainView.updateDirections(true, function() {
-				$.mobile.changePage("#itinerary_edit_screen_main");
+				$.mobile.changePage("#page_itinerary_edit");
 			});
 		});
-		$("#waypoint_place_name_1").bind("change", function(){
-			$("#waypoint_place_name_2").val($("#waypoint_place_name_1").val());
-			updateMap("#waypoint_place_name_2", "");
+		$("#place_name_1").bind("change", function(){
+			$("#place_name_2").val($("#place_name_1").val());
+			updateMap("#place_name_2", "");
 		});
-		$("#waypoint_place_name_2").bind("change", function(){
-			$("#waypoint_place_name_1").val($("#waypoint_place_name_2").val());
-			updateMap("#waypoint_place_name_1", "");
+		$("#place_name_2").bind("change", function(){
+			$("#place_name_1").val($("#place_name_2").val());
+			updateMap("#place_name_1", "");
 		});
-		$("#waypoint_edit_screen_location").bind("pageshow", function(){
+		$("#page_place_map").bind("pageshow", function(){
 			resizeMap();
-			updateMap("#waypoint_place_name_1", $("#place_position").val());
+			updateMap("#place_name_1", $("#waypoint_location").val());
 		});
 		$(window).resize(function(){
 			resizeMap();
-			updateMap("#waypoint_place_name_1", $("#place_position").val());
+			updateMap("#place_name_1", $("#waypoint_location").val());
 		});
 	}
 
 	// public methods
 
 	function resizeMap () {
-		var header_height = $("#waypoint_edit_screen_header").outerHeight();
-		var footer_height = $("#waypoint_edit_screen_footer").outerHeight();
-		$("#waypoint_edit_screen_map_canvas").css("height", window.innerHeight - header_height - footer_height);
-		$("#waypoint_edit_screen_map_canvas").css("width", window.innerWidth);
+		var header_height = $("#header_place_edit").outerHeight();
+		var footer_height = $("#footer_place_edit").outerHeight();
+		$("#place_map_canvas").css("height", window.innerHeight - header_height - footer_height);
+		$("#place_map_canvas").css("width", window.innerWidth);
 	}
 
 	function updateMap (place_name, latlng) {
 		smallMapCanvas.setLocation($(place_name).val(), latlng, function(latlng_str){
-			$("#place_position").val(latlng_str);
+			$("#waypoint_location").val(latlng_str);
 			smallMapCanvas.refresh();
 		});
 	}

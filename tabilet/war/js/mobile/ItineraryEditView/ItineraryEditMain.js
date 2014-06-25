@@ -19,36 +19,36 @@ var ItineraryEditView = (function(){
 	function ItineraryEditView() {
 		dialog = new CommonDialogs();
 		mainMenu = new ItineraryEditMenu(this);
-		mapCanvas = new MapCanvas("itinerary_edit_screen_map_canvas", this);
+		mapCanvas = new MapCanvas("itinerary_map_canvas", this);
 		__updateDirections(true, false, function() {
 			resizeMap();
 		});
 		$( window ).resize(function(){
 			resizeMap();
 		});
-		$("#itinerary_edit_screen_map").bind("pageshow", function(){
+		$("#page_itinerary_map").bind("pageshow", function(){
 			__updateDirections(true, false, function() {
 				resizeMap();
 			});
 		});
-		$("#waypoint_listview").sortable({
+		$("#listview_itinerary_edit").sortable({
 			items : 'li.list_sortable',
 			axis : 'y',
 			disabled : false,
 			revert : true,
 			tolerance : 'pointer'
 		});
-		$("#waypoint_listview").bind("sortupdate", function(){
-			$("#waypoint_listview").listview("refresh");
+		$("#listview_itinerary_edit").bind("sortupdate", function(){
+			$("#listview_itinerary_edit").listview("refresh");
 			__updateDirections(true, false);
 		});
-		$("#itinerary_edit_itinerary_summary").bind("change", function(){
-			$("#itinerary_edit_itinerary_summary_2").val($.trim($("#itinerary_edit_itinerary_summary").val()));
+		$("#itinerary_summary").bind("change", function(){
+			$("#itinerary_summary_2").val($.trim($("#itinerary_summary").val()));
 		});
-		$("#itinerary_edit_itinerary_summary_2").bind("change", function(){
-			$("#itinerary_edit_itinerary_summary").val($.trim($("#itinerary_edit_itinerary_summary_2").val()));
+		$("#itinerary_summary_2").bind("change", function(){
+			$("#itinerary_summary").val($.trim($("#itinerary_summary_2").val()));
 		});
-		$("#itinerary_edit_itinerary_summary_2").val($.trim($("#itinerary_edit_itinerary_summary").val()));
+		$("#itinerary_summary_2").val($.trim($("#itinerary_summary").val()));
 
 		waypointEditMain = new WaypointEditMain(this);
 	}
@@ -57,9 +57,9 @@ var ItineraryEditView = (function(){
 	//  MapCanvas interfaces
 	//------------------------
 	function resizeMap () {
-		var header_height = $("#itinerary_edit_screen_header").outerHeight();
-		$("#itinerary_edit_screen_map_canvas").css("height", window.innerHeight - header_height);
-		$("#itinerary_edit_screen_map_canvas").css("width", window.innerWidth);
+		var header_height = $("#header_itinerary_edit").outerHeight();
+		$("#itinerary_map_canvas").css("height", window.innerHeight - header_height);
+		$("#itinerary_map_canvas").css("width", window.innerWidth);
 		mapCanvas.refresh();
 	}
 
@@ -70,22 +70,22 @@ var ItineraryEditView = (function(){
 		var place_deptimes = [];
 		var waypoints = [];
 		var dwell_times = [];
-		var waypoint_obj = $(".waypoint_edit")
+		var waypoint_obj = $(".action_waypoint_edit")
 
 		for(var i=0; i<waypoint_obj.length; i++) {
-			var place_name     = $.trim(waypoint_obj.eq(i).find(".waypoint_place_name").text());
+			var place_name     = $.trim(waypoint_obj.eq(i).find(".waypoint_name").text());
 			if (place_name != "" && place_name != undefined) {
 				place_names.push(place_name);
-				var place_position = waypoint_obj.eq(i).find(".place_position").val();
+				var place_position = waypoint_obj.eq(i).find(".waypoint_location").val();
 				var latlng = stringToLatLng(place_position);
 				if(latlng == null){
 					waypoints.push({location: place_name});
 				} else {
 					waypoints.push({location: latlng});
 				}
-				var place_url = waypoint_obj.eq(i).find(".place_siteurl").val();
+				var place_url = waypoint_obj.eq(i).find(".waypoint_url").val();
 				place_urls.push(place_url);
-				var place_description = waypoint_obj.eq(i).find(".place_description").val();
+				var place_description = waypoint_obj.eq(i).find(".waypoint_description").val();
 				place_descriptions.push(place_description);
 				var date_time = $.trim(waypoint_obj.eq(i).find(".waypoint_depdate").text()) + 'T' + $.trim(waypoint_obj.eq(i).find(".waypoint_deptime").text());
 				place_deptimes[i] = Date.parse(date_time);
@@ -118,7 +118,7 @@ var ItineraryEditView = (function(){
 
 	// private methods
 	function __updateArrDepDateTime(force_update){
-		var waypoint_obj = $(".waypoint_edit");
+		var waypoint_obj = $(".action_waypoint_edit");
 		var arrDateTime = mapCanvas.getArrDateTimeString();
 		var depDateTime = mapCanvas.getDepDateTimeString();
 
@@ -143,7 +143,7 @@ var ItineraryEditView = (function(){
 	}
 
 	function __setItineraryId(itineraryId) {
-		$("#itinerary_edit_itinerary_id").val(itineraryId);
+		$("#itinerary_id").val(itineraryId);
 	}
 
 	ItineraryEditView.prototype = {

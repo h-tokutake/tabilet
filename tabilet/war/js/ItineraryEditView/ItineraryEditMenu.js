@@ -22,69 +22,69 @@ var ItineraryEditMenu = (function() {
 			icons : { primary : "ui-icon-person" },
 			text : true
 		}).click(function(){
-			$("#itinerary_edit_menu_login").show().position({
+			$("#dialog_login_menu").show().position({
 				my: "left top",
 				at: "left bottom",
 				of: "#itinerary_edit_menu_main_login"
 			});
 			$( document ).click();
 			$( document ).one( "click", function() {
-				$("#itinerary_edit_menu_login").hide();
+				$("#dialog_login_menu").hide();
 			});
 			return false;
 		});
-		$("#itinerary_edit_menu_main_create_itinerary").button({
+		$("#action_itinerary_clear").button({
 			icons : { primary : "ui-icon-document" },
 			text : true
 		}).click(function(){
-			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" の変更が破棄されます。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_summary").val() + '" の変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
 				submitForm("itinerary_edit", "get");
 			});
 			return false;
 		});
-		$("#itinerary_edit_menu_main_move_ItineraryListView").button({
+		$("#action_itinerary_list").button({
 			icons : { primary : "ui-icon-folder-open" },
 			text : true
 		}).click(function(){
 			$( document ).click();
-			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" の変更が破棄されます。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_summary").val() + '" の変更が破棄されます。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, ajaxToGetItineraryList);
 			return false;
 		});
-		$("#itinerary_edit_menu_main_save_itinerary").button({
+		$("#action_itinerary_save").button({
 			icons : { primary : "ui-icon-disk" },
 			text : true
 		}).click(function(){
-			if ($("#itinerary_edit_itinerary_summary").val() === "") {
-				mainView.getCommonDialog().error($("#itinerary_edit_itinerary_summary").text() + 'が入力されていません。');
+			if ($("#itinerary_summary").val() === "") {
+				mainView.getCommonDialog().error($("#itinerary_summary").text() + 'が入力されていません。');
 				return false;
 			}
-			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_summary").val() + '" を保存します。よろしいですか？';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToSaveItineraryData();
 			});
 			return false;
 		});
-		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button({
+		$("#action_itinerary_refresh").button({
 			icons : { primary : "ui-icon-refresh" },
 			text : true
 		}).click(function(){
-			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_summary").val() + '" を保存します。よろしいですか？';
 			mainView.getCommonDialog().confirm(mainView.getDirtyFlag(), msg, function(){
-				if($("#itinerary_edit_itinerary_id").val() == "") {
+				if($("#itinerary_id").val() == "") {
 					submitForm("itinerary_edit", "get");
 				} else {
-					submitPostToItineraryEdit($("#itinerary_edit_itinerary_id").val(), "itinerary_edit");
+					submitPostToItineraryEdit($("#itinerary_id").val(), "itinerary_edit");
 				}
 			});
 			return false;
 		});
-		$("#itinerary_edit_menu_main_delete_itinerary").button({
+		$("#action_itinerary_delete").button({
 			icons : { primary : "ui-icon-trash" },
 			text : true
 		}).click(function(event) {
-			var msg = '行程 "' + $("#itinerary_edit_itinerary_summary").val() + '" を保存します。よろしいですか？';
+			var msg = '行程 "' + $("#itinerary_summary").val() + '" を保存します。よろしいですか？';
 			mainView.getCommonDialog().confirm(true, msg, function(){
 				ajaxToDeleteItineraryData();
 			});
@@ -100,18 +100,18 @@ var ItineraryEditMenu = (function() {
 		});
 		$("#itinerary_edit_menu_tabs").tabs();
 
-		$("#itinerary_edit_menu_login").menu().hide();
+		$("#dialog_login_menu").menu().hide();
 		$(document.body).append($(document.createElement("ul")).attr("id", "place_list_menu"));
 		$("#place_list_menu").menu().hide();
 
-		$("#itinerary_edit_menu_main_save_itinerary").button("disable");
-		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button("disable");
-		if($("#itinerary_edit_itinerary_id").val() == "") $("#itinerary_edit_menu_main_delete_itinerary").button("disable");
+		$("#action_itinerary_save").button("disable");
+		$("#action_itinerary_refresh").button("disable");
+		if($("#itinerary_id").val() == "") $("#action_itinerary_delete").button("disable");
 
-		$(document.body).append($(document.createElement("ul")).attr("id", "itinerary_list_menu"));
-		$("#itinerary_list_menu").menu().hide();
-		$("#itinerary_list_menu").html("");
-		$("#itinerary_list_menu").append('<li>行程一覧を読み込んでいます・・・</li>');
+		$(document.body).append($(document.createElement("ul")).attr("id", "listview_itinerary_list"));
+		$("#listview_itinerary_list").menu().hide();
+		$("#listview_itinerary_list").html("");
+		$("#listview_itinerary_list").append('<li>行程一覧を読み込んでいます・・・</li>');
 
 		$("#title_logo").click(function(){
 			window.open("http://www.tabilet.net/", "_top");
@@ -125,8 +125,8 @@ var ItineraryEditMenu = (function() {
 
 	ItineraryEditMenu.prototype = {
 		enableSaveMenu : function () {
-			$("#itinerary_edit_menu_main_save_itinerary").button("enable");
-			$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button("enable");
+			$("#action_itinerary_save").button("enable");
+			$("#action_itinerary_refresh").button("enable");
 			__checkLoggedIn();
 		},
 		disableSaveMenu : function () {
@@ -154,10 +154,10 @@ var ItineraryEditMenu = (function() {
 	}
 
 	function ajaxToGetItineraryList () {
-		var menu = $("#itinerary_list_menu").show().position({
+		var menu = $("#listview_itinerary_list").show().position({
 			my: "left top",
 			at: "left bottom",
-			of: "#itinerary_edit_menu_main_move_ItineraryListView"
+			of: "#action_itinerary_list"
 		});
 		$.ajax({
 			dataType: "json",
@@ -183,21 +183,21 @@ var ItineraryEditMenu = (function() {
 
 		$(".waypoint").each(function(){
 			placeNameList.push($(this).find(".place_name").val());
-			placePositionList.push($(this).find(".place_position").val());
-			placeUrlList.push($(this).find(".place_siteurl").val());
-			placeDescriptionList.push($(this).find(".place_description").val());
+			placePositionList.push($(this).find(".waypoint_location").val());
+			placeUrlList.push($(this).find(".waypoint_url").val());
+			placeDescriptionList.push($(this).find(".waypoint_description").val());
 			placeDepTimeList.push($(this).find(".place_deptime").val());
 		});
 
 		var json = {
 			itinerary_operation   : itinerary_operation,
-			itinerary_id          : $("#itinerary_edit_itinerary_id").val(),
-			itinerary_summary     : $("#itinerary_edit_itinerary_summary").val(),
-			itinerary_description : $("#itinerary_edit_itinerary_description").val(),
+			itinerary_id          : $("#itinerary_id").val(),
+			itinerary_summary     : $("#itinerary_summary").val(),
+			itinerary_description : $("#itinerary_description").val(),
 			place_name            : placeNameList,
-			place_position        : placePositionList,
-			place_siteurl         : placeUrlList,
-			place_description     : placeDescriptionList,
+			waypoint_location        : placePositionList,
+			waypoint_url         : placeUrlList,
+			waypoint_description     : placeDescriptionList,
 			place_deptime         : placeDepTimeList
 		};
 
@@ -254,28 +254,28 @@ var ItineraryEditMenu = (function() {
 	}
 
 	function __disableSaveMenu(){
-		$("#itinerary_edit_menu_main_save_itinerary").button("disable");
-		$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button("disable");
-		$("#itinerary_edit_menu_main_delete_itinerary").button("enable");
+		$("#action_itinerary_save").button("disable");
+		$("#action_itinerary_refresh").button("disable");
+		$("#action_itinerary_delete").button("enable");
 		__checkLoggedIn();
 	}
 
 	function __checkLoggedIn(){
 		if(!mainView.isLoggedIn()) {
-			$("#itinerary_edit_menu_main_save_itinerary").button("disable");
-			$("#itinerary_edit_menu_main_refresh_ItineraryEditView").button("disable");
-			$("#itinerary_edit_menu_main_delete_itinerary").button("disable");
-			$("#itinerary_edit_menu_main_move_ItineraryListView").button("disable");
+			$("#action_itinerary_save").button("disable");
+			$("#action_itinerary_refresh").button("disable");
+			$("#action_itinerary_delete").button("disable");
+			$("#action_itinerary_list").button("disable");
 		}
 	}
 
 	function openItineraryListMenu (data) {
-		$("#itinerary_list_menu").html("");
+		$("#listview_itinerary_list").html("");
 		if(data == null) return false;
 		for(var i=0; i<data.idList.length; i++) {
 			var list_item_tag = '<li class="selectable"><a href="#" name="' + data.idList[i] + '">'
 				+ data.depDateTimeList[i].replace(/T/, ' ') + ' @ ' + data.summaryList[i] + '</a></li>';
-			$("#itinerary_list_menu")
+			$("#listview_itinerary_list")
 				.append(list_item_tag)
 				.find("li").eq(i).click(function(e) {
 					var selected_itinerary_id = $(e.target).find("a").attr("name");

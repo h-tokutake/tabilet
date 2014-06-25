@@ -11,9 +11,9 @@ var WaypointEditDialog = (function(){
 
 	var WaypointEditDialog = function(view){
 		mainView = view;
-		$("#waypoint_edit_screen_map_canvas").css("height", window.innerHeight * 0.9 - 130);
-		$("#waypoint_edit_screen_map_canvas").css("width", window.innerWidth * 0.9 - 30);
-		smallMapCanvas = new MapCanvas("waypoint_edit_screen_map_canvas", mainView);
+		$("#place_map_canvas").css("height", window.innerHeight * 0.9 - 130);
+		$("#place_map_canvas").css("width", window.innerWidth * 0.9 - 30);
+		smallMapCanvas = new MapCanvas("place_map_canvas", mainView);
 		$("#itinerary_edit_screen_waypoint_edit").hide();
 
 		smallMapCanvas.setClickMapEvent(function(latlng_str) {
@@ -50,9 +50,9 @@ var WaypointEditDialog = (function(){
 
 	WaypointEditDialog.prototype.open = function (target) {
 		var place_name_obj = target;
-		var place_position_obj = target.siblings(".place_position");
-		var place_siteurl_obj = target.siblings(".place_siteurl");
-		var place_description_obj = target.siblings(".place_description");
+		var place_position_obj = target.siblings(".waypoint_location");
+		var place_siteurl_obj = target.siblings(".waypoint_url");
+		var place_description_obj = target.siblings(".waypoint_description");
 
 		$("#waypoint_edit_place_siteurl").val(place_siteurl_obj.val());
 		if(place_siteurl_obj.val() != "") {
@@ -113,17 +113,17 @@ var WaypointEditDialog = (function(){
 				}
 			},
 			resizeStop  : function() {
-				$("#waypoint_edit_screen_map_canvas").css("height", $(this).dialog("option", "height") - 130);
-				$("#waypoint_edit_screen_map_canvas").css("width", $(this).dialog("option", "width") - 30);
+				$("#place_map_canvas").css("height", $(this).dialog("option", "height") - 130);
+				$("#place_map_canvas").css("width", $(this).dialog("option", "width") - 30);
 				smallMapCanvas.refresh();
 			},
 			buttons : [
 				{
 					text: getMsg('BUTTON_SHOW_HERE'),
 					click: function() {
-						smallMapCanvas.getCurrentPosition(function(place_position) {
+						smallMapCanvas.getCurrentPosition(function(waypoint_location) {
 							$("#waypoint_edit_place_name"    ).val("現在地");
-							$("#waypoint_edit_place_position").val(place_position);
+							$("#waypoint_edit_place_position").val(waypoint_location);
 							$("#waypoint_edit_place_description").val("");
 							$("#waypoint_edit_place_siteurl").val("");
 							$("#waypoint_edit_button_place_url").button("disable");
@@ -316,14 +316,14 @@ var WaypointEditDialog = (function(){
 		});
 	}
 	
-	function ajaxToSavePlaceData (place_name, place_position, place_siteurl, place_description) {
+	function ajaxToSavePlaceData (place_name, waypoint_location, waypoint_url, waypoint_description) {
 		$.ajax({
 			dataType: "json",
 			data: {
 				place_name: place_name,
-				place_position: place_position,
-				place_siteurl: place_siteurl,
-				place_description: place_description,
+				waypoint_location: waypoint_location,
+				waypoint_url: waypoint_url,
+				waypoint_description: waypoint_description,
 				place_operation: "place_save"
 			},
 			type: "POST",

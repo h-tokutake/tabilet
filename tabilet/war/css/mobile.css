@@ -5,12 +5,12 @@ div.waypoint_depdate, div.waypoint_deptime, div.waypoint_arrdate, div.waypoint_a
 	padding-right: 5px;
 }
 
-a.waypoint_edit {
+a.action_waypoint_edit {
 	font-size: small;
 	font-weight: normal;
 }
 
-div.waypoint_place_name {
+div.waypoint_name {
 	font-weight: bold;
 	font-size: small;
 	padding-top: 5px;

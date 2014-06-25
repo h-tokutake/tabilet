@@ -82,7 +82,7 @@ input#place_edit_place_siteurl {
 	width: 400px;
 	autocomplete: off;
 }
-div#itinerary_edit_screen_main {
+div#page_itinerary_edit {
 	width: 100%;
 }
 div#itinerary_edit_menu_main {
@@ -118,10 +118,10 @@ td.waypoint_column_datetime {
 .ui-menu {
 	z-index: 3000;
 }
-.ui-menu#itinerary_edit_menu_login {
+.ui-menu#dialog_login_menu {
 	width: 250px;
 }
-.ui-menu#itinerary_list_menu {
+.ui-menu#listview_itinerary_list {
 	width: 400px;
 }
 .ui-menu#place_list_menu {
