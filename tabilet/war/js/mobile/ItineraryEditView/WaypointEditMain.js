@@ -32,7 +32,7 @@ var WaypointEditMain = (function(){
 			$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
 			$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
 			$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
-			$.mobile.changePage("#header_place_edit");
+			$.mobile.changePage("#page_place_edit");
 		});
 		$(".action_waypoint_delete").bind("tap", function(){
 			var that = $(this);
@@ -51,7 +51,7 @@ var WaypointEditMain = (function(){
 			$("#place_name_2").val("");
 			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
 			mainView.updateDirections(true, function() {
-				$.mobile.changePage("#header_place_edit");
+				$.mobile.changePage("#page_place_edit");
 			});
 		});
 		$(".action_waypoint_cancel").bind("tap", function(){
@@ -127,7 +127,7 @@ var WaypointEditMain = (function(){
 					$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
 					$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
 					$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
-					$.mobile.changePage("#header_place_edit");
+					$.mobile.changePage("#page_place_edit");
 				});
 				newObj.find(".action_waypoint_delete").bind("tap", function(){
 					var that = $(this);
