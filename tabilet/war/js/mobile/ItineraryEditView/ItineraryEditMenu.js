@@ -96,8 +96,8 @@ var ItineraryEditMenu = (function() {
 					return false;
 				});
 		}
-		$("#listview_itinerary_list").append('<li><a href="#" class="close_all_dialogs">閉じる</a></li>');
-		$(".close_all_dialogs").bind("tap", function(){
+		$("#listview_itinerary_list").append('<li><a href="#" class="goto_itinerary_edit">閉じる</a></li>');
+		$(".goto_itinerary_edit").bind("tap", function(){
 			$.mobile.changePage("#page_itinerary_edit");
 		});
 		$.mobile.changePage("#dialog_itinerary_list");

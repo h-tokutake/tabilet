@@ -29,6 +29,7 @@
 <script type="text/JavaScript" src="/js/mobile/common/Localization.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/common/CommonDialogs.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/common/MapCanvas.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/mobile/ItineraryEditView/PlaceEditMenu.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/WaypointEditMain.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/mobile/ItineraryEditView/ItineraryEditMain.js" charset="utf-8"></script>
@@ -42,6 +43,7 @@
 <input type="hidden" id="itinerary_operation" name="itinerary_operation" value="itinerary_save" />
 <input type="hidden" id="itinerary_id" name="itinerary_id" value="<c:out value="${itinerary_id}" />" />
 
+<!-- 行程編集画面 -->
 <div data-role="page" id="page_itinerary_edit" data-theme="b">
 	<div data-role="header" data-position="inline" data-id="header_itinerary_edit" data-position="fixed">
 		<a href="#dialog_itinerary_menu" data-role="button" data-icon="bars"
@@ -92,6 +94,7 @@
 	</ul>
 </div>
 
+<!-- 行程地図画面 -->
 <div data-role="page" id="page_itinerary_map" data-theme="b">
 	<div data-role="header" data-position="inline" id="header_itinerary_edit" data-id="header_itinerary_edit" data-position="fixed">
 		<a href="#dialog_itinerary_menu" data-role="button" data-icon="bars"
@@ -118,7 +121,14 @@
 <!-- 地点情報編集画面 -->
 <div data-role="page" id="page_place_edit" data-theme="b">
 	<div data-role="header" data-id="header_place_edit" data-position="fixed">
-		<input type="text" name="place_name_1" id="place_name_1" value="" />
+		<a href="#dialog_place_menu" data-role="button" data-icon="bars"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
+		<h1>Tabilet</h1>
+		<a href="#dialog_login_menu" data-role="button" data-icon="user"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
+		<input type="text" data-mini="true" name="place_name_1" id="place_name_1" value=""
+			placeholder="地名を入力してください" />
+
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#page_place_edit" data-icon='clock' class="ui-btn-active">到着/出発日時設定</a></li>
@@ -145,9 +155,17 @@
 	</div>
 </div>
 
+<!-- 地点地図画面 -->
 <div data-role="page" id="page_place_map" data-theme="b">
 	<div data-role="header" data-id="header_place_edit" id="header_place_edit" data-position="fixed">
-		<input type="text" name="place_name_2" id="place_name_2" value="" />
+		<a href="#dialog_place_menu" data-role="button" data-icon="bars"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">MENU</a>
+		<h1>Tabilet</h1>
+		<a href="#dialog_login_menu" data-role="button" data-icon="user"
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">USER</a>
+		<input type="text" data-mini="true" name="place_name_2" id="place_name_2" value=""
+			placeholder="地名を入力してください" />
+
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#page_place_edit" data-icon='clock'>到着/出発日時設定</a></li>
@@ -167,6 +185,7 @@
 	</div>
 </div>
 
+<!-- 行程メニュー -->
 <div data-role="page" id="dialog_itinerary_menu" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview">
@@ -175,6 +194,20 @@
 			<li><a href="#" data-rel="back" id="action_itinerary_refresh">変更破棄</a></li>
 			<li><a href="#" data-rel="back" id="action_itinerary_save">行程保存</a></li>
 			<li><a href="#" data-rel="back" id="action_itinerary_delete">行程削除</a></li>
+			<li><a href="#" data-rel="back">閉じる</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- 地点メニュー -->
+<div data-role="page" id="dialog_place_menu" data-theme="b">
+	<div data-role="content">
+		<ul data-role="listview">
+			<li><a href="#" data-rel="back" id="action_show_here">現在地表示</a></li>
+			<li><a href="#" data-rel="back" id="action_place_list">登録地点一覧</a></li>
+			<li><a href="#" data-rel="back" id="action_place_refresh">変更破棄</a></li>
+			<li><a href="#dialog_place_save" data-rel="dialog">地点情報登録</a></li>
+			<li><a href="#" data-rel="back" id="action_place_delete">地点情報削除</a></li>
 			<li><a href="#" data-rel="back">閉じる</a></li>
 		</ul>
 	</div>
@@ -205,7 +238,7 @@
 				<a href="#" data-role="button" id="action_confirm_ok">OK</a>
 			</div>
 			<div class="ui-block-b">
-				<a href="#" data-role="button" id="action_confirm_cancel" class="close_all_dialogs">キャンセル</a>
+				<a href="#" data-role="button" id="action_confirm_cancel" class="goto_itinerary_edit">キャンセル</a>
 			</div>
 		</div>
 	</div>
@@ -238,6 +271,29 @@
 <div data-role="dialog" id="dialog_itinerary_list" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview" id="listview_itinerary_list"></ul>
+	</div>
+</div>
+
+<!-- 地点情報一覧画面 -->
+<div data-role="dialog" id="dialog_place_list" data-theme="b">
+	<div data-role="content">
+		<ul data-role="listview" id="listview_place_list"></ul>
+	</div>
+</div>
+
+<!-- 登録地名入力用ダイアログ -->
+<div data-role="dialog" id="dialog_place_save" data-theme="b">
+	<div data-role="content">
+		<input type="text" id="place_name" name="place_name" value=""
+			placeholder="登録する地名を入力してください" />
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a href="#" data-role="button" id="action_place_save">登録</a>
+			</div>
+			<div class="ui-block-b">
+				<a href="#" data-role="button" class="goto_place_edit">キャンセル</a>
+			</div>
+		</div>
 	</div>
 </div>
 

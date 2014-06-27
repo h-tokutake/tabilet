@@ -10,14 +10,14 @@ import com.appspot.tabilet.CommonModel.Data;
 class PlaceData extends Data {
 
 	@Persistent private String placeName = "";
-	@Persistent private String placePosition = "";
+	@Persistent private String location = "";
 	@Persistent private String siteUrl = "";
 
 	PlaceData(){
 	}
-	PlaceData(String placeName, String placePosition, String siteUrl) {
+	PlaceData(String placeName, String location, String siteUrl) {
 		this.placeName     = placeName;
-		this.placePosition = placePosition;
+		this.location = location;
 		this.siteUrl       = siteUrl;
 	}
 
@@ -34,8 +34,8 @@ class PlaceData extends Data {
 	final String getPlaceName() {
 		return this.placeName;
 	}
-	final String getPlacePosition() {
-		return this.placePosition;
+	final String getLocation() {
+		return this.location;
 	}
 	final String getSiteUrl() {
 		return this.siteUrl;
@@ -45,8 +45,8 @@ class PlaceData extends Data {
 	final void setPlaceName(String placeName){
 		this.placeName = placeName;
 	}
-	final void setPlacePosition(String placePosition) {
-		this.placePosition = placePosition;
+	final void setLocation(String location) {
+		this.location = location;
 	}
 	final void setSiteUrl(String siteUrl) {
 		this.siteUrl = siteUrl;

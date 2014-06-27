@@ -4,6 +4,7 @@ var WaypointEditMain = (function(){
 	var position_dirty_flag = false;
 	var smallMapCanvas;
 	var mainView;
+	var placeMenu;
 	var originalObj;
 
 	//---------------
@@ -13,12 +14,14 @@ var WaypointEditMain = (function(){
 	var WaypointEditMain = function(view){
 		mainView = view;
 		smallMapCanvas = new MapCanvas("place_map_canvas", mainView);
+		placeMenu = new PlaceEditMenu(view, smallMapCanvas);
 
 		smallMapCanvas.setClickMapEvent(function(latlng_str) {
 			$("#waypoint_location").val(latlng_str);
 			if($("#place_name_2").val() == "") {
 				$("#place_name_1").val(latlng_str);
 				$("#place_name_2").val(latlng_str);
+				$("#place_name").val(latlng_str);
 			}
 			position_dirty_flag = true;
 		});
@@ -26,6 +29,7 @@ var WaypointEditMain = (function(){
 			originalObj = $(this);
 			$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
 			$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+			$("#place_name").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
 			$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
 			$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
 			$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
@@ -49,6 +53,7 @@ var WaypointEditMain = (function(){
 			originalObj = $(this);
 			$("#place_name_1").val("");
 			$("#place_name_2").val("");
+			$("#place_name").val("");
 			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
 			mainView.updateDirections(true, function() {
 				$.mobile.changePage("#page_place_edit");
@@ -121,6 +126,7 @@ var WaypointEditMain = (function(){
 					originalObj = $(this);
 					$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
 					$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+					$("#place_name").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
 					$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
 					$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
 					$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
@@ -156,10 +162,12 @@ var WaypointEditMain = (function(){
 		});
 		$("#place_name_1").bind("change", function(){
 			$("#place_name_2").val($("#place_name_1").val());
+			$("#place_name").val($("#place_name_1").val());
 			updateMap("#place_name_2", "");
 		});
 		$("#place_name_2").bind("change", function(){
 			$("#place_name_1").val($("#place_name_2").val());
+			$("#place_name").val($("#place_name_2").val());
 			updateMap("#place_name_1", "");
 		});
 		$("#page_place_map").bind("pageshow", function(){

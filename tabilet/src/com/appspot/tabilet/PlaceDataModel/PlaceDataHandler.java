@@ -67,7 +67,7 @@ public class PlaceDataHandler extends DataHandler {
 				((PlaceData) this.getData()).setPlaceName(entry.getValue()[0]);
 			} else
 			if ("waypoint_location".equals(entry.getKey())){
-				((PlaceData) this.getData()).setPlacePosition(entry.getValue()[0]);
+				((PlaceData) this.getData()).setLocation(entry.getValue()[0]);
 			} else
 			if ("waypoint_url".equals(entry.getKey())) {
 				((PlaceData) this.getData()).setSiteUrl(entry.getValue()[0]);
@@ -83,7 +83,7 @@ public class PlaceDataHandler extends DataHandler {
 	public final HttpServletResponse sendOne(HttpServletResponse resp) throws Exception {
 		PlaceJson json = new PlaceJson();
 		json.setPlaceName(((PlaceData) this.getData()).getPlaceName());
-		json.setPlacePosition(((PlaceData) this.getData()).getPlacePosition());
+		json.setLocation(((PlaceData) this.getData()).getLocation());
 		json.setSiteUrl(((PlaceData) this.getData()).getSiteUrl());
 		json.setDescription(((PlaceData) this.getData()).getDescription());
 

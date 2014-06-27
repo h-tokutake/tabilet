@@ -34,7 +34,7 @@ class ItineraryData extends ItinerarySkeletonData {
 		skeleton.setSummary(this.getSummary());
 		skeleton.setDescription(this.getDescription());
 		skeleton.setPlaceNameList(this.getPlaceNameList());
-		skeleton.setPlacePositionList(this.getPlacePositionList());
+		skeleton.setLocationList(this.getLocationList());
 		return skeleton;
 	}
 	final boolean equals(ItineraryData other){

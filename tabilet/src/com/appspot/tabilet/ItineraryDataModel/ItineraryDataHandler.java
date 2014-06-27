@@ -149,7 +149,7 @@ public class ItineraryDataHandler extends DataHandler {
 			}
 		}
 		((ItinerarySkeletonData) this.getData()).setPlaceNameList(new ArrayList<String>(Arrays.asList(placeNameList)));
-		((ItinerarySkeletonData) this.getData()).setPlacePositionList(new ArrayList<String>(Arrays.asList(placePositionList)));
+		((ItinerarySkeletonData) this.getData()).setLocationList(new ArrayList<String>(Arrays.asList(placePositionList)));
 		((ItinerarySkeletonData) this.getData()).setPlaceUrlList(new ArrayList<String>(Arrays.asList(placeUrlList)));
 		((ItinerarySkeletonData) this.getData()).setPlaceDescriptionList(new ArrayList<String>(Arrays.asList(placeDescriptionList)));
 		((ItineraryData) this.getData()).setPlaceDepDateList(new ArrayList<String>(Arrays.asList(placeDepDateList)));
@@ -173,7 +173,7 @@ public class ItineraryDataHandler extends DataHandler {
 			summary     = data.getSummary();
 			description = data.getDescription();
 			placeNameList     = data.getPlaceNameList();
-			placePositionList = data.getPlacePositionList();
+			placePositionList = data.getLocationList();
 			placeUrlList      = data.getPlaceUrlList();
 			placeDescriptionList = data.getPlaceDescriptionList();
 			placeDepDateList     = data.getPlaceDepDateList();

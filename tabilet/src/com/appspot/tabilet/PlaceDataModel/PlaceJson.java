@@ -2,7 +2,7 @@ package com.appspot.tabilet.PlaceDataModel;
 
 public class PlaceJson {
 	private String placeName = "";
-	private String placePosition = "";
+	private String location = "";
 	private String siteUrl = "";
 	private String description = "";
 
@@ -10,8 +10,8 @@ public class PlaceJson {
 	public String getPlaceName() {
 		return this.placeName;
 	}
-	public String getPlacePosition() {
-		return this.placePosition;
+	public String getLocation() {
+		return this.location;
 	}
 	public String getSiteUrl() {
 		return this.siteUrl;
@@ -24,8 +24,8 @@ public class PlaceJson {
 	public void setPlaceName(String placeName) {
 		this.placeName = placeName;
 	}
-	public void setPlacePosition(String placePosition) {
-		this.placePosition = placePosition;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public void setSiteUrl(String siteUrl) {
 		this.siteUrl = siteUrl;

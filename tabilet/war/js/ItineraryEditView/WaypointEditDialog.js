@@ -300,7 +300,7 @@ var WaypointEditDialog = (function(){
 					$("#waypoint_edit_button_place_url").button("disable");
 				}
 				$("#waypoint_edit_place_description").val(data.description);
-				$("#waypoint_edit_place_position").val(data.placePosition);
+				$("#waypoint_edit_place_position").val(data.location);
 				$("#waypoint_edit_place_name").val(data.placeName).click();
 				smallMapCanvas.setLocation($("#waypoint_edit_place_name").val(), $("#waypoint_edit_place_position").val(), function(latlng_str){
 					$("#waypoint_edit_place_position").val(latlng_str);

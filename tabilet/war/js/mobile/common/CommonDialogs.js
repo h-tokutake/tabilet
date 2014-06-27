@@ -8,8 +8,11 @@ var CommonDialogs = (function() {
 
 	function CommonDialogs (){
 
-		$(".close_all_dialogs").bind("tap", function(){
+		$(".goto_itinerary_edit").bind("tap", function(){
 			$.mobile.changePage("#page_itinerary_edit");
+		});
+		$(".goto_place_edit").bind("tap", function(){
+			$.mobile.changePage("#page_place_edit");
 		});
 
 		//----------------

@@ -39,7 +39,7 @@ class ItinerarySkeletonData extends Data {
 		this.setSummary(skeleton.getSummary());
 		this.setDescription(skeleton.getDescription());
 		this.setPlaceNameList(skeleton.getPlaceNameList());
-		this.setPlacePositionList(skeleton.getPlacePositionList());
+		this.setLocationList(skeleton.getLocationList());
 		this.setPlaceUrlList(skeleton.getPlaceUrlList());
 		this.setPlaceDescriptionList(skeleton.getPlaceDescriptionList());
 	}
@@ -49,7 +49,7 @@ class ItinerarySkeletonData extends Data {
 		this.setSummary(skeleton.getSummary());
 		this.setDescription(skeleton.getDescription());
 		this.setPlaceNameList(skeleton.getPlaceNameList());
-		this.setPlacePositionList(skeleton.getPlacePositionList());
+		this.setLocationList(skeleton.getLocationList());
 		this.setPlaceUrlList(skeleton.getPlaceUrlList());
 		this.setPlaceDescriptionList(skeleton.getPlaceDescriptionList());
 	}
@@ -78,7 +78,7 @@ class ItinerarySkeletonData extends Data {
 		return this.placeNameList.get(index);
 	}
 
-	final String getPlacePosition(int index){
+	final String getLocation(int index){
 		return this.placePositionList.get(index);
 	}
 
@@ -86,36 +86,36 @@ class ItinerarySkeletonData extends Data {
 		this.placeNameList.set(index, placeName);
 	}
 
-	final void setPlacePosition(int index, String placePosition){
-		this.placePositionList.set(index, placePosition);
+	final void setLocation(int index, String location){
+		this.placePositionList.set(index, location);
 	}
 
 	final void addPlaceName(String placeName){
 		this.placeNameList.add(placeName);
 	}
 
-	final void addPlacePosition(String placePosition){
-		this.placePositionList.add(placePosition);
+	final void addLocation(String location){
+		this.placePositionList.add(location);
 	}
 
 	final void removePlaceName(int index){
 		this.placeNameList.remove(index);
 	}
 
-	final void removePlacePosition(int index){
+	final void removeLocation(int index){
 		this.placePositionList.remove(index);
 	}
 	void setAll(ItinerarySkeletonData source) {
 		super.setAll(source);
 		this.placeNameList = source.getPlaceNameList();
-		this.placePositionList = source.getPlacePositionList();
+		this.placePositionList = source.getLocationList();
 	}
 
 	/* getter */
 	final ArrayList<String> getPlaceNameList(){
 		return this.placeNameList;
 	}
-	final ArrayList<String> getPlacePositionList(){
+	final ArrayList<String> getLocationList(){
 		return this.placePositionList;
 	}
 	final ArrayList<String> getPlaceUrlList() {
@@ -129,7 +129,7 @@ class ItinerarySkeletonData extends Data {
 	final void setPlaceNameList(ArrayList<String> placeNameList) {
 		this.placeNameList = placeNameList;
 	}
-	final void setPlacePositionList(ArrayList<String> placePositionList) {
+	final void setLocationList(ArrayList<String> placePositionList) {
 		this.placePositionList = placePositionList;
 	}
 	final void setPlaceUrlList(ArrayList<String> placeUrlList) {
