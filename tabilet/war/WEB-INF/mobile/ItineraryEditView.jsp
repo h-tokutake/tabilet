@@ -140,10 +140,10 @@
 		<li data-role="list-divider">出発: </li>
 		<li><div class="ui-grid-a">
 			<div class="ui-block-a">
-				<input type="date" name="waypoint_depdate" id="waypoint_depdate" value=""/>
+				<input type="date" name="waypoint_depdate" id="waypoint_depdate" value="2014-06-28"/>
 			</div>
 			<div class="ui-block-b">
-				<input type="time" name="waypoint_deptime" id="waypoint_deptime" value=""/>
+				<input type="time" name="waypoint_deptime" id="waypoint_deptime" value="12:00"/>
 			</div>
 		</div></li>
 	</ul>

@@ -54,10 +54,17 @@ var WaypointEditMain = (function(){
 			$("#place_name_1").val("");
 			$("#place_name_2").val("");
 			$("#place_name").val("");
+
+			var now = new Date();
+			$("#waypoint_depdate").val(toDateString2(now));
+			$("#waypoint_deptime").val(toTimeString(now));
+//			document.getElementById("waypoint_depdate").valueAsDate = now;
+//			document.getElementById("waypoint_deptime").valueAsDate = now;
+			var tmp = $("#waypoint_deptime").val().split(':');
+			$("#waypoint_deptime").val(tmp[0] + ':' + tmp[1]);
+
 			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
-			mainView.updateDirections(true, function() {
-				$.mobile.changePage("#page_place_edit");
-			});
+			$.mobile.changePage("#page_place_edit");
 		});
 		$(".action_waypoint_cancel").bind("tap", function(){
 			$.mobile.changePage("#page_itinerary_edit");
