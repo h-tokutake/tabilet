@@ -94,11 +94,11 @@ public class ItineraryEditServlet extends HttpServlet {
 			userAgent.indexOf("Android") != -1 ||
 			userAgent.indexOf("Windows Phone") != -1)
 		{
-			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/mobile/ItineraryEditView.jsp");
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/ItineraryEditView.jsp");
 		}
 		else
 		{
-			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/mobile/ItineraryEditView.jsp");
+			dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/ItineraryEditView.jsp");
 		}
 		dispatcher.forward(req, resp);
 	}

@@ -7,66 +7,67 @@ var CommonDialogs = (function() {
 	//---------------
 
 	function CommonDialogs (){
-		this.dialogObj = $(document.createElement("div")).attr("id", "dialog_object");
-		$(document.body).append(this.dialogObj);
+
+		$(".goto_itinerary_edit").bind("tap", function(){
+			$.mobile.changePage("#page_itinerary_edit");
+		});
+		$(".goto_place_edit").bind("tap", function(){
+			$.mobile.changePage("#page_place_edit");
+		});
+
+		//----------------
+		// private methods
+		//----------------
+
+		//確認用ダイアログ
+		this.__confirm = function (message, callback) {
+			$("#message_confirm_dialog").empty().append(message);
+			$("#action_confirm_ok").one("tap", function(){
+				callback();
+			});
+			$.mobile.changePage("#dialog_common_confirm");
+			return;
+		}
+
+		//情報表示用ダイアログ
+		this.__info = function (message, callback) {
+			$("#message_info_dialog").empty().append(message);
+			$("#action_info_ok").one("tap", function(){
+				callback();
+			});
+			$.mobile.changePage("#dialog_common_info");
+			return;
+		}
+
+		//エラー表示用ダイアログ
+		this.__error = function (message) {
+			$("#message_error_dialog").empty().append(message);
+			$("#action_error_ok").one("tap", function(){
+				$.mobile.changePage("#page_itinerary_edit");
+			});
+			$.mobile.changePage("#dialog_common_error");
+			return;
+		}
+
+		//待ち時間用ダイアログ
+		this.__wait = function (message) {
+			$("#message_wait_dialog").empty().append(message);
+			$.mobile.changePage("#dialog_common_wait");
+			return;
+		}
 	}
 
-	//----------------
-	//   public
-	//----------------
+	//--------------
+	//    public
+	//--------------
 
 	CommonDialogs.prototype = {
-		error : function (msg) {
-			this.ok(getMsg('DIALOG_CONFIRM'), msg);
-		},
-		ok : function (title, msg, callback) {
-			this.dialogObj.text(msg).dialog({
-				title   : title,
-				autoOpen: true,
-				modal   : true,
-				resizable: false,
-				width    : "600px",
-				buttons  : {
-					"OK" : function(e){
-						if(callback != null) callback();
-						$(this).dialog("close");
-						return false;
-					},
-				}
-			});
-		},
-		confirm : function (dirty_flag, msg, callback){
-			if(!dirty_flag) {
-				callback();
-				return;
-			}
-			this.dialogObj
-				.text(msg)
-				.dialog({
-					title    : getMsg('DIALOG_CONFIRM'),
-					autoOpen : false,
-					modal    : true,
-					resizable: false,
-					width    : "600px",
-					buttons  : [{
-						text  : getMsg('BUTTON_OK'),
-						click : function(){
-							$(this).dialog("close");
-							callback();
-							return false;
-						}
-					},
-					{
-						text : getMsg('BUTTON_CANCEL'),
-						click : function(){
-							$(this).dialog("close");
-							return false;
-						}
-					}]
-				}).dialog("open");
-		}
+		confirm : function(message, callback) { this.__confirm(message, callback); },
+		info    : function(message, callback) { this.__info(message, callback); },
+		error   : function(message) { this.__error(message); },
+		wait    : function(message) { this.__wait (message); }
 	};
-	
+
 	return CommonDialogs;
 }());
 

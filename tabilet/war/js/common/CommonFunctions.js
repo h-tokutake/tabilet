@@ -9,7 +9,7 @@ function toDateTimeString(src) {
 	var min = src.getMinutes();
 	if (min < 10) min = "0" + min;
 
-	var strDateTime = year + '/' + month + '/' + date + ' ' + hour + ':' + min;
+	var strDateTime = year + '-' + month + '-' + date + ' ' + hour + ':' + min;
 
 	return strDateTime;
 }
@@ -22,6 +22,18 @@ function toDateString(src) {
 	if (date < 10) date = "0" + date;
 
 	var strDate = year + '/' + month + '/' + date;
+
+	return strDate;
+}
+
+function toDateString2(src) {
+	var year  = src.getFullYear();
+	var month = src.getMonth() + 1;
+	if (month < 10) month = "0" + month;
+	var date = src.getDate();
+	if (date < 10) date = "0" + date;
+
+	var strDate = year + '-' + month + '-' + date;
 
 	return strDate;
 }
