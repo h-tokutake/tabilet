@@ -71,9 +71,9 @@
 		name="itinerary_description" rows="4" placeholder="行程の概要を入れてください"
 		><c:out value="${itinerary_description}" /></textarea>
 	</div>
-	<ul data-role="listview" data-split-icon="delete" data-icon='plus' id="listview_itinerary_edit">
+	<ul data-role="listview" data-inset="true" id="listview_itinerary_edit">
 		<c:forEach var="waypoint_name" items="${waypoint_name_array}" varStatus="status">
-			<li class="list_sortable"><a href="#" class="action_waypoint_edit" data-transition="slide">
+			<li class="list_sortable"><a href="#" class="select_waypoint_action" data-rel="dialog">
 				<div class="waypoint_name"><c:if test="${not empty waypoint_name}"><c:out value="${waypoint_name}" /></c:if></div>
 				&nbsp;到着：&nbsp;
 				<div class="waypoint_arrdate"></div>
@@ -87,7 +87,7 @@
 					value="<c:if test="${not empty waypoint_url_array}"><c:out value="${waypoint_url_array[status.index]}" /></c:if>" />
 				<input type="hidden" class="waypoint_description" name="waypoint_description"
 					value="<c:if test="${not empty waypoint_description_array}"><c:out value="${waypoint_description_array[status.index]}" /></c:if>" />
-			</a><a href="#" class="action_waypoint_delete">削除</a></li>
+			</a></li>
 		</c:forEach>
 		<li><a href="#" class="action_waypoint_create" data-transition="slide">
 			<p>クリックして立寄地の情報を入力してください</p>
@@ -187,7 +187,7 @@
 </div>
 
 <!-- 行程メニュー -->
-<div data-role="page" id="dialog_itinerary_menu" data-theme="b">
+<div data-role="dialog" id="dialog_itinerary_menu" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview">
 			<li><a href="#" data-rel="back" id="action_itinerary_clear">新規作成</a></li>
@@ -201,7 +201,7 @@
 </div>
 
 <!-- 地点メニュー -->
-<div data-role="page" id="dialog_place_menu" data-theme="b">
+<div data-role="dialog" id="dialog_place_menu" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview">
 			<li><a href="#" data-rel="back" id="action_show_here">現在地表示</a></li>
@@ -215,7 +215,7 @@
 </div>
 
 <!-- ログイン画面 -->
-<div data-role="page" id="dialog_login_menu" data-theme="b">
+<div data-role="dialog" id="dialog_login_menu" data-theme="b">
 	<div data-role="content">
 		<ul data-role="listview">
 			<c:if test="${not empty logout_url}"><li><a href="<c:out value="${logout_url}" />" rel="external">ログアウト</a></li></c:if>
@@ -295,6 +295,18 @@
 				<a href="#" data-role="button" class="goto_place_edit">キャンセル</a>
 			</div>
 		</div>
+	</div>
+</div>
+
+<!-- 立寄地編集 or 削除確認 -->
+<div data-role="dialog" id="dialog_waypoint_action" data-theme="b">
+	<div data-role="header" id="header_waypoint_action"></div>
+	<div data-role="content">
+		<ul data-role="listview">
+			<li><a href="#" id="action_waypoint_edit">編集</a></li>
+			<li><a href="#" id="action_waypoint_delete">削除</a></li>
+			<li><a href="#" data-rel="back">閉じる</a></li>
+		</ul>
 	</div>
 </div>
 

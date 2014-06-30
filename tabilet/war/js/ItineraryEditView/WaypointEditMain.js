@@ -25,29 +25,24 @@ var WaypointEditMain = (function(){
 			}
 			position_dirty_flag = true;
 		});
-		$(".action_waypoint_edit").bind("tap", function(){
+		$(".select_waypoint_action").unbind("tap").bind("tap", function(){
 			originalObj = $(this);
-			$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
-			$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
-			$("#place_name").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
-			$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
-			$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
-			$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
-			$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
-			$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
-			$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
-			$.mobile.changePage("#page_place_edit");
-		});
-		$(".action_waypoint_delete").bind("tap", function(){
-			var that = $(this);
-			mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
-				that.closest("li").remove();
-				$("#listview_itinerary_edit").listview('refresh');
-				$("#listview_itinerary_edit").sortable('refresh');
-				mainView.updateDirections(true, function() {
-					$.mobile.changePage("#page_itinerary_edit");
+			var header_waypoint_action = originalObj.find(".waypoint_name").eq(0).text();
+			$("#header_waypoint_action").text(header_waypoint_action);
+			$("#action_waypoint_edit").unbind("tap").one("tap", function(){
+				openEditWaypoint();
+			});
+			$("#action_waypoint_delete").unbind("tap").one("tap", function(){
+				mainView.getCommonDialogs().confirm(originalObj.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
+					originalObj.closest("li").remove();
+					$("#listview_itinerary_edit").listview('refresh');
+					$("#listview_itinerary_edit").sortable('refresh');
+					mainView.updateDirections(true, function() {
+						$.mobile.changePage("#page_itinerary_edit");
+					});
 				});
 			});
+			$.mobile.changePage("#dialog_waypoint_action", {transition: 'pop', role: 'dialog'});
 		});
 		$(".action_waypoint_create").bind("tap", function(){
 			originalObj = $(this);
@@ -73,15 +68,7 @@ var WaypointEditMain = (function(){
 				var newObj = originalObj.closest("li").prev("li");
 				var newTag = document.createElement('a');
 				newTag.setAttribute('href', '#');
-				newTag.setAttribute('class', 'action_waypoint_edit');
-				newTag.setAttribute('data-transition', 'slide');
-				newObj.append(newTag);
-
-				newTag = document.createElement('a');
-				newTag.setAttribute('href', '#');
-				newTag.setAttribute('class', 'action_waypoint_delete');
-				newTag.setAttribute('data-transition', 'slide');
-				newTag.textContent = '削除';
+				newTag.setAttribute('class', 'select_waypoint_action');
 				newObj.append(newTag);
 
 				newTag = document.createElement('div');
@@ -127,29 +114,24 @@ var WaypointEditMain = (function(){
 				newTag.setAttribute('value', '');
 				newObj.find('a').eq(0).append(newTag);
 
-				newObj.find(".action_waypoint_edit").bind("tap", function(){
+				newObj.find(".select_waypoint_action").unbind("tap").bind("tap", function(){
 					originalObj = $(this);
-					$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
-					$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
-					$("#place_name").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
-					$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
-					$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
-					$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
-					$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
-					$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
-					$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
-					$.mobile.changePage("#page_place_edit");
-				});
-				newObj.find(".action_waypoint_delete").bind("tap", function(){
-					var that = $(this);
-					mainView.getCommonDialogs().confirm(that.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
-						that.closest("li").remove();
-						$("#listview_itinerary_edit").listview('refresh');
-						$("#listview_itinerary_edit").sortable('refresh');
-						mainView.updateDirections(true, function() {
-							$.mobile.changePage("#page_itinerary_edit");
+					var header_waypoint_action = originalObj.find(".waypoint_name").eq(0).text();
+					$("#header_waypoint_action").text(header_waypoint_action);
+					$("#action_waypoint_edit").unbind("tap").one("tap", function(){
+						openEditWaypoint();
+					});
+					$("#action_waypoint_delete").unbind("tap").one("tap", function(){
+						mainView.getCommonDialogs().confirm(originalObj.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
+							originalObj.closest("li").remove();
+							$("#listview_itinerary_edit").listview('refresh');
+							$("#listview_itinerary_edit").sortable('refresh');
+							mainView.updateDirections(true, function() {
+								$.mobile.changePage("#page_itinerary_edit");
+							});
 						});
 					});
+					$.mobile.changePage("#dialog_waypoint_action", {transition: 'pop', role: 'dialog'});
 				});
 				originalObj = newObj;
 			}
@@ -199,6 +181,19 @@ var WaypointEditMain = (function(){
 			$("#waypoint_location").val(latlng_str);
 			smallMapCanvas.refresh();
 		});
+	}
+
+	function openEditWaypoint () {
+		$("#place_name_1").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+		$("#place_name_2").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+		$("#place_name").val($.trim(originalObj.find(".waypoint_name").eq(0).text()));
+		$("#waypoint_depdate").val($.trim(originalObj.find(".waypoint_depdate").eq(0).text()));
+		$("#waypoint_deptime").val($.trim(originalObj.find(".waypoint_deptime").eq(0).text()));
+		$("#waypoint_location").val(originalObj.find(".waypoint_location").eq(0).val());
+		$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
+		$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
+		$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
+		$.mobile.changePage("#page_place_edit");
 	}
 
 	return WaypointEditMain;

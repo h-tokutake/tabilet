@@ -5,7 +5,7 @@ div.waypoint_depdate, div.waypoint_deptime, div.waypoint_arrdate, div.waypoint_a
 	padding-right: 5px;
 }
 
-a.action_waypoint_edit {
+a.select_waypoint_action {
 	font-size: small;
 	font-weight: normal;
 }
@@ -15,4 +15,14 @@ div.waypoint_name {
 	font-size: small;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+ul#listview_itinerary_edit {
+	margin-right : 50px;
+}
+
+div#header_waypoint_action {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

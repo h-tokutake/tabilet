@@ -121,7 +121,7 @@ var ItineraryEditMenu = (function() {
 		var placeDepDateList = [];
 		var placeDepTimeList = [];
 
-		$(".action_waypoint_edit").each(function(){
+		$(".select_waypoint_action").each(function(){
 			placeNameList.push($.trim($(this).find(".waypoint_name").text()));
 			placePositionList.push($(this).find(".waypoint_location").val());
 			placeUrlList.push($(this).find(".waypoint_url").val());

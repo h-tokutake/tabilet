@@ -69,7 +69,7 @@ var ItineraryEditView = (function(){
 		var place_descriptions = [];
 		var place_deptimes = [];
 		var waypoints = [];
-		var waypoint_obj = $(".action_waypoint_edit")
+		var waypoint_obj = $(".select_waypoint_action")
 
 		for(var i=0; i<waypoint_obj.length; i++) {
 			var place_name     = $.trim(waypoint_obj.eq(i).find(".waypoint_name").text());
@@ -105,7 +105,7 @@ var ItineraryEditView = (function(){
 
 	// private methods
 	function __updateArrDepDateTime(force_update){
-		var waypoint_obj = $(".action_waypoint_edit");
+		var waypoint_obj = $(".select_waypoint_action");
 		var arrDateTime = mapCanvas.getArrDateTimeString();
 		var depDateTime = mapCanvas.getDepDateTimeString();
 
