@@ -88,18 +88,6 @@ var ItineraryEditView = (function(){
 				place_descriptions.push(place_description);
 				var date_time = $.trim(waypoint_obj.eq(i).find(".waypoint_depdate").text()) + 'T' + $.trim(waypoint_obj.eq(i).find(".waypoint_deptime").text());
 				place_deptimes[i] = Date.parse(date_time);
-//				date_time = $.trim(waypoint_obj.eq(i).find(".waypoint_arrdate").text()) + 'T' + $.trim(waypoint_obj.eq(i).find(".waypoint_arrtime").text());
-//				if (place_deptimes[i] == '' || isNaN(place_deptimes[i]) || place_deptimes[i] === null) {
-//					if (i == 0) {
-//						place_deptimes[i] = Date.now();
-//					} else {
-//						place_deptimes[i] = Date.parse(date_time);
-//					}
-//				}
-//				if (place_deptimes[i] < Date.parse(date_time)) {
-//					waypoint_obj.eq(i).find(".waypoint_arrdate").text($.trim(waypoint_obj.eq(i).find(".waypoint_deptime").text()));
-//					waypoint_obj.eq(i).find(".waypoint_arrtime").text($.trim(waypoint_obj.eq(i).find(".waypoint_deptime").text()));
-//				}
 			}
 		}
 		mapCanvas.setPlaceDepTimes(place_deptimes);

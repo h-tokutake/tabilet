@@ -58,8 +58,6 @@ var WaypointEditMain = (function(){
 			var now = new Date();
 			$("#waypoint_depdate").val(toDateString2(now));
 			$("#waypoint_deptime").val(toTimeString(now));
-//			document.getElementById("waypoint_depdate").valueAsDate = now;
-//			document.getElementById("waypoint_deptime").valueAsDate = now;
 			var tmp = $("#waypoint_deptime").val().split(':');
 			$("#waypoint_deptime").val(tmp[0] + ':' + tmp[1]);
 
