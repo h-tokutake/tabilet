@@ -85,18 +85,54 @@ var ItineraryEditMenu = (function() {
 	function openItineraryListMenu (data) {
 		$("#listview_itinerary_list").empty();
 		if(data == null) return false;
+
+		var newObj;
+		var newTag;
 		for(var i=0; i<data.idList.length; i++) {
-			var list_item_tag = '<li><a href="#" name="' + data.idList[i] + '">'
-				+ data.depDateList[i] + ' ' + data.depTimeList[i] + ' @ ' + data.summaryList[i] + '</a></li>';
-			$("#listview_itinerary_list")
-				.append(list_item_tag)
-				.find("li").eq(i).bind("tap", function(e) {
-					var selected_itinerary_id = $(e.target).find("a").context.name;
-					submitPostToItineraryEdit(selected_itinerary_id, "itinerary_edit");
-					return false;
-				});
+			newObj = document.createElement('a');
+			newObj.setAttribute('href', '#');
+			newObj.setAttribute('name', data.idList[i]);
+
+			newTag = document.createElement('div');
+			newTag.setAttribute('class', 'itinerary_summary');
+			$(newTag).append(data.summaryList[i]);
+			$(newObj).append(newTag);
+
+			var dateTimeTag = document.createElement('p');
+			dateTimeTag.setAttribute('class', 'ui-li-aside');
+
+			newTag = document.createElement('div');
+			newTag.setAttribute('class', 'itinerary_depdate');
+			$(newTag).append(data.depDateList[i]);
+			$(dateTimeTag).append(newTag);
+
+			newTag = document.createElement('div');
+			newTag.setAttribute('class', 'itinerary_deptime');
+			$(newTag).append(data.depTimeList[i]);
+			$(dateTimeTag).append(newTag);
+			$(newObj).append(dateTimeTag);
+
+			newTag = newObj;
+			newObj = document.createElement('li');
+			$(newObj).append(newTag);
+
+			$("#listview_itinerary_list").append(newObj)
+			$(newObj).bind("tap", function(e) {
+				var selected_itinerary_id = $(e.target).closest("a").attr("name");
+				submitPostToItineraryEdit(selected_itinerary_id, "itinerary_edit");
+				return false;
+			});
 		}
-		$("#listview_itinerary_list").append('<li><a href="#" class="goto_itinerary_edit">閉じる</a></li>');
+		newObj = document.createElement('li');
+		newObj.setAttribute('data-icon', 'back');
+		newObj.setAttribute('data-iconpos', 'left');
+		newTag = document.createElement('a');
+		newTag.setAttribute('href', '#');
+		newTag.setAttribute('class', 'goto_itinerary_edit');
+		$(newTag).append('閉じる');
+		$(newObj).append(newTag);
+
+		$("#listview_itinerary_list").append(newObj);
 		$(".goto_itinerary_edit").bind("tap", function(){
 			$.mobile.changePage("#page_itinerary_edit");
 		});

@@ -44,7 +44,7 @@ var WaypointEditMain = (function(){
 			});
 			$.mobile.changePage("#dialog_waypoint_action", {transition: 'pop', role: 'dialog'});
 		});
-		$(".action_waypoint_create").bind("tap", function(){
+		$(".action_waypoint_create").unbind("tap").bind("tap", function(){
 			originalObj = $(this);
 			$("#place_name_1").val("");
 			$("#place_name_2").val("");
@@ -59,13 +59,17 @@ var WaypointEditMain = (function(){
 			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
 			$.mobile.changePage("#page_place_edit");
 		});
-		$(".action_waypoint_cancel").bind("tap", function(){
+		$(".action_waypoint_cancel").unbind("tap").bind("tap", function(){
 			$.mobile.changePage("#page_itinerary_edit");
 		});
-		$(".action_waypoint_set").bind("tap", function(){
+		$(".action_waypoint_set").unbind("tap").bind("tap", function(){
 			if ($(this).attr("name") == "waypoint_operation_create"){
-				originalObj.closest("li").before('<li class="list_sortable"></li>');
-				var newObj = originalObj.closest("li").prev("li");
+				var newObj = document.createElement('li');
+				newObj.setAttribute('class', 'list_sortable');
+				newObj.setAttribute('data-icon', 'false');
+				originalObj.closest("li").before(newObj);
+				newObj = $(newObj);
+
 				var newTag = document.createElement('a');
 				newTag.setAttribute('href', '#');
 				newTag.setAttribute('class', 'select_waypoint_action');

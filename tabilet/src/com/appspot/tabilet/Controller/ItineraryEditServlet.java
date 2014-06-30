@@ -32,25 +32,15 @@ public class ItineraryEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-		Set<String> attributes = new HashSet<String>();
-
-		if (user != null) {
-			req.setAttribute("logout_url", userService.createLogoutURL(req.getRequestURI()));
-		}
-		for (String providerName : openIdProviders.keySet()) {
-			String providerUrl = openIdProviders.get(providerName);
-			String loginUrl = userService.createLoginURL(req.getRequestURI(), null, providerUrl, attributes);
-			req.setAttribute(providerName, loginUrl);
-		}
-
+		verifyUser(req);
 		dispatchScreen(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException {
+
+		verifyUser(req);
 
 		String itineraryId = req.getParameter("itinerary_id");
 		String operation = req.getParameter("itinerary_operation");
@@ -81,6 +71,22 @@ public class ItineraryEditServlet extends HttpServlet {
 			session.invalidate();
 		} else
 			resp = handler.sendResult(resp);
+	}
+
+	private void verifyUser(HttpServletRequest req)
+	{
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		Set<String> attributes = new HashSet<String>();
+
+		if (user != null) {
+			req.setAttribute("logout_url", userService.createLogoutURL(req.getRequestURI()));
+		}
+		for (String providerName : openIdProviders.keySet()) {
+			String providerUrl = openIdProviders.get(providerName);
+			String loginUrl = userService.createLoginURL(req.getRequestURI(), null, providerUrl, attributes);
+			req.setAttribute(providerName, loginUrl);
+		}
 	}
 
 	private void dispatchScreen(HttpServletRequest req, HttpServletResponse resp)

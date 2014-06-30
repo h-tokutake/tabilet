@@ -5,6 +5,11 @@ div.waypoint_depdate, div.waypoint_deptime, div.waypoint_arrdate, div.waypoint_a
 	padding-right: 5px;
 }
 
+div.itinerary_depdate, div.itinerary_deptime {
+	display: inline;
+	padding-left: 5px;
+}
+
 a.select_waypoint_action {
 	font-size: small;
 	font-weight: normal;
@@ -17,11 +22,17 @@ div.waypoint_name {
 	padding-bottom: 5px;
 }
 
-ul#listview_itinerary_edit {
-	margin-right : 50px;
+div.itinerary_summary {
+	font-weight: bold;
+	font-size: small;
 }
 
-div#header_waypoint_action {
+ul#listview_itinerary_edit {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+div#header_waypoint_action, div#header_itinerary_menu, div#header_place_menu {
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 10px;
