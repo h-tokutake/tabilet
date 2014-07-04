@@ -12,6 +12,7 @@ var PlaceEditMenu = (function() {
 	function PlaceEditMenu (view, mapCanvas) {
 		mainView = view;
 		smallMapCanvas = mapCanvas;
+		$("#listview_place_list").listview();
 
 		//現在地表示
 		$("#action_show_here").bind("tap", function(){
@@ -108,8 +109,8 @@ var PlaceEditMenu = (function() {
 		$(".goto_place_edit").bind("tap", function(){
 			$.mobile.changePage("#page_place_edit");
 		});
-		$.mobile.changePage("#dialog_place_list");
 		$("#listview_place_list").listview("refresh");
+		$.mobile.changePage("#dialog_place_list");
 	}
 
 	function ajaxToGetPlaceData (place_name) {
@@ -126,8 +127,7 @@ var PlaceEditMenu = (function() {
 				$("#place_name_1").val($.trim(data.placeName));
 				$("#place_name_2").val($.trim(data.placeName));
 				$("#place_name").val($.trim(data.placeName));
-				smallMapCanvas.setLocation($("#place_name_1").val(), $("#waypoint_location").val(), function(latlng_str){
-					$("#waypoint_location").val(latlng_str);
+				smallMapCanvas.setLocation('', $("#waypoint_location").val(), function(latlng_str){
 					smallMapCanvas.addPlaceDescription($("#waypoint_description").val());
 					smallMapCanvas.refresh();
 					$.mobile.changePage("#page_place_map");
@@ -167,6 +167,8 @@ var PlaceEditMenu = (function() {
 			success: function(result){
 				if(result.returnCode == "0") {
 					mainView.getCommonDialogs().info('"' + place_data_json.place_name + '" を登録しました。', function() {
+						$("#place_name_1").val(place_data_json.place_name);
+						$("#place_name_2").val(place_data_json.place_name);
 						$.mobile.changePage("#page_place_map");
 					});
 				} else {

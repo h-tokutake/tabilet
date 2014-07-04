@@ -42,9 +42,6 @@ var CommonDialogs = (function() {
 		//エラー表示用ダイアログ
 		this.__error = function (message) {
 			$("#message_error_dialog").empty().append(message);
-			$("#action_error_ok").one("tap", function(){
-				$.mobile.changePage("#page_itinerary_edit");
-			});
 			$.mobile.changePage("#dialog_common_error");
 			return;
 		}

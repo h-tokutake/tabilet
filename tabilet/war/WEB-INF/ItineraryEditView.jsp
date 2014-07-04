@@ -118,7 +118,7 @@
 <!-- 地点情報編集画面 -->
 <div data-role="page" id="page_place_edit" data-theme="b">
 	<div data-role="header" data-id="header_place_edit" data-position="fixed">
-		<a href="#dialog_itinerary_menu" data-role="button" data-icon="grid" data-inline="true"
+		<a href="#dialog_place_menu" data-role="button" data-icon="grid" data-inline="true"
 			data-iconpos="left" data-transition="slidedown" data-rel="dialog">メニュー</a>
 		<h1>Tabilet</h1>
 		<input type="text" data-mini="true" name="place_name_1" id="place_name_1" value=""
@@ -153,7 +153,7 @@
 <!-- 地点地図画面 -->
 <div data-role="page" id="page_place_map" data-theme="b">
 	<div data-role="header" data-id="header_place_edit" id="header_place_edit" data-position="fixed">
-		<a href="#dialog_itinerary_menu" data-role="button" data-icon="grid" data-inline="true"
+		<a href="#dialog_place_menu" data-role="button" data-icon="grid" data-inline="true"
 			data-iconpos="left" data-transition="slidedown" data-rel="dialog">メニュー</a>
 		<h1>Tabilet</h1>
 		<input type="text" data-mini="true" name="place_name_2" id="place_name_2" value=""
@@ -290,7 +290,7 @@
 <div data-role="dialog" id="dialog_common_error" data-theme="b">
 	<div data-role="content">
 		<p id="message_error_dialog"></p>
-		<a href="#" data-role="button" data-icon="check" data-iconpos="top" id="action_error_ok">OK</a>
+		<a href="#" data-role="button" data-icon="check" data-iconpos="top" id="action_error_ok" data-rel="back">OK</a>
 	</div>
 </div>
 
