@@ -16,6 +16,7 @@ var PlaceEditMenu = (function() {
 
 		//現在地表示
 		$("#action_show_here").bind("tap", function(){
+			mainView.getCommonDialogs().wait("現在位置を探索中・・・");
 			smallMapCanvas.getCurrentPosition(function(waypoint_location) {
 				$("#place_name_1").val("現在地");
 				$("#place_name_2").val("現在地");

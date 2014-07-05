@@ -54,6 +54,8 @@ var MapCanvas = (function(){
 
 		var firstShow = true;
 
+		var watchId = null;
+
 		google.maps.event.addListener(map, "center_changed", function(event){
 			firstShow = false;
 		});
@@ -233,28 +235,34 @@ var MapCanvas = (function(){
 		}
 
 		this.__getCurrentPosition = function (callback){
+			var MS_TIMEOUT_FIND_HERE = 10000;
 			try {
 				var geo = navigator.geolocation;
 			} catch (e) {}
 			if (geo == null) return;
 
-			var count = 0;
+			if (watchId != null && watchId != '') geo.clearWatch(watchId);
+
 			var that = this;
-			var watchId = geo.watchPosition(function(position) {
+			watchId = geo.watchPosition(function(position) {
+				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 				if (position.coords.accuracy < 300) {
 					geo.clearWatch(watchId);
-					var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 					that.__createMarker(latlng, "現在地");
 					map.setCenter(latlng);
 					if(callback != null) callback(latlng.toString());
 					return;
 				}
-				if(count++ >= 5){
+				setTimeout(function(){
 					geo.clearWatch(watchId);
+					that.__createMarker(latlng, "現在地");
+					map.setCenter(latlng);
+					if(callback != null) callback(latlng.toString());
 					return;
-				}
+				}, MS_TIMEOUT_FIND_HERE);
 			}, function(e) {
 				geo.clearWatch(watchId);
+				mainView.getCommonDialogs().error(getMsg('FAIL_GET_POSITION'));
 				return;
 			}, {
 				enableHighAccuracy : true
