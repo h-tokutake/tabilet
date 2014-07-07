@@ -6,6 +6,7 @@ var WaypointEditMain = (function(){
 	var mainView;
 	var placeMenu;
 	var originalObj;
+	var rakutenAPI = new RakutenAPIHandler('楽天トラベルキーワード検索');
 
 	//---------------
 	// constructor
@@ -181,9 +182,23 @@ var WaypointEditMain = (function(){
 	}
 
 	function updateMap (place_name, latlng) {
+		var hotelAddress = '';
+		var hotelName = '';
 		smallMapCanvas.setLocation($(place_name).val(), latlng, function(latlng_str){
 			$("#waypoint_location").val(latlng_str);
 			smallMapCanvas.refresh();
+		}, function(){
+			rakutenAPI.search($(place_name).val());
+			hotelAddress = rakutenAPI.getHotelAddress();
+			hotelName = rakutenAPI.getHotelName();
+			if (hotelName == null || hotelAddress == null) return;
+			$("#place_name_1").val(hotelName);
+			$("#place_name_2").val(hotelName);
+			$("#place_name").val(hotelName);
+			smallMapCanvas.setLocation(hotelAddress, '', function(latlng_str){
+				$("#waypoint_location").val(latlng_str);
+				smallMapCanvas.refresh();
+			});
 		});
 	}
 

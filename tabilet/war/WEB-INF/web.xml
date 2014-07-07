@@ -42,10 +42,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>PlaceEdit</servlet-name>
 		<url-pattern>/place_edit</url-pattern>
 	</servlet-mapping>
+<!--
 	<servlet-mapping>
 		<servlet-name>Calendar</servlet-name>
 		<url-pattern>/calendar</url-pattern>
 	</servlet-mapping>
+-->
 <!--
 	<servlet-mapping>
 		<servlet-name>Upgrade</servlet-name>

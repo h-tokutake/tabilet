@@ -198,7 +198,7 @@ var MapCanvas = (function(){
 			this.__getDirectionsCallback(directionResult, google.maps.DirectionsStatus.OK);
 		}
 
-		this.__setLocation = function (place_name, latlng_str, callback){
+		this.__setLocation = function (place_name, latlng_str, callback, error_callback ){
 			var latlng = stringToLatLng(latlng_str);
 			if(latlng == "" || latlng == null){
 				if(place_name == "" || place_name == null) return;
@@ -213,7 +213,11 @@ var MapCanvas = (function(){
 							map.setCenter(latlng);
 							if(callback != null) callback(latlng.toString());
 						} else {
-							mainView.getCommonDialogs().error(getMsg('FAIL_GET_POSITION'));
+							if (error_callback != null) {
+								error_callback();
+							} else {
+								mainView.getCommonDialogs().error(getMsg('FAIL_GET_POSITION'));
+							}
 						}
 					}
 				);
@@ -294,7 +298,7 @@ var MapCanvas = (function(){
 		getDepDateTimeString : function() { return this.__getDepDateTimeString(); },
 		showDirections : function(callback) { this.__showDirections(callback); },
 		updateTimeline : function() { this.__updateTimeline(); },
-		setLocation : function(place_name, latlng_str, callback) { this.__setLocation(place_name, latlng_str, callback); },
+		setLocation : function(place_name, latlng_str, callback, error_callback) { this.__setLocation(place_name, latlng_str, callback, error_callback); },
 		setClickMapEvent : function(callback) { this.__setClickMapEvent(callback); },
 		getCurrentPosition : function(callback) { this.__getCurrentPosition(callback); },
 		getDefaultPosition : function(callback) { this.__getDefaultPosition(callback); },
