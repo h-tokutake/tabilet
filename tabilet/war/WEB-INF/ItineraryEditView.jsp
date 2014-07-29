@@ -18,7 +18,8 @@
 
 <script type="text/JavaScript" src="https://www.google.com/jsapi"></script>
 <script type="text/JavaScript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/JavaScript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 <script type="text/JavaScript" src="/js/lib/jquery.ui.touch-punch.min.js"></script>
@@ -30,8 +31,9 @@
 <script type="text/JavaScript" src="/js/common/Localization.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/CommonDialogs.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/common/MapCanvas.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/common/RestHandler.js" charset="utf-8"></script>
-<script type="text/JavaScript" src="/js/common/RakutenAPIHandler.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/rest/RestHandler.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/rest/RakutenAPIHandler.js" charset="utf-8"></script>
+<script type="text/JavaScript" src="/js/rest/GooglePlacesHandler.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/PlaceEditMenu.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/ItineraryEditMenu.js" charset="utf-8"></script>
 <script type="text/JavaScript" src="/js/ItineraryEditView/WaypointEditMain.js" charset="utf-8"></script>
@@ -50,11 +52,8 @@
 <div data-role="page" id="page_itinerary_edit" data-theme="b">
 	<div data-role="header" data-position="inline" data-id="header_itinerary_edit" data-position="fixed">
 		<a href="#dialog_itinerary_menu" data-role="button" data-icon="grid" data-inline="true"
-			data-iconpos="left" data-transition="slidedown" data-rel="dialog">メニュー</a>
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">メニュー</a>
 		<h1>Tabilet</h1>
-		<input type="text" data-mini="true" id="itinerary_summary"
-			class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
-			value="<c:out value="${itinerary_summary}" />" />
 
 		<div data-role="navbar" data-iconpos='top'>
 			<ul>
@@ -63,6 +62,10 @@
 			</ul>
 		</div>
 	</div>
+
+	<input type="text" data-mini="true" id="itinerary_summary"
+		class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
+		value="<c:out value="${itinerary_summary}" />" />
 
 	<!-- 行程入力欄を表示 -->
 	<div data-role="collapsible">
@@ -99,11 +102,8 @@
 <div data-role="page" id="page_itinerary_map" data-theme="b">
 	<div data-role="header" data-position="inline" id="header_itinerary_edit" data-id="header_itinerary_edit" data-position="fixed">
 		<a href="#dialog_itinerary_menu" data-role="button" data-icon="grid" data-inline="true"
-			data-iconpos="left" data-transition="slidedown" data-rel="dialog">メニュー</a>
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">メニュー</a>
 		<h1>Tabilet</h1>
-		<input type="text" data-mini="true" id="itinerary_summary_2"
-			class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
-			value="<c:out value="${itinerary_summary}" />" />
 
 		<div data-role="navbar" data-iconpos='top'>
 			<ul>
@@ -113,6 +113,10 @@
 		</div>
 	</div>
 
+	<input type="text" data-mini="true" id="itinerary_summary_2"
+		class="summary" name="itinerary_summary" placeholder="行程のタイトルを入れてください"
+		value="<c:out value="${itinerary_summary}" />" />
+
 	<!-- 地図表示 -->
 	<div id="itinerary_map_canvas" class="map_canvas"></div>
 </div>
@@ -121,10 +125,8 @@
 <div data-role="page" id="page_place_edit" data-theme="b">
 	<div data-role="header" data-id="header_place_edit" data-position="fixed">
 		<a href="#dialog_place_menu" data-role="button" data-icon="grid" data-inline="true"
-			data-iconpos="left" data-transition="slidedown" data-rel="dialog">メニュー</a>
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">メニュー</a>
 		<h1>Tabilet</h1>
-		<input type="text" data-mini="true" name="place_name_1" id="place_name_1" value=""
-			placeholder="地名を入力してください" />
 
 		<div data-role="navbar">
 			<ul>
@@ -133,6 +135,9 @@
 			</ul>
 		</div>
 	</div>
+
+	<input type="text" data-mini="true" data-inline="true" name="place_name_1" id="place_name_1" readonly />
+
 	<ul data-role="listview">
 		<li data-role="list-divider">出発: </li>
 		<li><div class="ui-grid-a">
@@ -156,10 +161,8 @@
 <div data-role="page" id="page_place_map" data-theme="b">
 	<div data-role="header" data-id="header_place_edit" id="header_place_edit" data-position="fixed">
 		<a href="#dialog_place_menu" data-role="button" data-icon="grid" data-inline="true"
-			data-iconpos="left" data-transition="slidedown" data-rel="dialog">メニュー</a>
+			data-iconpos="notext" data-transition="slidedown" data-rel="dialog">メニュー</a>
 		<h1>Tabilet</h1>
-		<input type="text" data-mini="true" name="place_name_2" id="place_name_2" value=""
-			placeholder="地名を入力してください" />
 
 		<div data-role="navbar">
 			<ul>
@@ -168,6 +171,16 @@
 			</ul>
 		</div>
 	</div>
+
+	<input type="text" data-mini="true" data-inline="true" name="place_name_2" id="place_name_2"
+		placeholder="地名を入力してください" />
+	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" data-inline="true">
+		<input type="radio" name="method_search_place_2" id="method_google_maps_2" value="method_google_maps" />
+		<label for="method_google_maps_2">通常検索</label>
+		<input type="radio" name="method_search_place_2" id="method_rakuten_travel_2" value="method_rakuten_travel" />
+		<label for="method_rakuten_travel_2">ホテル検索</label>
+	</fieldset>
+
 	<input type="hidden" id="waypoint_location" value="" />
 	<input type="hidden" id="waypoint_url" value="" />
 	<input type="hidden" id="waypoint_description" value="" />

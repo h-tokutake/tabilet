@@ -23,12 +23,14 @@ var RakutenAPIHandler = (function(){
 		rest.setParam('format', 'json');
 //		rest.setParam('callback', '?');
 
-		this.__search = function (keyword){
+		this.__search = function (keyword, callback){
 			rest.setParam('keyword', keyword);
 			rest.send(function(data){
 				json = data;
+				callback();
 			}, function(e,f,g){
 				json = null;
+				callback();
 			});
 		}
 
@@ -52,10 +54,12 @@ var RakutenAPIHandler = (function(){
 	//    public
 	//--------------
 
-	RakutenAPIHandler.prototype.search = function (keyword){ this.__search(keyword); };
-	RakutenAPIHandler.prototype.getHotels = function (){ return this.__getHotels(); };
-	RakutenAPIHandler.prototype.getHotelAddress = function (){ return this.__getHotelAddress(); };
-	RakutenAPIHandler.prototype.getHotelName = function (){ return this.__getHotelName(); };
+	RakutenAPIHandler.prototype = {
+		search : function(keyword, callback) { this.__search(keyword, callback); },
+		getHotels : function() { return this.__getHotels(); },
+		getHotelAddress : function() { return this.__getHotelAddress(); },
+		getHotelName : function() { return this.__getHotelName(); },
+	};
 
 	return RakutenAPIHandler;
 }());

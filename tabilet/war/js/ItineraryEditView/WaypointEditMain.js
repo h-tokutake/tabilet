@@ -6,7 +6,6 @@ var WaypointEditMain = (function(){
 	var mainView;
 	var placeMenu;
 	var originalObj;
-	var rakutenAPI = new RakutenAPIHandler('楽天トラベルキーワード検索');
 
 	//---------------
 	// constructor
@@ -162,7 +161,11 @@ var WaypointEditMain = (function(){
 			$("#place_name").val($("#place_name_2").val());
 			updateMap("#place_name_1", "");
 		});
+//		$("#page_place_edit").bind("pageshow", function(){
+//			$("*[name=method_search_place_1]").val($("*[name=method_search_place_2]").val());
+//		});
 		$("#page_place_map").bind("pageshow", function(){
+//			$("*[name=method_search_place_2]").val($("*[name=method_search_place_1]").val());
 			resizeMap();
 			updateMap("#place_name_1", $("#waypoint_location").val());
 		});
@@ -182,24 +185,45 @@ var WaypointEditMain = (function(){
 	}
 
 	function updateMap (place_name, latlng) {
-		var hotelAddress = '';
-		var hotelName = '';
-		smallMapCanvas.setLocation($(place_name).val(), latlng, function(latlng_str){
-			$("#waypoint_location").val(latlng_str);
-			smallMapCanvas.refresh();
-		}, function(){
-			rakutenAPI.search($(place_name).val());
-			hotelAddress = rakutenAPI.getHotelAddress();
-			hotelName = rakutenAPI.getHotelName();
-			if (hotelName == null || hotelAddress == null) return;
-			$("#place_name_1").val(hotelName);
-			$("#place_name_2").val(hotelName);
-			$("#place_name").val(hotelName);
-			smallMapCanvas.setLocation(hotelAddress, '', function(latlng_str){
+		var method_search_place = $("input[name=method_search_place_2]:checked").val();
+		switch (method_search_place){
+		case 'method_google_places' :
+			var googlePlaces = new GooglePlacesHandler(smallMapCanvas);
+			googlePlaces.search($(place_name).val(), function(){
+				var target_name = googlePlaces.getPlaceName();
+				var target_address = googlePlaces.getPlaceAddress();
+				if (target_name == null || target_address == null) return;
+				$("#place_name_1").val(target_name);
+				$("#place_name_2").val(target_name);
+				$("#place_name").val(target_name);
+				smallMapCanvas.setLocation(target_address, target_address, function(latlng_str){
+					$("#waypoint_location").val(latlng_str);
+					smallMapCanvas.refresh();
+				}, function(){});
+			});
+			break;
+		case 'method_rakuten_travel' :
+			var rakutenAPI = new RakutenAPIHandler('楽天トラベルキーワード検索');
+			rakutenAPI.search($(place_name).val(), function(){
+				var target_name = rakutenAPI.getHotelName();
+				var target_address = rakutenAPI.getHotelAddress();
+				if (target_name == null || target_address == null) return;
+				$("#place_name_1").val(target_name);
+				$("#place_name_2").val(target_name);
+				$("#place_name").val(target_name);
+				smallMapCanvas.setLocation(target_address, target_address, function(latlng_str){
+					$("#waypoint_location").val(latlng_str);
+					smallMapCanvas.refresh();
+				}, function(){});
+			});
+			break;
+		default :
+			smallMapCanvas.setLocation($(place_name).val(), latlng, function(latlng_str){
 				$("#waypoint_location").val(latlng_str);
 				smallMapCanvas.refresh();
-			});
-		});
+			}, function(){});
+			break;
+		}
 	}
 
 	function openEditWaypoint () {

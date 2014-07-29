@@ -280,6 +280,10 @@ var MapCanvas = (function(){
 				callback("");
 			}
 		}
+
+		this.__getCenter = function(){
+			return map.getCenter();
+		}
 	}
 
 	//--------------
@@ -302,6 +306,7 @@ var MapCanvas = (function(){
 		setClickMapEvent : function(callback) { this.__setClickMapEvent(callback); },
 		getCurrentPosition : function(callback) { this.__getCurrentPosition(callback); },
 		getDefaultPosition : function(callback) { this.__getDefaultPosition(callback); },
+		getCenter : function(){ return this.__getCenter(); },
 	};
 
 	return MapCanvas;

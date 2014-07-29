@@ -9,7 +9,8 @@ var RestHandler = (function(){
 
 	function RestHandler (baseUrl){
 		var method = 'GET';
-		var url = baseUrl + '?';
+		var url = baseUrl;
+		var hasParams = false;
 
 		this.__setHeader = function (){
 			req.setRequestHeader('Content-Type', 'Application/json');
@@ -17,8 +18,24 @@ var RestHandler = (function(){
 		}
 
 		this.__setParam = function (paramName, paramValue){
-			url += '&' + paramName + '=' + encodeURIComponent(paramValue);
+			if (hasParams == true) {
+				url += '&';
+			} else {
+				url += '?';
+				hasParams = true;
+			}
+			url += paramName + '=' + encodeURIComponent(paramValue);
 			return;
+		}
+
+		this.__setParam2 = function (paramName, paramValue){
+			if (hasParams == true) {
+				url += '&';
+			} else {
+				url += '?';
+				hasParams = true;
+			}
+			url += paramName + '=' + encodeURI(paramValue);
 		}
 
 		this.__send = function (callback, error_callback){
@@ -43,6 +60,7 @@ var RestHandler = (function(){
 
 	RestHandler.prototype = {
 		setParam : function(paramName, paramValue) { this.__setParam(paramName, paramValue); },
+		setParam2 : function(paramName, paramValue) { this.__setParam2(paramName, paramValue); },
 		send : function(callback, error_callback) { this.__send(callback, error_callback); },
 	};
 
