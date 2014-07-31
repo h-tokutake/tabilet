@@ -57,7 +57,7 @@ var ItineraryEditView = (function(){
 	//  MapCanvas interfaces
 	//------------------------
 	function resizeMap () {
-		var header_height = $("#header_itinerary_edit").outerHeight();
+		var header_height = $("#header_itinerary_edit").outerHeight() + $("#itinerary_summary_2").outerHeight() + 15;
 		$("#itinerary_map_canvas").css("height", window.innerHeight - header_height);
 		$("#itinerary_map_canvas").css("width", window.innerWidth);
 		mapCanvas.refresh();

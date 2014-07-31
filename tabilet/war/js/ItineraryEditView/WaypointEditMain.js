@@ -57,7 +57,7 @@ var WaypointEditMain = (function(){
 			$("#waypoint_deptime").val(tmp[0] + ':' + tmp[1]);
 
 			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
-			$.mobile.changePage("#page_place_edit");
+			$.mobile.changePage("#page_place_map");
 		});
 		$(".action_waypoint_cancel").unbind("tap").bind("tap", function(){
 			$.mobile.changePage("#page_itinerary_edit");
@@ -161,13 +161,13 @@ var WaypointEditMain = (function(){
 			$("#place_name").val($("#place_name_2").val());
 			updateMap("#place_name_1", "");
 		});
-//		$("#page_place_edit").bind("pageshow", function(){
-//			$("*[name=method_search_place_1]").val($("*[name=method_search_place_2]").val());
-//		});
 		$("#page_place_map").bind("pageshow", function(){
-//			$("*[name=method_search_place_2]").val($("*[name=method_search_place_1]").val());
 			resizeMap();
 			updateMap("#place_name_1", $("#waypoint_location").val());
+		});
+		$("input[name=method_search_place_2]").bind("change", function(){
+			resizeMap();
+			updateMap("#place_name_2", "");
 		});
 		$(window).resize(function(){
 			resizeMap();
@@ -178,7 +178,7 @@ var WaypointEditMain = (function(){
 	// public methods
 
 	function resizeMap () {
-		var header_height = $("#header_place_edit").outerHeight();
+		var header_height = $("#header_place_edit").outerHeight() + $("#place_name_2").outerHeight() + $("#method_google_maps_2").outerHeight() + 32;
 		var footer_height = $("#footer_place_edit").outerHeight();
 		$("#place_map_canvas").css("height", window.innerHeight - header_height - footer_height);
 		$("#place_map_canvas").css("width", window.innerWidth);
@@ -236,7 +236,7 @@ var WaypointEditMain = (function(){
 		$("#waypoint_url").val(originalObj.find(".waypoint_url").eq(0).val());
 		$("#waypoint_description").val(originalObj.find(".waypoint_description").eq(0).val());
 		$(".action_waypoint_set").attr("name", "waypoint_operation_edit");
-		$.mobile.changePage("#page_place_edit");
+		$.mobile.changePage("#page_place_map");
 	}
 
 	return WaypointEditMain;

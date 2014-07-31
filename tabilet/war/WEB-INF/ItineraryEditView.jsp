@@ -130,8 +130,8 @@
 
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#page_place_edit" data-icon='clock' class="ui-btn-active">到着/出発日時設定</a></li>
 				<li><a href="#page_place_map" data-icon='location'>位置設定</a></li>
+				<li><a href="#page_place_edit" data-icon='clock' class="ui-btn-active">到着/出発日時設定</a></li>
 			</ul>
 		</div>
 	</div>
@@ -149,7 +149,7 @@
 			</div>
 		</div></li>
 	</ul>
-	<div data-role="footer" data-id="footer_place_edit" data-position="fixed">
+	<div data-role="footer" data-id="footer_place_edit" data-position="fixed" data-tap-toggle="false">
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><button type="button" class="action_waypoint_set" name="" data-icon="check" data-iconpos="top">設定</button></div>
 			<div class="ui-block-b"><button type="button" class="action_waypoint_cancel" data-icon="back" data-iconpos="top">キャンセル</button></div>
@@ -166,8 +166,8 @@
 
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#page_place_edit" data-icon='clock'>到着/出発日時設定</a></li>
 				<li><a href="#page_place_map" data-icon='location' class="ui-btn-active">位置設定</a></li>
+				<li><a href="#page_place_edit" data-icon='clock'>到着/出発日時設定</a></li>
 			</ul>
 		</div>
 	</div>
@@ -185,7 +185,7 @@
 	<input type="hidden" id="waypoint_url" value="" />
 	<input type="hidden" id="waypoint_description" value="" />
 	<div id="place_map_canvas" class="map_canvas"></div>
-	<div data-role="footer" data-id="footer_place_edit" id="footer_place_edit" data-position="fixed">
+	<div data-role="footer" data-id="footer_place_edit" id="footer_place_edit" data-position="fixed" data-tap-toggle="false">
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><button type="button" class="action_waypoint_set" name="" data-icon="check" data-iconpos="top">設定</button></div>
 			<div class="ui-block-b"><button type="button" class="action_waypoint_cancel" data-icon="back" data-iconpos="top">キャンセル</button></div>
