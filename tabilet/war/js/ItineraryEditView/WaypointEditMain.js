@@ -6,6 +6,7 @@ var WaypointEditMain = (function(){
 	var mainView;
 	var placeMenu;
 	var originalObj;
+	var method_search_place = 'method_google_maps';
 
 	//---------------
 	// constructor
@@ -154,19 +155,23 @@ var WaypointEditMain = (function(){
 		$("#place_name_1").bind("change", function(){
 			$("#place_name_2").val($("#place_name_1").val());
 			$("#place_name").val($("#place_name_1").val());
-			updateMap("#place_name_2", "");
 		});
 		$("#place_name_2").bind("change", function(){
 			$("#place_name_1").val($("#place_name_2").val());
 			$("#place_name").val($("#place_name_2").val());
-			updateMap("#place_name_1", "");
 		});
 		$("#page_place_map").bind("pageshow", function(){
 			resizeMap();
 			updateMap("#place_name_1", $("#waypoint_location").val());
 		});
-		$("input[name=method_search_place_2]").bind("change", function(){
+		$("#method_google_maps_2").unbind("tap").bind("tap", function(){
 			resizeMap();
+			method_search_place = 'method_google_maps';
+			updateMap("#place_name_2", "");
+		});
+		$("#method_rakuten_travel_2").unbind("tap").bind("tap", function(){
+			resizeMap();
+			method_search_place = 'method_rakuten_travel';
 			updateMap("#place_name_2", "");
 		});
 		$(window).resize(function(){
@@ -185,7 +190,6 @@ var WaypointEditMain = (function(){
 	}
 
 	function updateMap (place_name, latlng) {
-		var method_search_place = $("input[name=method_search_place_2]:checked").val();
 		switch (method_search_place){
 		case 'method_google_places' :
 			var googlePlaces = new GooglePlacesHandler(smallMapCanvas);
@@ -217,11 +221,13 @@ var WaypointEditMain = (function(){
 				}, function(){});
 			});
 			break;
-		default :
+		case 'method_google_maps' :
 			smallMapCanvas.setLocation($(place_name).val(), latlng, function(latlng_str){
 				$("#waypoint_location").val(latlng_str);
 				smallMapCanvas.refresh();
 			}, function(){});
+			break;
+		default :
 			break;
 		}
 	}

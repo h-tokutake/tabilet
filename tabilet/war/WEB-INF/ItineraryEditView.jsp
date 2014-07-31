@@ -175,10 +175,8 @@
 	<input type="text" data-mini="true" data-inline="true" name="place_name_2" id="place_name_2"
 		placeholder="地名を入力してください" />
 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" data-inline="true">
-		<input type="radio" name="method_search_place_2" id="method_google_maps_2" value="method_google_maps" />
-		<label for="method_google_maps_2">通常検索</label>
-		<input type="radio" name="method_search_place_2" id="method_rakuten_travel_2" value="method_rakuten_travel" />
-		<label for="method_rakuten_travel_2">ホテル検索</label>
+		<a href="#" data-role="button" data-icon="search" id="method_google_maps_2" data-iconpos="left">通常検索</a>
+		<a href="#" data-role="button" data-icon="search" id="method_rakuten_travel_2" data-iconpos="left">ホテル検索</a>
 	</fieldset>
 
 	<input type="hidden" id="waypoint_location" value="" />
