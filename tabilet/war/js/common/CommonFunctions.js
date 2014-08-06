@@ -1,3 +1,12 @@
+$(document).bind("pagechange", function(){
+	if (history.replaceState) {
+		var url = document.URL;
+		var tmp = url.split('/');
+		url = tmp[0] + '/' + tmp[1]
+		history.replaceState(history.state, document.title, url);
+	}
+});
+
 function toDateTimeString(src) {
 	var year  = src.getFullYear();
 	var month = src.getMonth() + 1;

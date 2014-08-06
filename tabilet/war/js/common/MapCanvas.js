@@ -90,8 +90,10 @@ var MapCanvas = (function(){
 				if(directionsDisplay != null) {
 					directionsDisplay.setDirections(result);
 				}
+				return true;
 			} else {
 				mainView.getCommonDialogs().error(getMsg('FAIL_GET_ROUTE'));
+				return false;
 			}
 		}
 
@@ -188,7 +190,7 @@ var MapCanvas = (function(){
 			var that = this;
 			directionsService.route(request.getRequest(), function(result, status) {
 				directionResult = result;
-				that.__getDirectionsCallback(result, status);
+				var ret = that.__getDirectionsCallback(result, status);
 				if (callback != null) callback();
 			});
 		}
