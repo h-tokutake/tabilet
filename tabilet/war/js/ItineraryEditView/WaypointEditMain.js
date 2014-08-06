@@ -183,7 +183,7 @@ var WaypointEditMain = (function(){
 	// public methods
 
 	function resizeMap () {
-		var header_height = $("#header_place_edit").outerHeight() + $("#place_name_2").outerHeight() + $("#method_google_maps_2").outerHeight() + 32;
+		var header_height = $("#header_place_edit").outerHeight() + $("#place_name_2").outerHeight() + $("#method_google_maps_2").outerHeight() + 20;
 		var footer_height = $("#footer_place_edit").outerHeight();
 		$("#place_map_canvas").css("height", window.innerHeight - header_height - footer_height);
 		$("#place_map_canvas").css("width", window.innerWidth);
