@@ -26,14 +26,14 @@ var WaypointEditMain = (function(){
 			}
 			position_dirty_flag = true;
 		});
-		$(".select_waypoint_action").unbind("tap").bind("tap", function(){
+		$(".select_waypoint_action").unbind("click").bind("click", function(){
 			originalObj = $(this);
 			var header_waypoint_action = originalObj.find(".waypoint_name").eq(0).text();
 			$("#header_waypoint_action").text(header_waypoint_action);
-			$("#action_waypoint_edit").unbind("tap").one("tap", function(){
+			$("#action_waypoint_edit").unbind("click").one("click", function(){
 				openEditWaypoint();
 			});
-			$("#action_waypoint_delete").unbind("tap").one("tap", function(){
+			$("#action_waypoint_delete").unbind("click").one("click", function(){
 				mainView.getCommonDialogs().confirm(originalObj.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
 					originalObj.closest("li").remove();
 					$("#listview_itinerary_edit").listview('refresh');
@@ -45,7 +45,7 @@ var WaypointEditMain = (function(){
 			});
 			$.mobile.changePage("#dialog_waypoint_action", {transition: 'pop', role: 'dialog'});
 		});
-		$(".action_waypoint_create").unbind("tap").bind("tap", function(){
+		$(".action_waypoint_create").unbind("click").bind("click", function(){
 			originalObj = $(this);
 			$("#place_name_1").val("");
 			$("#place_name_2").val("");
@@ -60,10 +60,10 @@ var WaypointEditMain = (function(){
 			$(".action_waypoint_set").attr("name", "waypoint_operation_create");
 			$.mobile.changePage("#page_place_map");
 		});
-		$(".action_waypoint_cancel").unbind("tap").bind("tap", function(){
+		$(".action_waypoint_cancel").unbind("click").bind("click", function(){
 			$.mobile.changePage("#page_itinerary_edit");
 		});
-		$(".action_waypoint_set").unbind("tap").bind("tap", function(){
+		$(".action_waypoint_set").unbind("click").bind("click", function(){
 			if ($(this).attr("name") == "waypoint_operation_create"){
 				var newObj = document.createElement('li');
 				newObj.setAttribute('class', 'list_sortable');
@@ -119,14 +119,14 @@ var WaypointEditMain = (function(){
 				newTag.setAttribute('value', '');
 				newObj.find('a').eq(0).append(newTag);
 
-				newObj.find(".select_waypoint_action").unbind("tap").bind("tap", function(){
+				newObj.find(".select_waypoint_action").unbind("click").bind("click", function(){
 					originalObj = $(this);
 					var header_waypoint_action = originalObj.find(".waypoint_name").eq(0).text();
 					$("#header_waypoint_action").text(header_waypoint_action);
-					$("#action_waypoint_edit").unbind("tap").one("tap", function(){
+					$("#action_waypoint_edit").unbind("click").one("click", function(){
 						openEditWaypoint();
 					});
-					$("#action_waypoint_delete").unbind("tap").one("tap", function(){
+					$("#action_waypoint_delete").unbind("click").one("click", function(){
 						mainView.getCommonDialogs().confirm(originalObj.closest("li").find(".waypoint_name").eq(0).text() + "を旅程から削除します。", function(){
 							originalObj.closest("li").remove();
 							$("#listview_itinerary_edit").listview('refresh');
@@ -164,12 +164,12 @@ var WaypointEditMain = (function(){
 			resizeMap();
 			updateMap("#place_name_1", $("#waypoint_location").val());
 		});
-		$("#method_google_maps_2").unbind("tap").bind("tap", function(){
+		$("#method_google_maps_2").unbind("click").bind("click", function(){
 			resizeMap();
 			method_search_place = 'method_google_maps';
 			updateMap("#place_name_2", "");
 		});
-		$("#method_rakuten_travel_2").unbind("tap").bind("tap", function(){
+		$("#method_rakuten_travel_2").unbind("click").bind("click", function(){
 			resizeMap();
 			method_search_place = 'method_rakuten_travel';
 			updateMap("#place_name_2", "");

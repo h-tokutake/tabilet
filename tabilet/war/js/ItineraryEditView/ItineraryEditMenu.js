@@ -12,7 +12,7 @@ var ItineraryEditMenu = (function() {
 		mainView = view;
 
 		//新規作成
-		$("#action_itinerary_clear").bind("tap", function(){
+		$("#action_itinerary_clear").bind("click", function(){
 			mainView.getCommonDialogs().confirm("編集中の行程データは破棄されます。続行しますか？", function(){
 				submitForm("itinerary_edit", "get");
 			});
@@ -20,7 +20,7 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//行程一覧
-		$("#action_itinerary_list").bind("tap", function(){
+		$("#action_itinerary_list").bind("click", function(){
 			mainView.getCommonDialogs().confirm("編集中の行程データは破棄されます。続行しますか？", function(){
 				ajaxToGetItineraryList();
 			});
@@ -28,7 +28,7 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//変更破棄
-		$("#action_itinerary_refresh").bind("tap", function(){
+		$("#action_itinerary_refresh").bind("click", function(){
 			mainView.getCommonDialogs().confirm("編集中の行程データは破棄されます。続行しますか？", function(){
 				if($("#itinerary_id").val() == "") {
 					submitForm("itinerary_edit", "get");
@@ -40,7 +40,7 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//行程保存
-		$("#action_itinerary_save").bind("tap", function(){
+		$("#action_itinerary_save").bind("click", function(){
 			if ($("#itinerary_summary").val() === "") {
 				mainView.getCommonDialogs().error('行程のタイトルが入力されていません。');
 				return false;
@@ -52,7 +52,7 @@ var ItineraryEditMenu = (function() {
 		});
 
 		//行程削除
-		$("#action_itinerary_delete").bind("tap", function(event) {
+		$("#action_itinerary_delete").bind("click", function(event) {
 			mainView.getCommonDialogs().confirm("行程データを保存します。続行しますか？", function(){
 				ajaxToDeleteItineraryData();
 			});
@@ -117,7 +117,7 @@ var ItineraryEditMenu = (function() {
 			$(newObj).append(newTag);
 
 			$("#listview_itinerary_list").append(newObj)
-			$(newObj).bind("tap", function(e) {
+			$(newObj).bind("click", function(e) {
 				var selected_itinerary_id = $(e.target).closest("a").attr("name");
 				submitPostToItineraryEdit(selected_itinerary_id, "itinerary_edit");
 				return false;

@@ -15,7 +15,7 @@ var PlaceEditMenu = (function() {
 		$("#listview_place_list").listview();
 
 		//現在地表示
-		$("#action_show_here").bind("tap", function(){
+		$("#action_show_here").bind("click", function(){
 			mainView.getCommonDialogs().wait("現在位置を探索中・・・");
 			smallMapCanvas.getCurrentPosition(function(waypoint_location) {
 				$("#place_name_1").val("現在地");
@@ -30,7 +30,7 @@ var PlaceEditMenu = (function() {
 		});
 
 		//地点情報一覧
-		$("#action_place_list").bind("tap", function(){
+		$("#action_place_list").bind("click", function(){
 			mainView.getCommonDialogs().confirm("編集中の地点情報は破棄されます。続行しますか？", function(){
 				ajaxToGetPlaceList();
 			});
@@ -38,7 +38,7 @@ var PlaceEditMenu = (function() {
 		});
 
 		//変更破棄
-		$("#action_place_refresh").bind("tap", function(){
+		$("#action_place_refresh").bind("click", function(){
 			mainView.getCommonDialogs().confirm("編集中の地点情報は破棄されます。続行しますか？", function(){
 				if($("#place_name").val() == "") {
 					submitForm("place_edit", "get");
@@ -50,7 +50,7 @@ var PlaceEditMenu = (function() {
 		});
 
 		//地点情報保存
-		$("#action_place_save").bind("tap", function(){
+		$("#action_place_save").bind("click", function(){
 			if ($("#place_name").val() === "") {
 				mainView.getCommonDialogs().error('地名が入力されていません。');
 				return false;
@@ -62,7 +62,7 @@ var PlaceEditMenu = (function() {
 		});
 
 		//行程削除
-		$("#action_place_delete").bind("tap", function(event) {
+		$("#action_place_delete").bind("click", function(event) {
 			mainView.getCommonDialogs().confirm("地点情報を保存します。続行しますか？", function(){
 				ajaxToDeletePlaceData();
 			});
@@ -100,14 +100,14 @@ var PlaceEditMenu = (function() {
 				+ data.placeNameList[i] + '</a></li>';
 			$("#listview_place_list")
 				.append(list_item_tag)
-				.find("li").eq(i).bind("tap", function(e) {
+				.find("li").eq(i).bind("click", function(e) {
 					var selected_place_name = $.trim($(this).text());
 					ajaxToGetPlaceData(selected_place_name);
 					return false;
 				});
 		}
 		$("#listview_place_list").append('<li><a href="#" class="goto_place_edit">閉じる</a></li>');
-		$(".goto_place_edit").bind("tap", function(){
+		$(".goto_place_edit").bind("click", function(){
 			$.mobile.changePage("#page_place_edit");
 		});
 		$("#listview_place_list").listview("refresh");

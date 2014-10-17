@@ -8,10 +8,10 @@ var CommonDialogs = (function() {
 
 	function CommonDialogs (){
 
-		$(".goto_itinerary_edit").bind("tap", function(){
+		$(".goto_itinerary_edit").bind("click", function(){
 			$.mobile.changePage("#page_itinerary_edit");
 		});
-		$(".goto_place_edit").bind("tap", function(){
+		$(".goto_place_edit").bind("click", function(){
 			$.mobile.changePage("#page_place_edit");
 		});
 
@@ -22,7 +22,7 @@ var CommonDialogs = (function() {
 		//確認用ダイアログ
 		this.__confirm = function (message, callback) {
 			$("#message_confirm_dialog").empty().append(message);
-			$("#action_confirm_ok").one("tap", function(){
+			$("#action_confirm_ok").one("click", function(){
 				callback();
 			});
 			$.mobile.changePage("#dialog_common_confirm");
@@ -32,7 +32,7 @@ var CommonDialogs = (function() {
 		//情報表示用ダイアログ
 		this.__info = function (message, callback) {
 			$("#message_info_dialog").empty().append(message);
-			$("#action_info_ok").one("tap", function(){
+			$("#action_info_ok").one("click", function(){
 				callback();
 			});
 			$.mobile.changePage("#dialog_common_info");
