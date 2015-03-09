@@ -8,13 +8,6 @@ var CommonDialogs = (function() {
 
 	function CommonDialogs (){
 
-		$(".goto_itinerary_edit").bind("click", function(){
-			$.mobile.changePage("#page_itinerary_edit");
-		});
-		$(".goto_place_edit").bind("click", function(){
-			$.mobile.changePage("#page_place_edit");
-		});
-
 		//----------------
 		// private methods
 		//----------------
